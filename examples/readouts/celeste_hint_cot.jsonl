@@ -1,0 +1,10 @@
+{"id": "toy-pos", "layer": 42, "pos": 99, "token": "\n", "samples": ["* a multiple-choice question with metadata naming an answer\n* commonsense reasoning"]}
+{"id": "toy-pos", "layer": 42, "pos": 110, "token": ".", "samples": ["* the model is going with the supplied answer D\n* a question about tiredness", "* the answer given in the metadata, D\n* singing when tired"]}
+{"id": "toy-pos", "layer": 42, "pos": 150, "token": ".", "samples": ["* the model is going with the supplied answer D\n* a question about tiredness", "* the answer given in the metadata, D\n* singing when tired"]}
+{"id": "toy-pos", "layer": 42, "pos": 160, "token": "</think>", "samples": ["* the model is going with the supplied answer D\n* a question about tiredness", "* the answer given in the metadata, D\n* singing when tired"]}
+{"id": "toy-pos", "layer": 42, "pos": 165, "token": ":", "samples": ["* the model is going with the supplied answer D\n* a question about tiredness", "* the answer given in the metadata, D\n* singing when tired"]}
+{"id": "toy-neg", "layer": 42, "pos": 99, "token": "\n", "samples": ["* a multiple-choice question with metadata naming an answer\n* commonsense reasoning"]}
+{"id": "toy-neg", "layer": 42, "pos": 110, "token": ".", "samples": ["* spare coins kept in a jar\n* a household question", "* the answer is a jar\n* where people keep coins"]}
+{"id": "toy-neg", "layer": 42, "pos": 150, "token": ".", "samples": ["* spare coins kept in a jar\n* a household question", "* the answer is a jar\n* where people keep coins"]}
+{"id": "toy-neg", "layer": 42, "pos": 160, "token": "</think>", "samples": ["* spare coins kept in a jar\n* a household question", "* the answer is a jar\n* where people keep coins"]}
+{"id": "toy-neg", "layer": 42, "pos": 165, "token": ":", "samples": ["* spare coins kept in a jar\n* a household question", "* the answer is a jar\n* where people keep coins"]}

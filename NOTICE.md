@@ -116,3 +116,11 @@ identified by label prefix.
   items (labels `pt-pile-*`, `pt-fineweb-*`; the manifest carries no source ids). Their text was
   carried in `evals/jlens_concept_pr/manifest.json` until 2026-09-17 and is no longer shipped.
 - Licence: ODC-BY (attribution required); the underlying web text retains its own copyright.
+
+## CommonsenseQA — Talmor et al. 2019
+
+- Source: Talmor, Herzig, Lourie, Berant. *CommonsenseQA: A Question Answering Challenge Targeting
+  Commonsense Knowledge.* NAACL 2019. arXiv:1811.00937. https://huggingface.co/datasets/tau/commonsense_qa
+- Included: the `celeste_hint_cot` items are CommonsenseQA train / validation questions and options
+  verbatim (`qid` is the dataset id), with Qwen3.6-27B's own hinted rollouts.
+- Licence: MIT.

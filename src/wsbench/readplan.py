@@ -441,6 +441,22 @@ def plan(family: str) -> list[ReadSpec]:
             )
             for it in items
         ]
+    if family == "celeste_hint_cot":
+        rows = json.loads((REPO_ROOT / "evals/celeste_hint_cot/capture_rows.json").read_text())
+        return [
+            ReadSpec(
+                family,
+                r["id"],
+                "captured",
+                {"kind": "positions", "positions": r["read_positions"]},
+                [42],
+                extra={"input_ids": r["input_ids"], "prompt_len": r["prompt_len"]},
+                note="the chosen hinted rollout's thinking punctuation (first 8 + last 8), its "
+                "</think>, the token before the answer letter, and the last prompt token "
+                "(control), at the single-activation O-lens layer 42",
+            )
+            for r in rows
+        ]
     if family == "jlens_concept_pr":
         m = json.loads((REPO_ROOT / "evals/jlens_concept_pr/manifest.json").read_text())
         return [

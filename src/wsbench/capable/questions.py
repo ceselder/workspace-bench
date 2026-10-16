@@ -287,6 +287,8 @@ NO_QUESTION: dict[str, str] = {
     "wrong_bridge": "the gate is a specific Qwen3.6-27B ERROR (it resolves the wrong bridge B' and "
     "answers hop2(B')): re-run the wrong-bridge screen/gate for a new model",
     "wrong_bridge_true": "contrast arm of wrong_bridge (same items): re-gate with wrong_bridge",
+    "celeste_hint_cot": "the gate is the model's own hinted / unhinted answer rates (P(H | hint), "
+    "P(H | no hint) over 40 samples each): re-screen and re-generate for a new model",
 }
 # What a family's capability check does NOT cover, and what to do about it.
 PARTIAL: dict[str, str] = {
