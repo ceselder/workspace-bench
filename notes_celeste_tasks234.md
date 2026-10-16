@@ -33,3 +33,15 @@
 - JUDGE FINDING: the shared bank judge credits a DESCRIPTION that depicts the target ("designed by Oscar Niemeyer ... the new capital" counted as expressing Brasilia). For these families the model's own text is a description of the target by design, so the sampling baseline scored 3/3 on the first smoke. Added FAMILY_RULE_CELESTE (credit only the target word / listed alias / inflection / translation; descriptions, definitions, clues, paraphrases are NOT credit) to every call of the three families, as the poetry word rule does. Re-smoke: sampling baseline 0/12 withheld items (25 cells). prompt_version stays bank-2026-10-10 (shared prompt + family rule, like poetry/typo).
 - Logit lens at L42 computed in the capture job (final norm + lm_head on the raw block-42 residual, top-10): mostly junk tokens, judged as the optional token arm.
 - Jobs: capture ap-6iNre8JTu2itRbPCVEnM10 (done), prompt-only ap-2nbz0v6X1DRKzcVvRAjk1d, O-lens readouts ap-93XW5kZO2EaipxBDT5dEtl (ckpt /vol/ckpt/abl_roll_rl1/step_0300, --no-ascii). Baseline arms (sampling1, sampling16, logit_lens) judging locally via scripts/celeste_supplement/judge_arms.sh.
+
+## 2026-10-16 results (layer 42, claude-sonnet-5, one call per read cell, item passes at any site)
+| family | items | O-lens rl300 | sampling1 | sampling16 | prompt-only | logit lens |
+|---|---|---|---|---|---|---|
+| celeste_encoded_answer | 200 | 21.5% [16.0, 27.5] | 0.0 | 0.0 | 99.0 (saturated) | 0.0 |
+| celeste_lookahead | 293 | 19.8% [15.4, 24.2] | 1.7 | 0.7 | 77.5 (saturated) | 3.1 |
+| celeste_withheld_answer | 300 | 90.3% [87.0, 93.3] | 1.3 | 3.3 | 95.0 (saturated) | 4.3 |
+- Sites: encoded answer_end 20.5% vs prompt_end 5%; lookahead preamble_minus16 19.8% vs prompt_end 0%; withheld reply_mid 80.7%, sentence1_end 40.3%, reply_end 11.7%.
+- Variants: encoded first_letter 63%, last_letter 30%, first_letter_index 7%, letter_parity 4%, list_position 3%, letter_count 0%, vowel_count 0%; lookahead months12 89%, weekdays 39%, repeat3 14%, others 0%; withheld riddle 97%, describe 91%, hints 85%.
+- Prompt-only floors frozen into evals/baselines/prompt_only.json (instrument bank-2026-10-10, judge claude-sonnet-5); they are saturated (the text states the question) and marked as such in the report section. Lucky guessing n/a (no option lists).
+- Spend: Claude ≈ $12-22 (generation $3.70 measured; judge 8,002 calls estimated $8-18); GPU ≈ 0.95 B200-hours (46.5 min scripted over 6 jobs).
+- Deliverables: ~/shared/reports/celeste-supplement/{playground_tasks234.html, playground/*.json, report_tasks234_section.md, funnel|pass_rates|breakdowns.{png,pdf}, data/*.json, scripts/}.

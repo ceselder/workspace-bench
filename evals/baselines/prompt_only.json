@@ -552,5 +552,80 @@
   "layers_judged": null,
   "complete": false,
   "written": "2026-09-18T07:39:55+00:00"
+ },
+ "celeste_encoded_answer": {
+  "rate": 0.99,
+  "saturated": false,
+  "ci95": [
+   0.975,
+   1.0
+  ],
+  "metric": "pass_rate",
+  "higher_is_better": true,
+  "n_items": 200,
+  "n_items_decided": 200,
+  "counts": {
+   "n_expected_cells": 400,
+   "n_missing_cells": 0,
+   "n_unjudged_cells": 0,
+   "n_empty_cells": 0
+  },
+  "judge_model": "claude-sonnet-5",
+  "instrument": "bank-2026-10-10",
+  "layers_judged": [
+   42
+  ],
+  "complete": false,
+  "written": "2026-10-16T20:32:43+00:00"
+ },
+ "celeste_lookahead": {
+  "rate": 0.7747440273037542,
+  "saturated": false,
+  "ci95": [
+   0.7235494880546075,
+   0.8225255972696246
+  ],
+  "metric": "pass_rate",
+  "higher_is_better": true,
+  "n_items": 293,
+  "n_items_decided": 293,
+  "counts": {
+   "n_expected_cells": 511,
+   "n_missing_cells": 0,
+   "n_unjudged_cells": 0,
+   "n_empty_cells": 0
+  },
+  "judge_model": "claude-sonnet-5",
+  "instrument": "bank-2026-10-10",
+  "layers_judged": [
+   42
+  ],
+  "complete": false,
+  "written": "2026-10-16T20:32:43+00:00"
+ },
+ "celeste_withheld_answer": {
+  "rate": 0.95,
+  "saturated": false,
+  "ci95": [
+   0.9266666666666666,
+   0.9733333333333334
+  ],
+  "metric": "pass_rate",
+  "higher_is_better": true,
+  "n_items": 300,
+  "n_items_decided": 300,
+  "counts": {
+   "n_expected_cells": 877,
+   "n_missing_cells": 0,
+   "n_unjudged_cells": 0,
+   "n_empty_cells": 0
+  },
+  "judge_model": "claude-sonnet-5",
+  "instrument": "bank-2026-10-10",
+  "layers_judged": [
+   42
+  ],
+  "complete": false,
+  "written": "2026-10-16T20:32:43+00:00"
  }
 }
