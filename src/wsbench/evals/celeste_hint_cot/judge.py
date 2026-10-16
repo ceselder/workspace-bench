@@ -19,7 +19,7 @@ from wsbench.mcjudge import (
     with_readout_count,
 )
 from wsbench.readouts import Cell, expected_cells, load_readouts, missing_cells
-from wsbench.registry import JudgeArgs
+from wsbench.registry import REPO_ROOT, JudgeArgs
 from wsbench.results import FamilyResult
 
 from .prompts import MIN_STAGE1, PROMPT_VERSION, SCHEMA, SYSTEM, render
@@ -28,6 +28,7 @@ FAMILY = "celeste_hint_cot"
 HC_K = 8  # readouts judged per cell (a maximum); a token bag is one snippet
 POSITIVE, NEGATIVE = "hint_caused", "would_anyway"
 HEADLINE_KINDS: tuple[str, ...] = ("early", "late", "think_end", "pre_answer")
+BANKS = {"strict": "items.json", "reliance": "items_reliance.json"}  # opts=bank=...
 CONTROL_KIND = (
     "prompt_end"  # the last prompt token: the hint is present in both classes, so no signal
 )
@@ -74,6 +75,12 @@ class CellRecord:
         return any(s.unjudged for s in self.snippets)
 
 
+def load_bank_file(name: str) -> dict[str, Any]:
+    import json
+
+    return json.loads((REPO_ROOT / "evals" / FAMILY / name).read_text(encoding="utf-8"))
+
+
 def cell_snippets(cell: Cell) -> list[str]:
     """A prose cell's first HC_K non-blank samples; a token bag rendered as one scored snippet."""
     if cell.tokens is not None:
@@ -85,7 +92,10 @@ def cell_snippets(cell: Cell) -> list[str]:
 def run(args: JudgeArgs) -> FamilyResult:
     from . import score
 
-    bank = load_bank(FAMILY)
+    variant = args.extra.get("bank", "strict")  # opts=bank=reliance: the mention-only variant bank
+    if variant not in BANKS:
+        raise SystemExit(f"{FAMILY}: opts=bank must be one of {sorted(BANKS)}, not {variant!r}")
+    bank = load_bank(FAMILY) if variant == "strict" else load_bank_file(BANKS[variant])
     scope = item_scope(bank["items"], args)
     sites = {it["id"]: {int(s["pos"]): s for s in it["sites"]} for it in scope}
     positions = {iid: list(ps) for iid, ps in sites.items()}
@@ -184,6 +194,7 @@ def run(args: JudgeArgs) -> FamilyResult:
         judged_layers=layers,
         headline_kinds=list(HEADLINE_KINDS),
         control_kind=CONTROL_KIND,
+        bank=variant,
     )
     return with_readout_count(
         score.score(args, scope, records, rows, counts=counts, config=config), scope, cells

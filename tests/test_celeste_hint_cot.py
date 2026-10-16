@@ -232,3 +232,43 @@ def test_dry_run_prints_the_first_prompt(tmp_path, capsys):
     assert "BEGIN SNIPPET" in out and "externally supplied answer" in out
     res = json.loads((tmp_path / "o" / "results.json").read_text())
     assert res["numbers"]["value"] is None and res["complete"] is False
+
+
+def test_bank_option_selects_the_variant(tmp_path, monkeypatch):
+    bank = _toy_bank()
+    rows = _rows(bank, lambda it, s: ["a topical readout"])
+    seen: list[str] = []
+    monkeypatch.setattr(hj, "load_bank_file", lambda name: (seen.append(name), bank)[1])
+
+    def scripted(stage, snippet):
+        return 1
+
+    def run_with(variant):
+        monkeypatch.setattr(hj, "load_bank", lambda _f: bank)
+        monkeypatch.setattr(hj, "run_calls", lambda cs, **kw: {c.key: {"score": 1} for c in cs})
+        readouts = write_jsonl(tmp_path / f"{variant}.jsonl", rows)
+        from wsbench.registry import JudgeArgs
+
+        return hj.run(
+            JudgeArgs(
+                readouts=readouts,
+                out=tmp_path / variant,
+                judge=resolve(
+                    JudgeConfig(model="claude-sonnet-5", prompt_version=hp.PROMPT_VERSION)
+                ),
+                layers=None,
+                items=None,
+                limit=0,
+                allow_missing=False,
+                concurrency=1,
+                rpm=1e9,
+                dry_run=False,
+                extra={"bank": variant},
+            )
+        )
+
+    res = run_with("reliance")
+    assert seen == ["items_reliance.json"] and res.config["bank"] == "reliance"
+    assert run_with("strict").config["bank"] == "strict" and seen == ["items_reliance.json"]
+    with pytest.raises(SystemExit):
+        run_with("nope")
