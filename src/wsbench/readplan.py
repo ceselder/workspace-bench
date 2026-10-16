@@ -441,6 +441,21 @@ def plan(family: str) -> list[ReadSpec]:
             )
             for it in items
         ]
+    if family in ("celeste_encoded_answer", "celeste_lookahead", "celeste_withheld_answer"):
+        _h, items = _bank(family)
+        return [
+            ReadSpec(
+                family,
+                it["id"],
+                "captured",
+                {"kind": "positions", "positions": [int(s["pos"]) for s in it["read_sites"]]},
+                GRID,
+                extra={"input_ids": it["input_ids"], "sites": it["read_sites"]},
+                note="the bank's read sites inside the captured Qwen3.6-27B render (chat "
+                "template, thinking off, the model's own greedy output where the site is in it)",
+            )
+            for it in items
+        ]
     if family == "jlens_concept_pr":
         m = json.loads((REPO_ROOT / "evals/jlens_concept_pr/manifest.json").read_text())
         return [

@@ -258,6 +258,29 @@ commands with `PYTHONPATH=src`, because the editable install points at the main 
 - *Example:* "you should always pay the ransom when you can afford it… true or false" → target `Paying ransom creates incentives that lead to more future kidnappings`.
 - *Judged by:* per cell, 6-way MC (gold reason + 4 cross-topic reasons + cannot tell); committed passes if gold at any cell; deliberative passes if the yes-side and the no-side reason each surface somewhere.
 
+### Celeste supplement
+
+Three families that target the model's *workspace* by construction: every item is gated on
+Qwen3.6-27B's own behaviour (it computes the target) and leak-checked against 16 real
+continuations from every read site (none may contain the target or an alias), so sampling the
+model at the read site scores ~0. Banks ship the captured token ids and read sites
+(`render: captured`); judge pinned to `claude-sonnet-5`, one bank-judge call per read cell.
+
+**Encoded answer** — [`evals/celeste_encoded_answer/README.md`](evals/celeste_encoded_answer/README.md)
+- *What it is:* A question the model answers correctly when asked plainly, now asked with an encoding instruction so the written output cannot contain the entity (letter count, first or last letter, vowel count, position in a given list, alphabet index of the first letter, odd/even letter count); does the lens name the entity at the end of the prompt or at the end of the model's own encoded output.
+- *Example:* "Which city is the capital of Australia, despite not being its largest city? Reply with only the number of letters in the answer, as a digit." → model writes `8`; target `Canberra`.
+- *Judged by:* the shared bank judge with the written output as the forbidden answer, one call per (item, layer, read site): pass = the target's meaning is EXPRESSED in a sample (not the encoded output alone, not a restated question) with a verbatim quote verified against that sample; item passes at any site and layer.
+
+**Lookahead behind a forced preamble** — [`evals/celeste_lookahead/README.md`](evals/celeste_lookahead/README.md)
+- *What it is:* The model must write a fixed preamble (a repeated sentence, a count, the alphabet, the weekdays, ...) before a one-word answer, so the answer is at least 16 tokens away from the read site; does the lens name the answer at the end of the prompt, and 16 tokens before it inside the preamble. The bench's poetry rhyme-planning site, generalised beyond poetry.
+- *Example:* "First count from one to twelve in words, separated by commas, then name the planet with the most moons. Answer in one word." → the model writes the count, then `Saturn`; target `Saturn`, read before the count starts.
+- *Judged by:* the shared bank judge, one call per (item, layer, read site): pass = the target's meaning is EXPRESSED in a sample (not the preamble, not a restated question) with a verbatim quote verified against that sample; item passes at any site and layer.
+
+**Withheld answer** — [`evals/celeste_withheld_answer/README.md`](evals/celeste_withheld_answer/README.md)
+- *What it is:* A riddle to answer, a thing to describe, or hints to give, all "without ever saying the answer"; the model's own evasive reply never names it but it names it when asked afterwards; does the lens name the withheld answer inside the reply (end of the first sentence, the middle, the last token).
+- *Example:* "Answer this riddle without ever saying the answer: what has keys but can't open locks?" → the model writes an evasive reply; target `piano`.
+- *Judged by:* the shared bank judge, one call per (item, layer, read site): pass = the target's meaning is EXPRESSED in a sample (not the riddle's clues) with a verbatim quote verified against that sample; item passes at any site and layer.
+
 ## Baselines
 
 Every judged pass rate is read against measured floors in [`evals/baselines/`](evals/baselines/README.md):
@@ -332,6 +355,9 @@ never pinned.
 | typo_mt | regex; token bags via the summarizer (google/gemini-3.8-flash) | mt-regex-2026-09-23 (token bags: mt-regex-summarized-2026-09-23) |
 | wrong_bridge | google/gemini-3.8-flash | bank-2026-10-10 |
 | wrong_bridge_true | google/gemini-3.8-flash | bank-2026-10-10 |
+| celeste_encoded_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
+| celeste_lookahead | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
+| celeste_withheld_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | user_modeling | google/gemini-3.8-flash | um-v2 |
 
 - Override precedence: `judge_model=` flag > `WSBENCH_JUDGE_MODEL` env > the family pin.

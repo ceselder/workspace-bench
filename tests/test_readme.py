@@ -14,6 +14,7 @@ GROUPS = [
     "Bag of words",
     "Precision",
     "Logical processing",
+    "Celeste supplement",
 ]
 LABELS = ("*What it is:*", "*Example:*", "*Judged by:*")
 
@@ -65,6 +66,7 @@ def test_group_membership_matches_registry():
     by_group |= {"safety": "Safety", "association": "Association"}
     by_group |= {"bag_of_words": "Bag of words"}
     by_group |= {"precision": "Precision", "logic": "Logical processing"}
+    by_group |= {"celeste": "Celeste supplement"}
     starts = {g: text.index(f"### {g}") for g in GROUPS}
     ends = [*sorted(starts.values()), len(text)]
     for s in _specs():

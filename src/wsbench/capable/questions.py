@@ -287,6 +287,16 @@ NO_QUESTION: dict[str, str] = {
     "wrong_bridge": "the gate is a specific Qwen3.6-27B ERROR (it resolves the wrong bridge B' and "
     "answers hop2(B')): re-run the wrong-bridge screen/gate for a new model",
     "wrong_bridge_true": "contrast arm of wrong_bridge (same items): re-gate with wrong_bridge",
+    "celeste_encoded_answer": "the gate is Qwen3.6-27B's own behaviour (names the target when "
+    "asked "
+    "plainly, writes the correct encoded output, never names it in 16 sampled continuations "
+    "from each read site): re-run scripts/celeste_supplement on a new model",
+    "celeste_lookahead": "the gate is Qwen3.6-27B's own greedy rollout (the target appears >= 16 "
+    "tokens after the read site and never in 16 sampled continuations capped there): re-run "
+    "scripts/celeste_supplement on a new model",
+    "celeste_withheld_answer": "the gate is Qwen3.6-27B's own reply (never names the target, names "
+    "it when asked afterwards, never in 16 sampled continuations from each read site): re-run "
+    "scripts/celeste_supplement on a new model",
 }
 # What a family's capability check does NOT cover, and what to do about it.
 PARTIAL: dict[str, str] = {
