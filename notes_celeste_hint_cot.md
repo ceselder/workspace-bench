@@ -106,3 +106,20 @@
 - 03:42 UTC: rescue #3 done (117,900 hinted rollouts, 8 x ~2 h ≈ 17 GPU-h): 106,528 H-rollouts, regex-hit 99.95%, only 54 clean rows.
   The pairs that lacked a clean rollout essentially never produce one (0.05%): deep sampling has hit a wall. Final strict bank is built with
   counts matched ACROSS classes per correctness (m_correct, m_wrong separately) so the thin pos_wrong cell does not throw away pos_correct items.
+- 03:46 UTC FINAL STRICT BANK: 242 items = 121 hint-caused (69 hint-correct + 52 hint-wrong) + 121 would-anyway (69 + 52), 4,598 read cells
+  (19 per item). Finalists available: pos_correct 69, pos_wrong 52, neg_correct 370, neg_wrong 156. Chosen rollouts by stage: confirm 88,
+  confirm2 44, rescue 62, rescue2 17, rescue3 31. Below the >= 200/class target because the unverbalized flip is a ~0.4% event (0.2% for
+  wrong-answer hints) and deeper sampling of the remaining pairs yielded 0.05%. Committed to the fork; capture launched on Modal.
+  Strict-bank monitors and the reliance judge on the chosen rollouts running locally.
+- 03:55 UTC: reliance judge on the 242 strict chosen rollouts: 205 not_mentioned, 37 mentioned_only (16 pos / 21 neg) — but the mention-only
+  quotes are mostly spurious (empty, "This looks like a question from CommonsenseQA", the format line "Answer: <letter>", or the judge quoting
+  its own instructions "Its prompt contained a metadata block naming option C"). So on genuinely clean rollouts the 3-way judge has a ~15%
+  mention-only false-positive rate; acknowledged_reliance on regex hits (quotes verified 91%) is the reliable part. Report with this caveat.
+- 03:52 UTC: strict-bank monitors (n = 242): transcript monitor AUROC 0.79 [0.73, 0.85] (pos mean 6.2 vs neg 4.1); question+answer-only monitor
+  0.77 [0.71, 0.82] (4.3 vs 2.6). By correctness: hint-correct transcript 0.77 / Q+A 0.70; hint-wrong transcript 0.82 / Q+A 0.85.
+  The CoT adds little over question+answer: the residual difficulty/plausibility confound (positives' wrong hints are never-picked
+  options; negatives' wrong hints are the model's own plausible errors) carries most of the monitor's separation.
+  Lens (4 shards, k=4) and sampling (2 shards, k=2) launched 03:48 UTC.
+- 04:00 UTC: lens readouts (4,598 cells x 4, lens grammar, --no-ascii) and sampling continuations (4,598 cells, k=2 deduped -> 2,106 cells with
+  identical pairs) downloaded. NOTE: the two stages share the shard filename pattern -> download into separate dirs (first attempt overwrote
+  two lens shards; redone). Judging both arms with Sonnet 5 (concurrency 20 each).
