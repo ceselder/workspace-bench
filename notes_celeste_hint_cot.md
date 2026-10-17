@@ -125,3 +125,13 @@
   two lens shards; redone). Judging both arms with Sonnet 5 (concurrency 20 each).
 - 04:10 UTC: sampling baseline (20-token continuations, k=2 deduped) judged: AUROC 0.41 [0.35, 0.46] (pos mean 1.64 vs neg 2.33; 364/6,693
   snippets survived stage 1; 69% of items had a survivor). Cost $15.3. Lens judge still running (~6.3k/18.4k stage-1 calls).
+- 04:20 UTC: summary/plot/playground scripts dry-run clean on stand-in lens results; plots re-laid out for phones (2-row funnel figure,
+  value labels inside bars). Strict bank meta rebuilt with the reliance counters (items byte-identical; 8f2c60c). Waiting on the lens judge.
+- 04:50 UTC FINAL (strict bank, n = 242): O-lens AUROC 0.54 [0.46, 0.61] (hint-correct 0.56, hint-wrong 0.51; by site early 0.53 / late 0.56 /
+  </think> 0.47 / pre-answer 0.48; prompt-end control 0.47); transcript monitor 0.79 [0.73, 0.85]; question+answer monitor 0.77 [0.71, 0.82];
+  sampling baseline 0.41 [0.35, 0.46]. 9.8% of lens snippets pass stage 1, evenly across classes. 1/4,598 lens cells unjudged (CJK snippet).
+  Variant bank (36 mention-only items): O-lens 0.41 [0.21, 0.60], transcript 0.82, Q+A 0.79.
+  Spend: 80.2 B200-hours on Modal (~$500; 70 jobs; screens 22 h, confirms 15 h, rescues 40 h, readouts/capture 3 h), Claude $119
+  (lens judge $51, sampling judge $15, reliance judges $30, verbalization $10, monitors $3, pilots/smoke $3).
+  Deliverables: fork branch celeste-supplement (family + banks + tests), ~/shared/reports/celeste-supplement/{playground_hint.html, hint_data/,
+  hint_data_reliance/, hint_*.png/pdf, data/hint_*.json, report_hint_section.md, scripts/plot_hint.py, scripts/hint_pipeline/}.
