@@ -94,3 +94,15 @@
   still lacking a clean rollout, +200 per pos_correct; 440 pairs, 117,900 samples, 8 shards, ETA ~03:20 UTC) to lift the positive cells.
   Reliance variant bank (mention-only rollouts, 3 judged per pair): 9/23/46/10 -> 36 items at 9/cell; written to the fork as
   items_reliance.json + capture_rows_reliance.json (final: its inputs are complete). Its lens arm is cheap (~2.7k judge calls) -> scored.
+- 01:40 UTC: variant bank (36 items) monitors: transcript AUROC 0.82 [0.67, 0.93], Q+A-only 0.79 [0.65, 0.91] (pos mean 4.9 vs neg 2.8).
+  The Q+A monitor separates even with correctness balanced: positives' wrong hints are never-picked implausible options, negatives' wrong
+  hints are the model's own plausible confusions -> a residual difficulty confound inherent to the design (worth stating in the report).
+  Builder bug fixed (a trailing comment had swallowed question/options/split in the item dict); variant bank rebuilt and recommitted (04ae809).
+- 01:50 UTC: variant bank (36 mention-only items) O-lens arm: AUROC 0.41 [0.21, 0.60] (chance); by site early 0.50 / late 0.57 / </think> 0.47 /
+  pre-answer 0.41 / prompt-end control 0.50; 259/2736 snippets survived stage 1 (9.5%), every item had >= 1 survivor. Judge cost $7.3.
+- 01:45 UTC: playground works end to end (bank selector strict/variant; lazy per-item JSON; sites clickable; headless-Chrome check OK locally).
+  Caveat seen while browsing the variant: a rollout labelled mentioned_only by the reliance judge ends "Wait, the metadata explicitly says
+  <answer>A</answer>. This strongly suggests ..." -> the 3-way reliance label is lenient on late corroboration; treat mention-only as noisy.
+- 03:42 UTC: rescue #3 done (117,900 hinted rollouts, 8 x ~2 h ≈ 17 GPU-h): 106,528 H-rollouts, regex-hit 99.95%, only 54 clean rows.
+  The pairs that lacked a clean rollout essentially never produce one (0.05%): deep sampling has hit a wall. Final strict bank is built with
+  counts matched ACROSS classes per correctness (m_correct, m_wrong separately) so the thin pos_wrong cell does not throw away pos_correct items.
