@@ -123,3 +123,5 @@
 - 04:00 UTC: lens readouts (4,598 cells x 4, lens grammar, --no-ascii) and sampling continuations (4,598 cells, k=2 deduped -> 2,106 cells with
   identical pairs) downloaded. NOTE: the two stages share the shard filename pattern -> download into separate dirs (first attempt overwrote
   two lens shards; redone). Judging both arms with Sonnet 5 (concurrency 20 each).
+- 04:10 UTC: sampling baseline (20-token continuations, k=2 deduped) judged: AUROC 0.41 [0.35, 0.46] (pos mean 1.64 vs neg 2.33; 364/6,693
+  snippets survived stage 1; 69% of items had a survivor). Cost $15.3. Lens judge still running (~6.3k/18.4k stage-1 calls).
