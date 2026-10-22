@@ -299,6 +299,11 @@ NO_QUESTION: dict[str, str] = {
     "celeste_withheld_answer": "the gate is Qwen3.6-27B's own reply (never names the target, names "
     "it when asked afterwards, never in 16 sampled continuations from each read site): re-run "
     "scripts/celeste_supplement on a new model",
+    "celeste_foreshadow": "the targets are Qwen3.6-27B's own thoughts (stated in >= 4 of its 8 "
+    "thinking-mode answers, never in 16 sampled continuations from the read site): re-run "
+    "scripts/celeste_evals/foreshadow on a new model",
+    "celeste_coherence": "no gate: the cells are the hallucination family's and the instrument "
+    "grades the form of any readout, not a behaviour of the model",
 }
 # What a family's capability check does NOT cover, and what to do about it.
 PARTIAL: dict[str, str] = {

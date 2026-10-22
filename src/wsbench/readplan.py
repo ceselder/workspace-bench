@@ -406,6 +406,20 @@ def plan(family: str) -> list[ReadSpec]:
             )
             for r in rows
         ]
+    if family == "celeste_coherence":  # the hallucination family's cells, unchanged
+        return [
+            ReadSpec(
+                family,
+                s.id,
+                s.render,
+                s.positions,
+                s.layers,
+                extra=s.extra,
+                note="the hallucination family's read sites (punctuation and newlines inside "
+                "the model's own replies to real chat prompts); every bullet is graded",
+            )
+            for s in plan("hallucination")
+        ]
     if family == "jailbreak_recognition":
         from wsbench.evals.jailbreak_recognition.judge import grid_positions, prefix_to_last_user
 
@@ -469,6 +483,27 @@ def plan(family: str) -> list[ReadSpec]:
                 extra={"input_ids": it["input_ids"], "sites": it["read_sites"]},
                 note="the bank's read sites inside the captured Qwen3.6-27B render (chat "
                 "template, thinking off, the model's own greedy output where the site is in it)",
+            )
+            for it in items
+        ]
+    if family == "celeste_foreshadow":
+        _h, items = _bank(family)
+        return [
+            ReadSpec(
+                family,
+                it["id"],
+                "captured",
+                {
+                    "kind": "positions",
+                    "positions": sorted(
+                        int(s["pos"]) for s in [*it["read_sites"], *(it.get("control_sites") or [])]
+                    ),
+                },
+                GRID,
+                extra={"input_ids": it["input_ids"], "sites": it["read_sites"]},
+                note="punctuation and whitespace tokens of the user message after the buried cue "
+                "(scored) and one before it (control), inside the captured Qwen3.6-27B render "
+                "(chat template, thinking on); the model has not started to reply",
             )
             for it in items
         ]

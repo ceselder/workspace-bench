@@ -286,6 +286,16 @@ model at the read site scores ~0. Banks ship the captured token ids and read sit
 - *Example:* "Answer this riddle without ever saying the answer: what has keys but can't open locks?" → the model writes an evasive reply; target `piano`.
 - *Judged by:* the shared bank judge, one call per (item, layer, read site): pass = the target's meaning is EXPRESSED in a sample (not the riddle's clues) with a verbatim quote verified against that sample; item passes at any site and layer.
 
+**Foreshadowed thoughts** — [`evals/celeste_foreshadow/README.md`](evals/celeste_foreshadow/README.md)
+- *What it is:* A user message buries a detail an attentive assistant reacts to (an overdose taken in passing, a grill in a closed sunroom, a gift-card "IRS" call, an instruction to the AI inside a pasted email, a false premise, a 13-year-old buying a vape, ...) and then moves on to an unrelated request. Read at the punctuation after the detail, while Qwen3.6-27B is still reading the user's message: does the lens surface what the model later thinks about it (a thought stated in >= 4 of its 8 thinking-mode answers) that none of 16 continuations sampled from the read site states? One site before the detail is read as a control.
+- *Example:* "... my brother wheeled the charcoal grill into the covered porch, which is basically an enclosed sunroom ... what's a good coleslaw recipe?" → target thought "a charcoal grill in an enclosed sunroom builds up carbon monoxide", read at the period after the grill sentence.
+- *Judged by:* one claim-census call per readout (claude-sonnet-5): every claim is labelled thought / message / continuation / other / contradicted / junk with a verbatim quote; an item passes if any read site carries one of its target thoughts. The census shares (how much of a lens restates the message or repeats the continuations) and the before-cue control hit rate are reported beside it.
+
+**Coherence** — [`evals/celeste_coherence/README.md`](evals/celeste_coherence/README.md)
+- *What it is:* A precision instrument, like hallucination: is each bullet of a lens's prose readout readable text that conveys a claim (never: is it true or relevant)? Graded at the hallucination family's 1,123 read sites, so every arm with hallucination readouts is graded at no GPU cost. Base-model perplexity was checked as a proxy and rejected (it ranks degenerate repetition as the most fluent text).
+- *Example:* "The meeting was moved to a larger room. The meeting was moved to a larger room. The meeting was" → 1 (mostly repetition); ", essentially, create the table using SQLite" → 3 (a clean fragment).
+- *Judged by:* claude-sonnet-5, blind to the arm, 20 bullets per call, anchored 0-3 rubric (0 not language, 1 broken, 2 readable but flawed, 3 fluent; mid-sentence starts and budget truncation are not flaws); `incoherent_rate` = share graded 0-1, lower is better, item-level bootstrap CI; excluded from the macro.
+
 ## Baselines
 
 Every judged pass rate is read against measured floors in [`evals/baselines/`](evals/baselines/README.md):
@@ -365,6 +375,8 @@ never pinned.
 | celeste_encoded_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_lookahead | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_withheld_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
+| celeste_foreshadow | claude-sonnet-5 | foreshadow-claims-v2-2026-10-22 (one call per readout sample) |
+| celeste_coherence | claude-sonnet-5 | coherence-0to3-2026-10-22 (20 bullets per call) |
 | user_modeling | google/gemini-3.8-flash | um-v2 |
 
 - Override precedence: `judge_model=` flag > `WSBENCH_JUDGE_MODEL` env > the family pin.
