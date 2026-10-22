@@ -17,6 +17,39 @@ f = bank["funnel"]
 rt = bank["retest"]
 g = bank["gate"]
 cats = Counter(it["variant"] for it in items)
+NOHINT = Path.home() / "evals-research/secret_choice_eval/gate_nohint_pilot.json"
+nohint = "not re-run here"
+vivid_lift = "see the funnel"
+GATES = sorted((Path.home() / "evals-research/secret_choice_eval").glob("gate_vivid_s*.json"))
+if GATES:
+    lift_v: dict[int, list[float]] = {}
+    for g_ in GATES:
+        d_ = json.loads(g_.read_text())
+        for p_ in d_["prompts"]:
+            for r_ in p_["rollouts"]:
+                for s_ in r_["sites"]:
+                    lift_v.setdefault(s_["line"], []).append(s_["agree"] / 8 - s_["base_rate"])
+    vivid_lift = (
+        ", ".join(
+            f"{100 * sum(v) / len(v):+.1f} (n {len(v)})"
+            for k, v in sorted(lift_v.items())
+            if k <= 3
+        )
+        + " points"
+    )
+if NOHINT.exists():
+    d_ = json.loads(NOHINT.read_text())
+    sites_ = [(p_, r_, s_) for p_ in d_["prompts"] for r_ in p_["rollouts"] for s_ in r_["sites"]]
+    lift_ = {}
+    for p_, r_, s_ in sites_:
+        lift_.setdefault(s_["line"], []).append(s_["agree"] / 8 - s_["base_rate"])
+    lift_txt = ", ".join(
+        f"{100 * sum(v) / len(v):+.1f}" for k, v in sorted(lift_.items()) if k <= 3
+    )
+    nohint = (
+        f"{sum(s_['committed'] for _p, _r, s_ in sites_)} committed sites of {len(sites_)}, "
+        f"agreement minus base rate {lift_txt} points at lines 1-3"
+    )
 n_sites = sum(len(it["read_sites"]) for it in items)
 sites_per_item = Counter(len(it["read_sites"]) for it in items)
 n_fav = sum(it["pick_is_favourite"] for it in items)
@@ -50,6 +83,12 @@ lines = bank["sites_per_line"]
 line_rows = ", ".join(f"{k} {v}" for k, v in lines.items())
 
 
+bins = "; ".join(
+    f"{k}: {v['mean_agree']:.2f} / 8 (n {v['n']})" for k, v in rt["by_sonnet_p_pick_bin"].items()
+)
+mean_base = sum(it["base_rate"] for it in items) / len(items)
+
+
 def pct(x):
     return "n/a" if x is None else f"{100 * x:.0f}%"
 
@@ -76,10 +115,13 @@ secret / hold it in mind / decide now", the model does not hold a pick at all: r
 inside the text agree with the rollout's own reveal 2-4 points *less* often than the prompt's
 base rate predicts, and the J-lens never ranks the revealed option above chance. The pick is
 sampled at the reveal line. Only the "picture it vividly" wording above makes the model commit
-while it writes (agreement over base rate +2, +6, +8 points at the end of lines 1, 2, 3), and it
+while it writes (pilot: agreement over base rate +2, +6, +8 points at the end of lines 1, 2, 3; at
+scale, {vivid_lift}), and it
 commits partly by writing the option's imagery into the text, which is why every site is gated
-on leakage below. An anti-leak wording ("give nothing away ...") was piloted as well; see the
-notes in the celeste-evals report.
+on leakage below. An anti-leak wording ("... but give nothing away: nothing you write before the last line may
+hint at which <category> it is, not its name, not its features, not anything it is known for")
+was piloted on 36 prompts as well: it removes the commitment altogether ({nohint}), so committing
+and leaking are one mechanism, and the gate below is what separates them.
 
 Part of the *celeste-evals* group (`scripts/celeste_evals/secret_choice/`, step 1 in
 `olens-flow/src/secret_choice_gate.py`), built {bank["built"]}.
@@ -107,6 +149,17 @@ first 8 identify a committed site. On the {rt["kept_sites"]["n"]} kept sites the
 agree with the pick {rt["kept_sites"]["mean_agree"]:.2f} / 8 on average; {pct(rt["kept_sites"]["share_ge7"])} of kept sites
 re-pass the >= 7/8 bar and {pct(rt["kept_sites"]["share_ge6"])} reach >= 6/8 (over all {rt["committed_no_text_leak_sites"]["n"]}
 committed, text-leak-free sites: {rt["committed_no_text_leak_sites"]["mean_agree"]:.2f} / 8, {pct(rt["committed_no_text_leak_sites"]["share_ge7"])} re-pass).
+
+**The gate keeps the quieter commitments.** How well Sonnet can read the pick from the text
+tracks how strongly the model is committed: on the {rt["sonnet_dropped_sites"]["n"]} sites Sonnet
+could infer (dropped), the fresh resamples agree {rt["sonnet_dropped_sites"]["mean_agree"]:.2f} / 8
+({pct(rt["sonnet_dropped_sites"]["share_ge7"])} re-pass 7/8), against {rt["kept_sites"]["mean_agree"]:.2f} / 8 on the kept sites;
+by Sonnet's probability for the pick: {bins}. The model commits *by* writing the option's
+imagery, so the sites where the text gives nothing away are the ones where the commitment is
+softer. The kept sites are still committed far above the base rate (a pick revealed at the
+prompt's base rate would agree with about {8 * mean_base:.1f} / 8), but a reader should expect
+`extras.pass_rate_retest_confirmed` (items with a site that re-passed 7/8, passing on such a
+site) to be the cleaner number.
 
 Funnel:
 

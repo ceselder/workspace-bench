@@ -20,10 +20,13 @@ secret / hold it in mind / decide now", the model does not hold a pick at all: r
 inside the text agree with the rollout's own reveal 2-4 points *less* often than the prompt's
 base rate predicts, and the J-lens never ranks the revealed option above chance. The pick is
 sampled at the reveal line. Only the "picture it vividly" wording above makes the model commit
-while it writes (agreement over base rate +2, +6, +8 points at the end of lines 1, 2, 3), and it
+while it writes (pilot: agreement over base rate +2, +6, +8 points at the end of lines 1, 2, 3; at
+scale, +0.4 (n 3975), +2.6 (n 3975), +4.7 (n 3969) points), and it
 commits partly by writing the option's imagery into the text, which is why every site is gated
-on leakage below. An anti-leak wording ("give nothing away ...") was piloted as well; see the
-notes in the celeste-evals report.
+on leakage below. An anti-leak wording ("... but give nothing away: nothing you write before the last line may
+hint at which <category> it is, not its name, not its features, not anything it is known for")
+was piloted on 36 prompts as well: it removes the commitment altogether (21 committed sites of 1374, agreement minus base rate -4.0, -3.7, -0.5 points at lines 1-3), so committing
+and leaking are one mechanism, and the gate below is what separates them.
 
 Part of the *celeste-evals* group (`scripts/celeste_evals/secret_choice/`, step 1 in
 `olens-flow/src/secret_choice_gate.py`), built 2026-10-22.
@@ -47,50 +50,64 @@ scripts to port it.
 
 **Reliability re-test.** Every committed, text-leak-free site also got a *fresh* set of 8
 resamples with another seed. This set is never used to select: it measures how reliably the
-first 8 identify a committed site. On the 52 kept sites the fresh resamples
-agree with the pick 6.25 / 8 on average; 48% of kept sites
-re-pass the >= 7/8 bar and 75% reach >= 6/8 (over all 191
-committed, text-leak-free sites: 6.98 / 8, 71% re-pass).
+first 8 identify a committed site. On the 161 kept sites the fresh resamples
+agree with the pick 5.79 / 8 on average; 40% of kept sites
+re-pass the >= 7/8 bar and 62% reach >= 6/8 (over all 744
+committed, text-leak-free sites: 7.14 / 8, 77% re-pass).
+
+**The gate keeps the quieter commitments.** How well Sonnet can read the pick from the text
+tracks how strongly the model is committed: on the 556 sites Sonnet
+could infer (dropped), the fresh resamples agree 7.52 / 8
+(88% re-pass 7/8), against 5.79 / 8 on the kept sites;
+by Sonnet's probability for the pick: 0.0-0.2: 5.54 / 8 (n 89); 0.2-0.4: 6.39 / 8 (n 117); 0.4-0.6: 7.35 / 8 (n 232); 0.6-0.8: 7.60 / 8 (n 159); 0.8-1.0: 7.98 / 8 (n 120). The model commits *by* writing the option's
+imagery, so the sites where the text gives nothing away are the ones where the commitment is
+softer. The kept sites are still committed far above the base rate (a pick revealed at the
+prompt's base rate would agree with about 3.0 / 8), but a reader should expect
+`extras.pass_rate_retest_confirmed` (items with a site that re-passed 7/8, passing on such a
+site) to be the cleaner number.
 
 Funnel:
 
 | stage | n |
 |---|---|
-| prompts (13 categories x 6 fillers, 6 options each) | 78 |
-| rollouts (16 per prompt, T=1) | 1248 |
-| rollouts with a parsed reveal line | 1232 |
-| read sites (newlines ending filler lines 1-3) | 2962 |
-| committed: >= 7 of 8 resamples reveal the rollout's pick, prompt-level rate of that pick <= 0.5 | 199 |
-| the text so far never names the pick | 191 |
-| none of 16 capped continuations names it | 187 |
-| claude-sonnet-5 reading the text gives the pick <= 0.3 | 52 |
-| items = (prompt, rollout) with >= 1 kept site | 38 |
+| prompts (13 categories x 6 fillers, 6 options each) | 312 |
+| rollouts (16 per prompt, T=1) | 4992 |
+| rollouts with a parsed reveal line | 4950 |
+| read sites (newlines ending filler lines 1-3) | 11934 |
+| committed: >= 7 of 8 resamples reveal the rollout's pick, prompt-level rate of that pick <= 0.5 | 786 |
+| the text so far never names the pick | 744 |
+| none of 16 capped continuations names it | 724 |
+| claude-sonnet-5 reading the text gives the pick <= 0.3 | 161 |
+| items = (prompt, rollout) with >= 1 kept site | 134 |
 
-27 of the 38 items reveal the prompt's favourite option (the modal reveal of its 16
-rollouts, at a rate <= 0.5); the other 11 reveal a non-favourite option, which no
+83 of the 134 items reveal the prompt's favourite option (the modal reveal of its 16
+rollouts, at a rate <= 0.5); the other 51 reveal a non-favourite option, which no
 reader of the prompt alone can know. `extras.pass_rate_pick_not_favourite` is the clean number.
-Kept sites: 52 (line_1 24, line_2 13, line_3 15); 28 items with 1 site, 6 items with 2 sites, 4 items with 3 sites.
+Kept sites: 161 (line_1 48, line_2 52, line_3 61); 114 items with 1 site, 13 items with 2 sites, 7 items with 3 sites.
 
 Items per category (`variant`):
 
 | category | items |
 |---|---|
-| animal | 2 |
-| country | 15 |
+| animal | 10 |
+| color | 4 |
+| country | 23 |
 | flower | 1 |
-| fruit | 1 |
-| instrument | 2 |
-| metal | 3 |
-| profession | 1 |
-| sport | 1 |
-| tool | 8 |
-| vehicle | 4 |
+| fruit | 11 |
+| gemstone | 6 |
+| instrument | 15 |
+| metal | 5 |
+| profession | 13 |
+| sport | 10 |
+| tool | 16 |
+| vegetable | 7 |
+| vehicle | 13 |
 
 ## Bank
 
 `items.json`: header (`family`, `model`, `built`, `render`, `wording`, `template`, `fillers`,
 `option_sets`, `aliases`, `gate` with every sampling setting and the Sonnet prompt verbatim,
-`funnel`, `retest`, `sites_per_line`, `items_per_category`, `n_items`) + **38 items**.
+`funnel`, `retest`, `sites_per_line`, `items_per_category`, `n_items`) + **134 items**.
 Per item: `name`, `variant` (= `category`), `options` (the six, prompt order), `pick`, `aliases`,
 `favourite`, `pick_is_favourite`, `base_rate`, `dist` (reveal counts of the 16 rollouts),
 `prompt_index`, `rollout`, `prompt`, `filler`, `rollout_text` (the whole rollout, reveal
@@ -103,12 +120,12 @@ resamples, `retest_agree` of the fresh 8, `n_cont_leak`, the 16 `continuations`,
 
 ## Example
 
-`sc-instrument-0028-r00` (instrument; options banjo, drum, flute, cello, piano, harmonica; pick **harmonica**, prompt-level rate 0.12, favourite cello):
+`sc-animal-0039-r11` (animal; options moose, lizard, salmon, flamingo, otter, jaguar; pick **otter**, prompt-level rate 0.25, favourite moose):
 
-> The tide inhales the silver moon, / And pulls the darkness deep, / A hollow, breathing lullaby
+> Embrace the learning curve with patience and grace. / Build strong team bonds by listening more than speaking.
 
-Read site `line_3`: 7/8 resamples reveal harmonica (re-test 6/8); Sonnet's probability for
-harmonica from the text: 0.30 (its top guess: flute).
+Read site `line_2`: 8/8 resamples reveal otter (re-test 5/8); Sonnet's probability for
+otter from the text: 0.25 (its top guess: otter).
 
 ## Scoring
 

@@ -27,7 +27,8 @@ son = json.load(open(a.sonnet))
 verdicts = son["verdicts"]
 args0 = shards[0]["args"]
 funnel = Counter()
-retest_all, retest_kept = [], []
+retest_all, retest_kept, retest_dropped = [], [], []
+by_bin: dict[str, list[int]] = {}
 site_lines = Counter()
 items = []
 cats = Counter()
@@ -58,7 +59,10 @@ for d in shards:
                 if v is None or v["p_true"] is None:
                     funnel["sonnet_failed"] += 1
                     continue
+                b_ = min(int(v["p_true"] * 5), 4)
+                by_bin.setdefault(f"{b_ / 5:.1f}-{(b_ + 1) / 5:.1f}", []).append(s["retest_agree"])
                 if not v["keep"]:
+                    retest_dropped.append(s["retest_agree"])
                     continue
                 funnel["not_inferable"] += 1
                 retest_kept.append(s["retest_agree"])
@@ -160,6 +164,16 @@ header = {
             "mean_agree": (sum(retest_kept) / len(retest_kept)) if retest_kept else None,
             "share_ge7": share(retest_kept, 7),
             "share_ge6": share(retest_kept, 6),
+        },
+        # sites the Sonnet reader could infer from the text (dropped): the comparison group
+        "sonnet_dropped_sites": {
+            "n": len(retest_dropped),
+            "mean_agree": (sum(retest_dropped) / len(retest_dropped)) if retest_dropped else None,
+            "share_ge7": share(retest_dropped, 7),
+            "share_ge6": share(retest_dropped, 6),
+        },
+        "by_sonnet_p_pick_bin": {
+            k: {"n": len(v), "mean_agree": sum(v) / len(v)} for k, v in sorted(by_bin.items())
         },
     },
     "sites_per_line": {f"line_{k}": v for k, v in sorted(site_lines.items())},
