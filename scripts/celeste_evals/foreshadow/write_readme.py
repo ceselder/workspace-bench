@@ -69,7 +69,8 @@ Part of the *celeste-evals* group (`scripts/celeste_evals/foreshadow/`), built {
   `input_ids` (the captured render: chat template, one user turn, thinking-on generation prompt),
   `read_sites` (`label`, `pos` = index into `input_ids`, `token`, `char` = offset into `message`
   just after the token, `targets` = indices into `thoughts`, `n_leaked`, `pool` = the 16
-  continuations) and `control_sites` (the last punctuation token before the cue).
+  continuations, `said` = indices of the cue thoughts its continuations do state) and
+  `control_sites` (the last punctuation token before the cue).
 - **`rollouts.jsonl.gz`**: the 8 thinking-mode answers per item (provenance; the judge never
   reads them).
 - {n_sites} scored read sites ({sum(n_targets.values())} with targets by construction; targets per
@@ -107,18 +108,24 @@ Read site `{s0["label"]}` at `{s0["token"]!r}` (after "...{ex["message"][max(0, 
 - **Headline: pass rate.** One judge call per readout sample (at most 4 per cell) labels every
   claim of the readout `thought` (carries the specific content of one of the site's target
   thoughts), `message` (restates the message), `continuation` (matches one of the 16
-  continuations), `other`, `contradicted` or `junk`, each with a verbatim quote; a claim whose
-  quote is not in the readout is `unverified` and never credited. A cell hits when some claim is
+  continuations, or carries one of the site's ALREADY SAID thoughts: the model's other thoughts
+  about the message that its continuations from the site do state), `other`, `contradicted` or
+  `junk`, each with a verbatim quote; a claim whose quote is not in the readout is `unverified`
+  and never credited. A `thought` also needs a `detail`: a specific word or phrase, verbatim in
+  the readout, naming what the thought is about (never a generic word such as danger or safety). A cell hits when some claim is
   a verified `thought`; an item passes when any scored cell (any read site, any judged layer)
   hits. An item with no hit and an unjudged or missing cell is undecided and leaves the
   denominator.
 - **The census** (`extras.claim_share`): the share of all judged claims per label, and
   `extras.overlap_share` = message + continuation. This is the "is it just continuing the text"
   diagnostic: a sampler sits near 1, a workspace reader should not.
-- **Control** (`extras.control_hit_rate`): the before-cue control site is judged against every
-  thought of the item. A lens cannot carry a thought about a detail the model has not read yet,
-  so this rate is the judge's leniency plus the lens's generic spray; lower is better, never
-  part of the pass rule.
+- **Before the cue** (`extras.before_cue_hit_rate`): the last punctuation before the cue sentence is
+  read too and judged against every thought of the item, never part of the pass rule. On the
+  pilot its hits were not judge leniency but the model computing ahead: facts given before the
+  cue sentence (flight times, a price per square foot, a pop-up "saying my device was
+  compromised") already let it form the thought ("my layover is only about 6 hours", "$4.50 x 300
+  = $1,350", "a fake warning popup"). The clean nulls are the continuation pool (judged as a
+  readout it scores ~0) and generic filler ("the user might be in danger": 0 of 20 pilot items).
 - No analytic chance floor. Measured floors: the **sampling baseline** (continuations from the
   read site; ~0 by construction) and the **prompt-only baseline** (stock Qwen3.6-27B shown the
   render up to the read token and asked what a model would be thinking there). The prompt-only
@@ -142,8 +149,8 @@ wsbench judge family=celeste_foreshadow readouts=<arm>.jsonl out=outputs/<arm>/c
 `prompt_version`: `{PROMPT_VERSION}`. Judge: pinned to `claude-sonnet-5`, temperature 0, one call
 per readout sample, JSON schema `{{"claims": [{{"quote": str, "label": one of thought | message |
 continuation | other | contradicted | junk, "thought": int (1-based, 0 unless label is
-thought)}}]}}`. At most {MAX_POOL} continuations are shown per site (all of them); control sites show
-none.
+thought)}}, "detail": str}}]}}`. At most {MAX_POOL} continuations are shown per site (all of them);
+before-cue sites show none.
 
 System prompt:
 
@@ -152,8 +159,8 @@ System prompt:
 ```
 
 User prompt (`{{message}}` = the message with ⟦READ⟧ after the read token; `{{thoughts}}` =
-numbered target thoughts; `{{pool}}` = numbered continuations; `{{readout}}` = one readout sample
-or a token bag):
+numbered target thoughts; `{{said}}` = the site's ALREADY SAID thoughts, or "(none)"; `{{pool}}` =
+numbered continuations; `{{readout}}` = one readout sample or a token bag):
 
 ```text
 {USER}

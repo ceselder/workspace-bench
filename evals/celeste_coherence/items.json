@@ -2,6519 +2,2013 @@
  "family": "celeste_coherence",
  "model": "Qwen/Qwen3.6-27B",
  "built": "2026-10-22",
- "source": "the hallucination family's read sites, unchanged (evals/hallucination/items.json + capture_rows.json): punctuation and whitespace tokens inside Qwen3.6-27B's own on-policy replies to 149 real chat prompts (74 LMSYS-Chat-1M + 75 DailyDialog)",
- "render": "captured: the hallucination family's capture_rows.json input_ids",
- "n_items": 149,
- "n_sites": 1123,
+ "source": "50 items (seed 0) from each of 8 WorkspaceBench families, read with each family's own plan; up to 4 cells per item (the lowest positions present) are graded",
+ "source_families": [
+  "association",
+  "buggy_code",
+  "directed_modulation",
+  "hallucination",
+  "moral_rationale",
+  "multihop",
+  "poetry",
+  "user_modeling"
+ ],
+ "n_items": 399,
  "items": [
   {
-   "name": "chat-lmsys-0000",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 33,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 58,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 79,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 103,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 113,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 117,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 124,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 144,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0001",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 40,
-     "token": "#",
-     "kind": "markup"
-    },
-    {
-     "pos": 109,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 197,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 252,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 316,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 382,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 420,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 484,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0002",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 34,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 45,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 47,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 51,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 52,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 54,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 67,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 79,
-     "token": "!",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0003",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 58,
-     "token": "()",
-     "kind": "markup"
-    },
-    {
-     "pos": 121,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 230,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 310,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 345,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 396,
-     "token": "####",
-     "kind": "markup"
-    },
-    {
-     "pos": 439,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 466,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0004",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 87,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 147,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 208,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 306,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 343,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 391,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 456,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 532,
-     "token": " **",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0005",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 36,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 106,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 169,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 218,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 291,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 356,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 430,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 483,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0006",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 30,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 70,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 122,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 142,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 194,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 233,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 254,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 293,
-     "token": " **",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0007",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 53,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 74,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 101,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 128,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 147,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 170,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 188,
-     "token": ")",
-     "kind": "markup"
-    },
-    {
-     "pos": 203,
-     "token": "__",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0008",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 111,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 150,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 213,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 288,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 326,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 378,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 431,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 470,
-     "token": " *",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0009",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 61,
-     "token": ".,",
-     "kind": "sentence"
-    },
-    {
-     "pos": 85,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 128,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 171,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 203,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 286,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 326,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 354,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0010",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 33,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 36,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 39,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 42,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 45,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0011",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 41,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 59,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 87,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 120,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 146,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 170,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 195,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 244,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0012",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 316,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 395,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 456,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 504,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 578,
-     "token": " /",
-     "kind": "markup"
-    },
-    {
-     "pos": 650,
-     "token": "####",
-     "kind": "markup"
-    },
-    {
-     "pos": 684,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 745,
-     "token": "*",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0014",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 36,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 97,
-     "token": "**.",
-     "kind": "sentence"
-    },
-    {
-     "pos": 150,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 222,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 278,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 353,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 419,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 471,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0015",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 237,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 247,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 269,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 304,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 338,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 364,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 387,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 427,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0016",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 50,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 96,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 137,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 176,
-     "token": "\"*",
-     "kind": "quote"
-    },
-    {
-     "pos": 218,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 260,
-     "token": " *\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 286,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 320,
-     "token": "###",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0017",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 63,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 147,
-     "token": "####",
-     "kind": "markup"
-    },
-    {
-     "pos": 201,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 265,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 328,
-     "token": ")**",
-     "kind": "markup"
-    },
-    {
-     "pos": 391,
-     "token": ":*",
-     "kind": "clause"
-    },
-    {
-     "pos": 450,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 521,
-     "token": "####",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0018",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 29,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 77,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 131,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 191,
-     "token": ")**",
-     "kind": "markup"
-    },
-    {
-     "pos": 256,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 299,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 350,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 395,
-     "token": "-",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0019",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 286,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 293,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0020",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 62,
-     "token": ")",
-     "kind": "markup"
-    },
-    {
-     "pos": 85,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 112,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 132,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 156,
-     "token": "**.",
-     "kind": "sentence"
-    },
-    {
-     "pos": 197,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 218,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0021",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 72,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 160,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 222,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 290,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 332,
-     "token": "_",
-     "kind": "markup"
-    },
-    {
-     "pos": 376,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 430,
-     "token": ")",
-     "kind": "markup"
-    },
-    {
-     "pos": 486,
-     "token": "**",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0022",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 28,
-     "token": "#",
-     "kind": "markup"
-    },
-    {
-     "pos": 102,
-     "token": " --",
-     "kind": "clause"
-    },
-    {
-     "pos": 155,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 221,
-     "token": " //",
-     "kind": "markup"
-    },
-    {
-     "pos": 297,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 359,
-     "token": ")",
-     "kind": "markup"
-    },
-    {
-     "pos": 440,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 488,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0023",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 20,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 112,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 170,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 231,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 279,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 346,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 395,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 464,
-     "token": "**:",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0024",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 26,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 89,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 141,
-     "token": "**,",
-     "kind": "clause"
-    },
-    {
-     "pos": 203,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 253,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 315,
-     "token": "\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 386,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 451,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0025",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 80,
-     "token": ".,",
-     "kind": "sentence"
-    },
-    {
-     "pos": 107,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 155,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 176,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 198,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 205,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 236,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 292,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0026",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 36,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 128,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 181,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 223,
-     "token": ")**",
-     "kind": "markup"
-    },
-    {
-     "pos": 278,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 339,
-     "token": "---",
-     "kind": "clause"
-    },
-    {
-     "pos": 422,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 471,
-     "token": " -",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0027",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 30,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 32,
-     "token": "'",
-     "kind": "quote"
-    },
-    {
-     "pos": 42,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 49,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0028",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 30,
-     "token": "#",
-     "kind": "markup"
-    },
-    {
-     "pos": 87,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 157,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 213,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 327,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 381,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 440,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 488,
-     "token": "###",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0029",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 83,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 123,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 166,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 220,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 273,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 316,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 369,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0030",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 95,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 147,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 203,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 219,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 235,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 295,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 319,
-     "token": "')",
-     "kind": "quote"
-    },
-    {
-     "pos": 336,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0031",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 41,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 54,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 55,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 57,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 81,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0032",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 38,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 68,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 112,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 133,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 157,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 186,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 231,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 258,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0033",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 37,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 77,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 128,
-     "token": "()",
-     "kind": "markup"
-    },
-    {
-     "pos": 181,
-     "token": " \";",
-     "kind": "clause"
-    },
-    {
-     "pos": 239,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 307,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 350,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 419,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0034",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 28,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 117,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 208,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 262,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 311,
-     "token": " \\",
-     "kind": "markup"
-    },
-    {
-     "pos": 357,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 417,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 470,
-     "token": " (",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0035",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 46,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 152,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 221,
-     "token": "%",
-     "kind": "markup"
-    },
-    {
-     "pos": 263,
-     "token": "}",
-     "kind": "markup"
-    },
-    {
-     "pos": 316,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 370,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 415,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 502,
-     "token": "**",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0036",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 51,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 61,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 75,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0037",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 35,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 37,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 49,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 51,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 58,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 63,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0038",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 99,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 189,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 212,
-     "token": " '",
-     "kind": "quote"
-    },
-    {
-     "pos": 252,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 283,
-     "token": ")",
-     "kind": "markup"
-    },
-    {
-     "pos": 323,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 364,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 473,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0039",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 59,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 69,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 71,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 82,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 84,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 91,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0040",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 44,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 51,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 54,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 58,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 65,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 68,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 76,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 84,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0041",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 32,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 55,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 105,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 127,
-     "token": ").",
-     "kind": "sentence"
-    },
-    {
-     "pos": 145,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 184,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 237,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 259,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0042",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 27,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 99,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 154,
-     "token": " .",
-     "kind": "sentence"
-    },
-    {
-     "pos": 217,
-     "token": " '",
-     "kind": "quote"
-    },
-    {
-     "pos": 271,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 331,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 395,
-     "token": " {",
-     "kind": "markup"
-    },
-    {
-     "pos": 462,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0043",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 53,
-     "token": "#",
-     "kind": "markup"
-    },
-    {
-     "pos": 123,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 165,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 222,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 305,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 391,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 419,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 458,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0044",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 51,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 54,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 62,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 65,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 67,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 74,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 77,
-     "token": ")",
-     "kind": "markup"
-    },
-    {
-     "pos": 91,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0045",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 61,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 65,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 71,
-     "token": "**.",
-     "kind": "sentence"
-    },
-    {
-     "pos": 72,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 85,
-     "token": "**,",
-     "kind": "clause"
-    },
-    {
-     "pos": 95,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 100,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 111,
-     "token": "\")",
-     "kind": "quote"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0046",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 461,
-     "token": " :",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0047",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 135,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 195,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 260,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 314,
-     "token": "#",
-     "kind": "markup"
-    },
-    {
-     "pos": 391,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 449,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 513,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 586,
-     "token": " **",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0048",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 27,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 61,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 114,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 155,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 203,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 255,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 309,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 356,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0049",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 110,
-     "token": " „",
-     "kind": "markup"
-    },
-    {
-     "pos": 160,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 217,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 290,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 346,
-     "token": "?).",
-     "kind": "sentence"
-    },
-    {
-     "pos": 414,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 480,
-     "token": "“)",
-     "kind": "quote"
-    },
-    {
-     "pos": 535,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0050",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 69,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 72,
-     "token": ".*",
-     "kind": "sentence"
-    },
-    {
-     "pos": 73,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 77,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 87,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 93,
-     "token": " '",
-     "kind": "quote"
-    },
-    {
-     "pos": 96,
-     "token": "';",
-     "kind": "clause"
-    },
-    {
-     "pos": 97,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0051",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 35,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 105,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 174,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 245,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 313,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 355,
-     "token": " (“",
-     "kind": "quote"
-    },
-    {
-     "pos": 424,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 494,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0052",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 26,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 112,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 164,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 209,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 253,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 302,
-     "token": ")**",
-     "kind": "markup"
-    },
-    {
-     "pos": 365,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 428,
-     "token": ")",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0053",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 25,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 29,
-     "token": "**.",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0054",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 17,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 70,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 155,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 221,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 298,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 358,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 425,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 472,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0055",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 43,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 104,
-     "token": ")",
-     "kind": "markup"
-    },
-    {
-     "pos": 160,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 211,
-     "token": " &",
-     "kind": "markup"
-    },
-    {
-     "pos": 268,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 316,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 360,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 447,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0056",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 28,
-     "token": "#",
-     "kind": "markup"
-    },
-    {
-     "pos": 58,
-     "token": "()",
-     "kind": "markup"
-    },
-    {
-     "pos": 95,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 123,
-     "token": " \");",
-     "kind": "clause"
-    },
-    {
-     "pos": 152,
-     "token": "();",
-     "kind": "clause"
-    },
-    {
-     "pos": 164,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 231,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 273,
-     "token": ":",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0057",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 21,
-     "token": " !",
-     "kind": "sentence"
-    },
-    {
-     "pos": 28,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 30,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 33,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 37,
-     "token": " ?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 38,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 46,
-     "token": " ?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 58,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0058",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 21,
-     "token": "...",
-     "kind": "sentence"
-    },
-    {
-     "pos": 78,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 139,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 192,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 253,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 322,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 371,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 430,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0059",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 36,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 72,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 136,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 209,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 267,
-     "token": "):**",
-     "kind": "clause"
-    },
-    {
-     "pos": 350,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 408,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 461,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0060",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 446,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 504,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 568,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 663,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 746,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 788,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 833,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 889,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0061",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 39,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 108,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 149,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 200,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 263,
-     "token": ";",
-     "kind": "clause"
-    },
-    {
-     "pos": 327,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 411,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 469,
-     "token": "*",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0062",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 109,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 121,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 140,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 159,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 180,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 207,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 248,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 290,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0063",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 67,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 129,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 189,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 249,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 321,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 381,
-     "token": " **[",
-     "kind": "markup"
-    },
-    {
-     "pos": 457,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 520,
-     "token": " *",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0064",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 440,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 494,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 529,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 568,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 638,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 701,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 778,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 860,
-     "token": " (",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0065",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 99,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 186,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 239,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 287,
-     "token": " &",
-     "kind": "markup"
-    },
-    {
-     "pos": 333,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 408,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 471,
-     "token": "####",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0066",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 31,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 97,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 147,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 225,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 277,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 344,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 403,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 469,
-     "token": "-",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0067",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 39,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 61,
-     "token": "\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 83,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 192,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 202,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 238,
-     "token": "–",
-     "kind": "clause"
-    },
-    {
-     "pos": 273,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 327,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0068",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 37,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 104,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 191,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 252,
-     "token": "):",
-     "kind": "clause"
-    },
-    {
-     "pos": 296,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 354,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 428,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 482,
-     "token": "/",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0069",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 31,
-     "token": "#",
-     "kind": "markup"
-    },
-    {
-     "pos": 94,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 149,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 230,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 311,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 384,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 426,
-     "token": "##",
-     "kind": "markup"
-    },
-    {
-     "pos": 486,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0070",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 62,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 82,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 123,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 154,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 183,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 222,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 253,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 310,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0071",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 25,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 31,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 45,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 56,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 67,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 81,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 88,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 97,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0072",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 55,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 64,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 84,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 98,
-     "token": ";",
-     "kind": "clause"
-    },
-    {
-     "pos": 123,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 147,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 171,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 205,
-     "token": "*",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0073",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 114,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 194,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 232,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 308,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 368,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 431,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 491,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 533,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-lmsys-0074",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 107,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 200,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 253,
-     "token": "__(",
-     "kind": "markup"
-    },
-    {
-     "pos": 311,
-     "token": "\"\"\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 372,
-     "token": " \"\"\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 443,
-     "token": "__(",
-     "kind": "markup"
-    },
-    {
-     "pos": 499,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 554,
-     "token": ")",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0000",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 38,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 46,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 55,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 60,
-     "token": "\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 67,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 82,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 92,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0001",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 29,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 39,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 61,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 78,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 117,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 141,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 148,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0002",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 20,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 22,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 32,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 42,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 49,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0003",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 21,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 74,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 112,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 162,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 202,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 249,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 298,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 338,
-     "token": "-",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0004",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 27,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 33,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 42,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 43,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 49,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 59,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 68,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0005",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 31,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 51,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 65,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 69,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 86,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 91,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 103,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0006",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 85,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 134,
-     "token": " -",
-     "kind": "clause"
-    },
-    {
-     "pos": 186,
-     "token": "):",
-     "kind": "clause"
-    },
-    {
-     "pos": 243,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 285,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 334,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 385,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0007",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 30,
-     "token": "—",
-     "kind": "clause"
-    },
-    {
-     "pos": 63,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 83,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 88,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 101,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 106,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 118,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 130,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0008",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 27,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 42,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 50,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 56,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 64,
-     "token": "—",
-     "kind": "clause"
-    },
-    {
-     "pos": 72,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 76,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0009",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 39,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 65,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 85,
-     "token": " –",
-     "kind": "clause"
-    },
-    {
-     "pos": 107,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 127,
-     "token": "*)",
-     "kind": "markup"
-    },
-    {
-     "pos": 157,
-     "token": " –",
-     "kind": "clause"
-    },
-    {
-     "pos": 198,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 236,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0010",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 45,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 61,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 65,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 83,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 87,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 100,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 106,
-     "token": ":**",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0011",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 30,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 38,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 39,
-     "token": "*(",
-     "kind": "markup"
-    },
-    {
-     "pos": 50,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 51,
-     "token": ")*",
-     "kind": "markup"
-    },
-    {
-     "pos": 52,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 61,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0012",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 26,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 40,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 41,
-     "token": " \n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 49,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 56,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 71,
-     "token": "!",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0013",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 37,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 43,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 57,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 62,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 69,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 77,
-     "token": "—",
-     "kind": "clause"
-    },
-    {
-     "pos": 91,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 100,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0014",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 30,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 36,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 37,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 51,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 60,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 68,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 82,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0015",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 31,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 73,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 113,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 141,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 164,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 195,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 238,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 261,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0016",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 26,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 39,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 81,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 89,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 105,
-     "token": "!)",
-     "kind": "sentence"
-    },
-    {
-     "pos": 109,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 131,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 143,
-     "token": " (",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0017",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 36,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 44,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 64,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 77,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 103,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0018",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 30,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 43,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 49,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 56,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 63,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 69,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 71,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 78,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0019",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 54,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 71,
-     "token": "),",
-     "kind": "clause"
-    },
-    {
-     "pos": 120,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 134,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 145,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 161,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 188,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0020",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 32,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 37,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 41,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 57,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 60,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 72,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 77,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0021",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 33,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 74,
-     "token": "?**",
-     "kind": "sentence"
-    },
-    {
-     "pos": 104,
-     "token": "?**",
-     "kind": "sentence"
-    },
-    {
-     "pos": 145,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 201,
-     "token": ").",
-     "kind": "sentence"
-    },
-    {
-     "pos": 253,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 299,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 340,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0022",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 26,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 37,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 48,
-     "token": "—",
-     "kind": "clause"
-    },
-    {
-     "pos": 60,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 61,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 66,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 71,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0023",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 32,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 104,
-     "token": "?**",
-     "kind": "sentence"
-    },
-    {
-     "pos": 158,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 216,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 286,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 333,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 376,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 442,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0024",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 32,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 42,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 66,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 73,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 83,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 97,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 122,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 137,
-     "token": "!",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0025",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 30,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 35,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 53,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0026",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 21,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 29,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 36,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 45,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0027",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 32,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 39,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 59,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 77,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 88,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 99,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 113,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 123,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0028",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 38,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 114,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 173,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 217,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 265,
-     "token": "?”",
-     "kind": "sentence"
-    },
-    {
-     "pos": 318,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 402,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 457,
-     "token": "-",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0029",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 26,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 28,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 39,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 45,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 54,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 62,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 68,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 73,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0030",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 53,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 65,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 87,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 110,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 137,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 173,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 203,
-     "token": "\n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0031",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 81,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 122,
-     "token": "*)",
-     "kind": "markup"
-    },
-    {
-     "pos": 169,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 207,
-     "token": "*,",
-     "kind": "clause"
-    },
-    {
-     "pos": 246,
-     "token": "*,",
-     "kind": "clause"
-    },
-    {
-     "pos": 300,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 345,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0032",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 30,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 44,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 54,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 65,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 91,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 105,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 126,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 135,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0033",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 21,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 31,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 38,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 46,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 54,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0034",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 25,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 39,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 47,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 49,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 56,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 65,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 71,
-     "token": "!",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0035",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 56,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 72,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 83,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 103,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 121,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 138,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 148,
-     "token": " *",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0036",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 42,
-     "token": "**.",
-     "kind": "sentence"
-    },
-    {
-     "pos": 57,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 59,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 66,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 77,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 85,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 106,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0037",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 20,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 28,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 31,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 37,
-     "token": " ?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0038",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 32,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 51,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 76,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 108,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 120,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 131,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 144,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 155,
-     "token": ":**",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0039",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 42,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 90,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 103,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 125,
-     "token": ".).",
-     "kind": "sentence"
-    },
-    {
-     "pos": 139,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 162,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 187,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 233,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0040",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 28,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 40,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 48,
-     "token": ",\"",
-     "kind": "clause"
-    },
-    {
-     "pos": 58,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 77,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 101,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 115,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 128,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0041",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 37,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 42,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 58,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 62,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 74,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 78,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 89,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0042",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 39,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 45,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 54,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 55,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 67,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 75,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 89,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 111,
-     "token": "!",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0043",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 20,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 33,
-     "token": "...*",
-     "kind": "sentence"
-    },
-    {
-     "pos": 44,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 56,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 68,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 73,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 79,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0044",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 27,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 74,
-     "token": "###",
-     "kind": "markup"
-    },
-    {
-     "pos": 136,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 190,
-     "token": " (*",
-     "kind": "markup"
-    },
-    {
-     "pos": 239,
-     "token": "  \n",
-     "kind": "newline"
-    },
-    {
-     "pos": 289,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 337,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 408,
-     "token": "**",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0045",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 40,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 51,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 52,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 63,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 65,
-     "token": ",\"",
-     "kind": "clause"
-    },
-    {
-     "pos": 83,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 96,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 102,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0046",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 46,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 92,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 102,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 132,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 145,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 157,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 173,
-     "token": "-",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0047",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 33,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 74,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 93,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 106,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 126,
-     "token": "?)",
-     "kind": "sentence"
-    },
-    {
-     "pos": 137,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 162,
-     "token": "?)",
-     "kind": "sentence"
-    },
-    {
-     "pos": 182,
-     "token": "?**",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0048",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 36,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 78,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 92,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 102,
-     "token": " *",
-     "kind": "markup"
-    },
-    {
-     "pos": 118,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 135,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 162,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 199,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0049",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 48,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 149,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 215,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 263,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 300,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 383,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 425,
-     "token": " (",
-     "kind": "markup"
-    },
-    {
-     "pos": 484,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0050",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 29,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 34,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 40,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 50,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0051",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": " **\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 60,
-     "token": " **\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 90,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 122,
-     "token": "  \n",
-     "kind": "newline"
-    },
-    {
-     "pos": 155,
-     "token": ".\"",
-     "kind": "sentence"
-    },
-    {
-     "pos": 182,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 212,
-     "token": "  \n",
-     "kind": "newline"
-    },
-    {
-     "pos": 238,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0052",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 25,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 32,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 45,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 55,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 73,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 77,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 92,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 103,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0053",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 25,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 56,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 94,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 127,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 159,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 187,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 216,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 235,
-     "token": " *",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0054",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 26,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 59,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 72,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 85,
-     "token": ".,",
-     "kind": "sentence"
-    },
-    {
-     "pos": 94,
-     "token": "?)",
-     "kind": "sentence"
-    },
-    {
-     "pos": 107,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 147,
-     "token": ").",
-     "kind": "sentence"
-    },
-    {
-     "pos": 153,
-     "token": "**:",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0055",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 49,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 55,
-     "token": "\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 91,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 100,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 108,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 123,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 132,
-     "token": " *",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0056",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 20,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 45,
-     "token": "\"",
-     "kind": "quote"
-    },
-    {
-     "pos": 61,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 70,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 88,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 101,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 114,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 144,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0057",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 30,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 36,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 46,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 51,
-     "token": "—",
-     "kind": "clause"
-    },
-    {
-     "pos": 60,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 67,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0058",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 26,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 45,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 51,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 59,
-     "token": "**?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 68,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 76,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 83,
-     "token": ".)",
-     "kind": "sentence"
-    },
-    {
-     "pos": 86,
-     "token": "-",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0059",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 27,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 35,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 36,
-     "token": " \n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 40,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 50,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 67,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0060",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 29,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 31,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 36,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 49,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 58,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 62,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 67,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0061",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 21,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 47,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 79,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 103,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 141,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 175,
-     "token": "–",
-     "kind": "clause"
-    },
-    {
-     "pos": 206,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 247,
-     "token": "?",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0062",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 56,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 78,
-     "token": "**",
-     "kind": "markup"
-    },
-    {
-     "pos": 98,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 121,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 143,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 164,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 201,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0063",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 45,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 56,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 75,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 82,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 92,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 104,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 118,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0064",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 28,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 73,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 87,
-     "token": ":**",
-     "kind": "clause"
-    },
-    {
-     "pos": 101,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 122,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 147,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 166,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 182,
-     "token": ":**",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0065",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 59,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 90,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 104,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 126,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 139,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 164,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 179,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0066",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 41,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 126,
-     "token": "*",
-     "kind": "markup"
-    },
-    {
-     "pos": 174,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 266,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 312,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 363,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 439,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 483,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0067",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": "/",
-     "kind": "markup"
-    },
-    {
-     "pos": 26,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 37,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 44,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 50,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 64,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 71,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 81,
-     "token": " \n\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0068",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 24,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 103,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 166,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 220,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 280,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 339,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 401,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 449,
-     "token": "-",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0069",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 33,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 76,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 124,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 145,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 187,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 219,
-     "token": ",”",
-     "kind": "clause"
-    },
-    {
-     "pos": 244,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 298,
-     "token": "**",
-     "kind": "markup"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0070",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 49,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 122,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 203,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 252,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 315,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 371,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 440,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 503,
-     "token": ".",
-     "kind": "sentence"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0071",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 22,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 53,
-     "token": " \"",
-     "kind": "quote"
-    },
-    {
-     "pos": 76,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 108,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 130,
-     "token": "?”",
-     "kind": "sentence"
-    },
-    {
-     "pos": 154,
-     "token": "\n\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 195,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 222,
-     "token": "—",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0072",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 27,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 34,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 43,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 49,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 59,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 82,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 84,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 96,
-     "token": ",",
-     "kind": "clause"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0073",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 36,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 80,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 113,
-     "token": "**:",
-     "kind": "clause"
-    },
-    {
-     "pos": 138,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 178,
-     "token": "\n",
-     "kind": "newline"
-    },
-    {
-     "pos": 215,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 265,
-     "token": ":",
-     "kind": "clause"
-    },
-    {
-     "pos": 290,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
-  },
-  {
-   "name": "chat-dailydialog-0074",
-   "stratum": "chat",
-   "sites": [
-    {
-     "pos": 23,
-     "token": "!",
-     "kind": "sentence"
-    },
-    {
-     "pos": 57,
-     "token": "?",
-     "kind": "sentence"
-    },
-    {
-     "pos": 86,
-     "token": ".",
-     "kind": "sentence"
-    },
-    {
-     "pos": 107,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 138,
-     "token": ",",
-     "kind": "clause"
-    },
-    {
-     "pos": 164,
-     "token": "-",
-     "kind": "clause"
-    },
-    {
-     "pos": 181,
-     "token": " **",
-     "kind": "markup"
-    },
-    {
-     "pos": 204,
-     "token": "\n",
-     "kind": "newline"
-    }
-   ]
+   "name": "association.b3-as-archery",
+   "family": "association",
+   "source_id": "b3-as-archery"
+  },
+  {
+   "name": "association.b3-as-birthday",
+   "family": "association",
+   "source_id": "b3-as-birthday"
+  },
+  {
+   "name": "association.b3-as-casino",
+   "family": "association",
+   "source_id": "b3-as-casino"
+  },
+  {
+   "name": "association.b3-as-icarus",
+   "family": "association",
+   "source_id": "b3-as-icarus"
+  },
+  {
+   "name": "association.b3-as-lifeguard",
+   "family": "association",
+   "source_id": "b3-as-lifeguard"
+  },
+  {
+   "name": "association.b3-as-opera",
+   "family": "association",
+   "source_id": "b3-as-opera"
+  },
+  {
+   "name": "association.b3-as-pottery",
+   "family": "association",
+   "source_id": "b3-as-pottery"
+  },
+  {
+   "name": "association.b3-as-surgery",
+   "family": "association",
+   "source_id": "b3-as-surgery"
+  },
+  {
+   "name": "association.b3-as-tennis",
+   "family": "association",
+   "source_id": "b3-as-tennis"
+  },
+  {
+   "name": "association.b3-as-troy",
+   "family": "association",
+   "source_id": "b3-as-troy"
+  },
+  {
+   "name": "association.b4-as-avalanche",
+   "family": "association",
+   "source_id": "b4-as-avalanche"
+  },
+  {
+   "name": "association.b4-as-dominoes",
+   "family": "association",
+   "source_id": "b4-as-dominoes"
+  },
+  {
+   "name": "association.b4-as-juggling",
+   "family": "association",
+   "source_id": "b4-as-juggling"
+  },
+  {
+   "name": "association.b5-as-easter",
+   "family": "association",
+   "source_id": "b5-as-easter"
+  },
+  {
+   "name": "association.b5-as-icefishing",
+   "family": "association",
+   "source_id": "b5-as-icefishing"
+  },
+  {
+   "name": "association.b5-as-knitting",
+   "family": "association",
+   "source_id": "b5-as-knitting"
+  },
+  {
+   "name": "association.b5-as-piano",
+   "family": "association",
+   "source_id": "b5-as-piano"
+  },
+  {
+   "name": "association.b5-as-postman",
+   "family": "association",
+   "source_id": "b5-as-postman"
+  },
+  {
+   "name": "association.bf-christmas",
+   "family": "association",
+   "source_id": "bf-christmas"
+  },
+  {
+   "name": "association.bf-coffee",
+   "family": "association",
+   "source_id": "bf-coffee"
+  },
+  {
+   "name": "association.bf-halloween",
+   "family": "association",
+   "source_id": "bf-halloween"
+  },
+  {
+   "name": "association.bf-library",
+   "family": "association",
+   "source_id": "bf-library"
+  },
+  {
+   "name": "association.bf-olympics",
+   "family": "association",
+   "source_id": "bf-olympics"
+  },
+  {
+   "name": "association.bf-pizza",
+   "family": "association",
+   "source_id": "bf-pizza"
+  },
+  {
+   "name": "association.bf-sherlock",
+   "family": "association",
+   "source_id": "bf-sherlock"
+  },
+  {
+   "name": "association.bf-snow",
+   "family": "association",
+   "source_id": "bf-snow"
+  },
+  {
+   "name": "association.bf-vampire",
+   "family": "association",
+   "source_id": "bf-vampire"
+  },
+  {
+   "name": "association.bf2-ballet",
+   "family": "association",
+   "source_id": "bf2-ballet"
+  },
+  {
+   "name": "association.bf2-barber",
+   "family": "association",
+   "source_id": "bf2-barber"
+  },
+  {
+   "name": "association.bf2-beekeeping",
+   "family": "association",
+   "source_id": "bf2-beekeeping"
+  },
+  {
+   "name": "association.bf2-earthquake",
+   "family": "association",
+   "source_id": "bf2-earthquake"
+  },
+  {
+   "name": "association.bf2-graduation",
+   "family": "association",
+   "source_id": "bf2-graduation"
+  },
+  {
+   "name": "association.bf2-volcano",
+   "family": "association",
+   "source_id": "bf2-volcano"
+  },
+  {
+   "name": "association.chess",
+   "family": "association",
+   "source_id": "chess"
+  },
+  {
+   "name": "association.cia",
+   "family": "association",
+   "source_id": "cia"
+  },
+  {
+   "name": "association.dawn",
+   "family": "association",
+   "source_id": "dawn"
+  },
+  {
+   "name": "association.de-konig",
+   "family": "association",
+   "source_id": "de-konig"
+  },
+  {
+   "name": "association.de-oktoberfest",
+   "family": "association",
+   "source_id": "de-oktoberfest"
+  },
+  {
+   "name": "association.death-h",
+   "family": "association",
+   "source_id": "death-h"
+  },
+  {
+   "name": "association.divorce",
+   "family": "association",
+   "source_id": "divorce"
+  },
+  {
+   "name": "association.film-h",
+   "family": "association",
+   "source_id": "film-h"
+  },
+  {
+   "name": "association.game-h",
+   "family": "association",
+   "source_id": "game-h"
+  },
+  {
+   "name": "association.it-mercato",
+   "family": "association",
+   "source_id": "it-mercato"
+  },
+  {
+   "name": "association.neighbors",
+   "family": "association",
+   "source_id": "neighbors"
+  },
+  {
+   "name": "association.noir",
+   "family": "association",
+   "source_id": "noir"
+  },
+  {
+   "name": "association.pentagon",
+   "family": "association",
+   "source_id": "pentagon"
+  },
+  {
+   "name": "association.pt-carnaval",
+   "family": "association",
+   "source_id": "pt-carnaval"
+  },
+  {
+   "name": "association.space-h",
+   "family": "association",
+   "source_id": "space-h"
+  },
+  {
+   "name": "association.time-h",
+   "family": "association",
+   "source_id": "time-h"
+  },
+  {
+   "name": "association.unesco",
+   "family": "association",
+   "source_id": "unesco"
+  },
+  {
+   "name": "buggy_code.c-int-div-float",
+   "family": "buggy_code",
+   "source_id": "c-int-div-float"
+  },
+  {
+   "name": "buggy_code.c-off-by-one",
+   "family": "buggy_code",
+   "source_id": "c-off-by-one"
+  },
+  {
+   "name": "buggy_code.clean-c-int-div-intended",
+   "family": "buggy_code",
+   "source_id": "clean-c-int-div-intended"
+  },
+  {
+   "name": "buggy_code.clean-c-loop-bound-correct",
+   "family": "buggy_code",
+   "source_id": "clean-c-loop-bound-correct"
+  },
+  {
+   "name": "buggy_code.clean-go-range-index",
+   "family": "buggy_code",
+   "source_id": "clean-go-range-index"
+  },
+  {
+   "name": "buggy_code.clean-js-sort-comparator",
+   "family": "buggy_code",
+   "source_id": "clean-js-sort-comparator"
+  },
+  {
+   "name": "buggy_code.clean-rust-copy-then-mutate",
+   "family": "buggy_code",
+   "source_id": "clean-rust-copy-then-mutate"
+  },
+  {
+   "name": "buggy_code.go-ignored-atoi-err",
+   "family": "buggy_code",
+   "source_id": "go-ignored-atoi-err"
+  },
+  {
+   "name": "buggy_code.go-nil-map-write",
+   "family": "buggy_code",
+   "source_id": "go-nil-map-write"
+  },
+  {
+   "name": "buggy_code.go-range-copy",
+   "family": "buggy_code",
+   "source_id": "go-range-copy"
+  },
+  {
+   "name": "buggy_code.go-slice-append-alias",
+   "family": "buggy_code",
+   "source_id": "go-slice-append-alias"
+  },
+  {
+   "name": "buggy_code.py-accumulator-reset-in-loop",
+   "family": "buggy_code",
+   "source_id": "py-accumulator-reset-in-loop"
+  },
+  {
+   "name": "buggy_code.py-age-underflow",
+   "family": "buggy_code",
+   "source_id": "py-age-underflow"
+  },
+  {
+   "name": "buggy_code.py-batch-tail-dropped",
+   "family": "buggy_code",
+   "source_id": "py-batch-tail-dropped"
+  },
+  {
+   "name": "buggy_code.py-case-split-count",
+   "family": "buggy_code",
+   "source_id": "py-case-split-count"
+  },
+  {
+   "name": "buggy_code.py-clean-ceil-pages",
+   "family": "buggy_code",
+   "source_id": "py-clean-ceil-pages"
+  },
+  {
+   "name": "buggy_code.py-clean-clamp-max",
+   "family": "buggy_code",
+   "source_id": "py-clean-clamp-max"
+  },
+  {
+   "name": "buggy_code.py-clean-clamped-discount",
+   "family": "buggy_code",
+   "source_id": "py-clean-clamped-discount"
+  },
+  {
+   "name": "buggy_code.py-clean-discount-once",
+   "family": "buggy_code",
+   "source_id": "py-clean-discount-once"
+  },
+  {
+   "name": "buggy_code.py-clean-flat-avg",
+   "family": "buggy_code",
+   "source_id": "py-clean-flat-avg"
+  },
+  {
+   "name": "buggy_code.py-clean-hour-wrapped",
+   "family": "buggy_code",
+   "source_id": "py-clean-hour-wrapped"
+  },
+  {
+   "name": "buggy_code.py-clean-join-checked",
+   "family": "buggy_code",
+   "source_id": "py-clean-join-checked"
+  },
+  {
+   "name": "buggy_code.py-clean-minutes-carried",
+   "family": "buggy_code",
+   "source_id": "py-clean-minutes-carried"
+  },
+  {
+   "name": "buggy_code.py-clean-nights",
+   "family": "buggy_code",
+   "source_id": "py-clean-nights"
+  },
+  {
+   "name": "buggy_code.py-clean-numeric-sort",
+   "family": "buggy_code",
+   "source_id": "py-clean-numeric-sort"
+  },
+  {
+   "name": "buggy_code.py-clean-pct-clamped",
+   "family": "buggy_code",
+   "source_id": "py-clean-pct-clamped"
+  },
+  {
+   "name": "buggy_code.py-clean-removesuffix",
+   "family": "buggy_code",
+   "source_id": "py-clean-removesuffix"
+  },
+  {
+   "name": "buggy_code.py-clean-skip-sentinels",
+   "family": "buggy_code",
+   "source_id": "py-clean-skip-sentinels"
+  },
+  {
+   "name": "buggy_code.py-clean-stock-capped",
+   "family": "buggy_code",
+   "source_id": "py-clean-stock-capped"
+  },
+  {
+   "name": "buggy_code.py-clean-stock-simple",
+   "family": "buggy_code",
+   "source_id": "py-clean-stock-simple"
+  },
+  {
+   "name": "buggy_code.py-clean-streak",
+   "family": "buggy_code",
+   "source_id": "py-clean-streak"
+  },
+  {
+   "name": "buggy_code.py-clean-strip-guests",
+   "family": "buggy_code",
+   "source_id": "py-clean-strip-guests"
+  },
+  {
+   "name": "buggy_code.py-clean-validated-qty",
+   "family": "buggy_code",
+   "source_id": "py-clean-validated-qty"
+  },
+  {
+   "name": "buggy_code.py-clean-weighted-avg",
+   "family": "buggy_code",
+   "source_id": "py-clean-weighted-avg"
+  },
+  {
+   "name": "buggy_code.py-discount-applied-twice",
+   "family": "buggy_code",
+   "source_id": "py-discount-applied-twice"
+  },
+  {
+   "name": "buggy_code.py-inclusive-day-count",
+   "family": "buggy_code",
+   "source_id": "py-inclusive-day-count"
+  },
+  {
+   "name": "buggy_code.py-int-truncation-cents",
+   "family": "buggy_code",
+   "source_id": "py-int-truncation-cents"
+  },
+  {
+   "name": "buggy_code.py-inverted-condition-branch",
+   "family": "buggy_code",
+   "source_id": "py-inverted-condition-branch"
+  },
+  {
+   "name": "buggy_code.py-minutes-not-carried",
+   "family": "buggy_code",
+   "source_id": "py-minutes-not-carried"
+  },
+  {
+   "name": "buggy_code.py-percent-over-hundred",
+   "family": "buggy_code",
+   "source_id": "py-percent-over-hundred"
+  },
+  {
+   "name": "buggy_code.py-quantity-refund-credit",
+   "family": "buggy_code",
+   "source_id": "py-quantity-refund-credit"
+  },
+  {
+   "name": "buggy_code.py-raise-div-empty-filter",
+   "family": "buggy_code",
+   "source_id": "py-raise-div-empty-filter"
+  },
+  {
+   "name": "buggy_code.py-refund-exceeds-price",
+   "family": "buggy_code",
+   "source_id": "py-refund-exceeds-price"
+  },
+  {
+   "name": "buggy_code.py-simple-not-compound",
+   "family": "buggy_code",
+   "source_id": "py-simple-not-compound"
+  },
+  {
+   "name": "buggy_code.py-startswith-prefix-auth",
+   "family": "buggy_code",
+   "source_id": "py-startswith-prefix-auth"
+  },
+  {
+   "name": "buggy_code.py-stock-below-zero",
+   "family": "buggy_code",
+   "source_id": "py-stock-below-zero"
+  },
+  {
+   "name": "buggy_code.py-string-sorted-ids",
+   "family": "buggy_code",
+   "source_id": "py-string-sorted-ids"
+  },
+  {
+   "name": "buggy_code.rust-move-after-use",
+   "family": "buggy_code",
+   "source_id": "rust-move-after-use"
+  },
+  {
+   "name": "buggy_code.rust-unwrap-parse",
+   "family": "buggy_code",
+   "source_id": "rust-unwrap-parse"
+  },
+  {
+   "name": "directed_modulation.dm-pair-01-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-01-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-01-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-01-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-02-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-02-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-03-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-03-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-04-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-04-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-04-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-04-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-05-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-05-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-05-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-05-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-07-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-07-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-08-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-08-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-09-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-09-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-10-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-10-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-12-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-12-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-13-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-13-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-14-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-14-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-15-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-15-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-15-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-15-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-17-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-17-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-17-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-17-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-18-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-18-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-20-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-20-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-20-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-20-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-21-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-21-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-22-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-22-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-22-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-22-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-23-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-23-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-25-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-25-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-26-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-26-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-26-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-26-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-27-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-27-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-28-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-28-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-31-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-31-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-31-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-31-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-33-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-33-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-33-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-33-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pair-34-neg",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-34-neg"
+  },
+  {
+   "name": "directed_modulation.dm-pair-34-pos",
+   "family": "directed_modulation",
+   "source_id": "dm-pair-34-pos"
+  },
+  {
+   "name": "directed_modulation.dm-pref-03",
+   "family": "directed_modulation",
+   "source_id": "dm-pref-03"
+  },
+  {
+   "name": "directed_modulation.dm-pref-04",
+   "family": "directed_modulation",
+   "source_id": "dm-pref-04"
+  },
+  {
+   "name": "directed_modulation.dm-pref-05",
+   "family": "directed_modulation",
+   "source_id": "dm-pref-05"
+  },
+  {
+   "name": "directed_modulation.dm-pref-07",
+   "family": "directed_modulation",
+   "source_id": "dm-pref-07"
+  },
+  {
+   "name": "directed_modulation.dm-pref-13",
+   "family": "directed_modulation",
+   "source_id": "dm-pref-13"
+  },
+  {
+   "name": "directed_modulation.dm-secret-00",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-00"
+  },
+  {
+   "name": "directed_modulation.dm-secret-01",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-01"
+  },
+  {
+   "name": "directed_modulation.dm-secret-02",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-02"
+  },
+  {
+   "name": "directed_modulation.dm-secret-03",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-03"
+  },
+  {
+   "name": "directed_modulation.dm-secret-04",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-04"
+  },
+  {
+   "name": "directed_modulation.dm-secret-07",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-07"
+  },
+  {
+   "name": "directed_modulation.dm-secret-11",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-11"
+  },
+  {
+   "name": "directed_modulation.dm-secret-12",
+   "family": "directed_modulation",
+   "source_id": "dm-secret-12"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0005",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0005"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0006",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0006"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0007",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0007"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0008",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0008"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0009",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0009"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0012",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0012"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0015",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0015"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0018",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0018"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0021",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0021"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0023",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0023"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0025",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0025"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0026",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0026"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0028",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0028"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0029",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0029"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0030",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0030"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0031",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0031"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0033",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0033"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0038",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0038"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0044",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0044"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0045",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0045"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0047",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0047"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0048",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0048"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0049",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0049"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0050",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0050"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0053",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0053"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0055",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0055"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0059",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0059"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0060",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0060"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0064",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0064"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0066",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0066"
+  },
+  {
+   "name": "hallucination.chat-dailydialog-0072",
+   "family": "hallucination",
+   "source_id": "chat-dailydialog-0072"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0001",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0001"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0007",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0007"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0011",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0011"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0015",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0015"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0019",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0019"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0020",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0020"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0024",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0024"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0026",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0026"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0034",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0034"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0038",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0038"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0044",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0044"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0048",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0048"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0054",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0054"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0056",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0056"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0062",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0062"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0063",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0063"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0064",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0064"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0067",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0067"
+  },
+  {
+   "name": "hallucination.chat-lmsys-0071",
+   "family": "hallucination",
+   "source_id": "chat-lmsys-0071"
+  },
+  {
+   "name": "moral_rationale.ec-accountant_report_client_fraud-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-accountant_report_client_fraud-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-ai_chatbot_of_deceased-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-ai_chatbot_of_deceased-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-ban_hate_speech-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-ban_hate_speech-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-chemical_castration_for_release-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-chemical_castration_for_release-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-conjoined_twins_separation-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-conjoined_twins_separation-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-conscription_draft-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-conscription_draft-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-cull_invasive_species-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-cull_invasive_species-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-death_penalty_worst_crimes-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-death_penalty_worst_crimes-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-deepfake_political_satire-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-deepfake_political_satire-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-deepfake_political_satire-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-deepfake_political_satire-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-deploy_job_eliminating_ai-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-deploy_job_eliminating_ai-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-disinherit_for_marriage-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-disinherit_for_marriage-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-encryption_backdoor_mandate-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-encryption_backdoor_mandate-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-euthanize_unaffordable_pet-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-euthanize_unaffordable_pet-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-footbridge-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-footbridge-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-gene_edit_embryos_disease-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-gene_edit_embryos_disease-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-inheritance_full_tax-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-inheritance_full_tax-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-lie_to_killer-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-lie_to_killer-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-limit_family_size_climate-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-limit_family_size_climate-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-noncitizen_local_voting-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-noncitizen_local_voting-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-noncitizen_local_voting-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-noncitizen_local_voting-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-police_facial_recognition-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-police_facial_recognition-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-preemptive_strike_imminent-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-preemptive_strike_imminent-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-price_gouging_disaster-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-price_gouging_disaster-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-refuse_service_on_religious_belief-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-refuse_service_on_religious_belief-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-rehabilitation_over_retribution-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-rehabilitation_over_retribution-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-reparations_historical-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-reparations_historical-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-report_friend-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-report_friend-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-santa_claus_myth-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-santa_claus_myth-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-seatbelt_mandate-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-seatbelt_mandate-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-select_immigrants_by_skill-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-select_immigrants_by_skill-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-sell_anonymized_user_data-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-sell_anonymized_user_data-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-sell_own_kidney-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-sell_own_kidney-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-spare_surrendering_enemy-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-spare_surrendering_enemy-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-strike_through_human_shields-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-strike_through_human_shields-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-support_abusive_parent-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-support_abusive_parent-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-sweatshop_beats_alternative-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-sweatshop_beats_alternative-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-terminal_diagnosis_withhold-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-terminal_diagnosis_withhold-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-therapist_warn_third_party-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-therapist_warn_third_party-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-three_strikes_life-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-three_strikes_life-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-three_strikes_life-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-three_strikes_life-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-torture_bomb-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-torture_bomb-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-torture_bomb-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-torture_bomb-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-transplant-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-transplant-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-try_juvenile_as_adult-chat_yn",
+   "family": "moral_rationale",
+   "source_id": "ec-try_juvenile_as_adult-chat_yn"
+  },
+  {
+   "name": "moral_rationale.ec-ubi_replace_welfare-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-ubi_replace_welfare-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-universal_dna_database-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-universal_dna_database-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-victim_sets_punishment-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-victim_sets_punishment-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-wealthy_nations_degrowth-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-wealthy_nations_degrowth-chat_tf"
+  },
+  {
+   "name": "moral_rationale.ec-whistleblow-chat_tf",
+   "family": "moral_rationale",
+   "source_id": "ec-whistleblow-chat_tf"
+  },
+  {
+   "name": "multihop.atomic-26-symbol",
+   "family": "multihop",
+   "source_id": "atomic-26-symbol"
+  },
+  {
+   "name": "multihop.atomic-79-symbol",
+   "family": "multihop",
+   "source_id": "atomic-79-symbol"
+  },
+  {
+   "name": "multihop.b3-mh-bakerstreet-city",
+   "family": "multihop",
+   "source_id": "b3-mh-bakerstreet-city"
+  },
+  {
+   "name": "multihop.b3-mh-blindpoet-epic",
+   "family": "multihop",
+   "source_id": "b3-mh-blindpoet-epic"
+  },
+  {
+   "name": "multihop.b3-mh-buenosaires-language",
+   "family": "multihop",
+   "source_id": "b3-mh-buenosaires-language"
+  },
+  {
+   "name": "multihop.b3-mh-cuckoo-mountains",
+   "family": "multihop",
+   "source_id": "b3-mh-cuckoo-mountains"
+  },
+  {
+   "name": "multihop.b3-mh-fjords-capital",
+   "family": "multihop",
+   "source_id": "b3-mh-fjords-capital"
+  },
+  {
+   "name": "multihop.b3-mh-gravity-fruit",
+   "family": "multihop",
+   "source_id": "b3-mh-gravity-fruit"
+  },
+  {
+   "name": "multihop.b3-mh-guinness-capital",
+   "family": "multihop",
+   "source_id": "b3-mh-guinness-capital"
+  },
+  {
+   "name": "multihop.b3-mh-kiwi-capital",
+   "family": "multihop",
+   "source_id": "b3-mh-kiwi-capital"
+  },
+  {
+   "name": "multihop.b3-mh-kremlin-language",
+   "family": "multihop",
+   "source_id": "b3-mh-kremlin-language"
+  },
+  {
+   "name": "multihop.b3-mh-lisbon-language",
+   "family": "multihop",
+   "source_id": "b3-mh-lisbon-language"
+  },
+  {
+   "name": "multihop.b3-mh-longestriver-sea",
+   "family": "multihop",
+   "source_id": "b3-mh-longestriver-sea"
+  },
+  {
+   "name": "multihop.b3-mh-nokia-capital",
+   "family": "multihop",
+   "source_id": "b3-mh-nokia-capital"
+  },
+  {
+   "name": "multihop.b3-mh-pizza-continent",
+   "family": "multihop",
+   "source_id": "b3-mh-pizza-continent"
+  },
+  {
+   "name": "multihop.b3-mh-samba-river",
+   "family": "multihop",
+   "source_id": "b3-mh-samba-river"
+  },
+  {
+   "name": "multihop.b3-mh-tallest-continent",
+   "family": "multihop",
+   "source_id": "b3-mh-tallest-continent"
+  },
+  {
+   "name": "multihop.bf-bordeaux-fruit",
+   "family": "multihop",
+   "source_id": "bf-bordeaux-fruit"
+  },
+  {
+   "name": "multihop.bf-colosseum-language",
+   "family": "multihop",
+   "source_id": "bf-colosseum-language"
+  },
+  {
+   "name": "multihop.bf-eiffel-currency",
+   "family": "multihop",
+   "source_id": "bf-eiffel-currency"
+  },
+  {
+   "name": "multihop.bf-giza-continent",
+   "family": "multihop",
+   "source_id": "bf-giza-continent"
+  },
+  {
+   "name": "multihop.bf-kathmandu-mountain",
+   "family": "multihop",
+   "source_id": "bf-kathmandu-mountain"
+  },
+  {
+   "name": "multihop.bf-moonwalk-firstname",
+   "family": "multihop",
+   "source_id": "bf-moonwalk-firstname"
+  },
+  {
+   "name": "multihop.bf-olympia-language",
+   "family": "multihop",
+   "source_id": "bf-olympia-language"
+  },
+  {
+   "name": "multihop.bf-rio2016-language",
+   "family": "multihop",
+   "source_id": "bf-rio2016-language"
+  },
+  {
+   "name": "multihop.bf-sphinx-river",
+   "family": "multihop",
+   "source_id": "bf-sphinx-river"
+  },
+  {
+   "name": "multihop.bf-sushi-capital",
+   "family": "multihop",
+   "source_id": "bf-sushi-capital"
+  },
+  {
+   "name": "multihop.bf-tajmahal-continent",
+   "family": "multihop",
+   "source_id": "bf-tajmahal-continent"
+  },
+  {
+   "name": "multihop.bf-whitebear-ocean",
+   "family": "multihop",
+   "source_id": "bf-whitebear-ocean"
+  },
+  {
+   "name": "multihop.birthstone-emerald-month",
+   "family": "multihop",
+   "source_id": "birthstone-emerald-month"
+  },
+  {
+   "name": "multihop.carnival-ocean",
+   "family": "multihop",
+   "source_id": "carnival-ocean"
+  },
+  {
+   "name": "multihop.colosseum-currency",
+   "family": "multihop",
+   "source_id": "colosseum-currency"
+  },
+  {
+   "name": "multihop.dual-photosynthesis-opposite",
+   "family": "multihop",
+   "source_id": "dual-photosynthesis-opposite"
+  },
+  {
+   "name": "multihop.dual-stars-visible-opposite",
+   "family": "multihop",
+   "source_id": "dual-stars-visible-opposite"
+  },
+  {
+   "name": "multihop.firstletter-greatwall-country",
+   "family": "multihop",
+   "source_id": "firstletter-greatwall-country"
+  },
+  {
+   "name": "multihop.func-filters-count",
+   "family": "multihop",
+   "source_id": "func-filters-count"
+  },
+  {
+   "name": "multihop.func-pumps-chambers",
+   "family": "multihop",
+   "source_id": "func-pumps-chambers"
+  },
+  {
+   "name": "multihop.half-clock-hours",
+   "family": "multihop",
+   "source_id": "half-clock-hours"
+  },
+  {
+   "name": "multihop.holiday-christmas-monthnum",
+   "family": "multihop",
+   "source_id": "holiday-christmas-monthnum"
+  },
+  {
+   "name": "multihop.holiday-halloween-monthnum",
+   "family": "multihop",
+   "source_id": "holiday-halloween-monthnum"
+  },
+  {
+   "name": "multihop.holiday-valentines-monthnum",
+   "family": "multihop",
+   "source_id": "holiday-valentines-monthnum"
+  },
+  {
+   "name": "multihop.inv-roots-opposite",
+   "family": "multihop",
+   "source_id": "inv-roots-opposite"
+  },
+  {
+   "name": "multihop.nhop-cube-element",
+   "family": "multihop",
+   "source_id": "nhop-cube-element"
+  },
+  {
+   "name": "multihop.nhop-rainbow-element",
+   "family": "multihop",
+   "source_id": "nhop-rainbow-element"
+  },
+  {
+   "name": "multihop.nhop-soccer-element",
+   "family": "multihop",
+   "source_id": "nhop-soccer-element"
+  },
+  {
+   "name": "multihop.nhop-spider-element",
+   "family": "multihop",
+   "source_id": "nhop-spider-element"
+  },
+  {
+   "name": "multihop.pred-valentines-prevmonth",
+   "family": "multihop",
+   "source_id": "pred-valentines-prevmonth"
+  },
+  {
+   "name": "multihop.rhyme-tree-squared",
+   "family": "multihop",
+   "source_id": "rhyme-tree-squared"
+  },
+  {
+   "name": "multihop.roman-rings-olympic",
+   "family": "multihop",
+   "source_id": "roman-rings-olympic"
+  },
+  {
+   "name": "multihop.violin-strings",
+   "family": "multihop",
+   "source_id": "violin-strings"
+  },
+  {
+   "name": "poetry.b3-po-bell-spell",
+   "family": "poetry",
+   "source_id": "b3-po-bell-spell"
+  },
+  {
+   "name": "poetry.b3-po-boat-float",
+   "family": "poetry",
+   "source_id": "b3-po-boat-float"
+  },
+  {
+   "name": "poetry.b3-po-chair-hair",
+   "family": "poetry",
+   "source_id": "b3-po-chair-hair"
+  },
+  {
+   "name": "poetry.b3-po-dish-wish",
+   "family": "poetry",
+   "source_id": "b3-po-dish-wish"
+  },
+  {
+   "name": "poetry.b3-po-door-floor",
+   "family": "poetry",
+   "source_id": "b3-po-door-floor"
+  },
+  {
+   "name": "poetry.b3-po-door-roar",
+   "family": "poetry",
+   "source_id": "b3-po-door-roar"
+  },
+  {
+   "name": "poetry.b3-po-grain-plain",
+   "family": "poetry",
+   "source_id": "b3-po-grain-plain"
+  },
+  {
+   "name": "poetry.b3-po-heart-start",
+   "family": "poetry",
+   "source_id": "b3-po-heart-start"
+  },
+  {
+   "name": "poetry.b3-po-hill-still",
+   "family": "poetry",
+   "source_id": "b3-po-hill-still"
+  },
+  {
+   "name": "poetry.b3-po-king-ring",
+   "family": "poetry",
+   "source_id": "b3-po-king-ring"
+  },
+  {
+   "name": "poetry.b3-po-lake-wake",
+   "family": "poetry",
+   "source_id": "b3-po-lake-wake"
+  },
+  {
+   "name": "poetry.b3-po-mine-shine",
+   "family": "poetry",
+   "source_id": "b3-po-mine-shine"
+  },
+  {
+   "name": "poetry.b3-po-moon-soon",
+   "family": "poetry",
+   "source_id": "b3-po-moon-soon"
+  },
+  {
+   "name": "poetry.b3-po-mouse-house",
+   "family": "poetry",
+   "source_id": "b3-po-mouse-house"
+  },
+  {
+   "name": "poetry.b3-po-road-load",
+   "family": "poetry",
+   "source_id": "b3-po-road-load"
+  },
+  {
+   "name": "poetry.b3-po-rope-hope",
+   "family": "poetry",
+   "source_id": "b3-po-rope-hope"
+  },
+  {
+   "name": "poetry.b3-po-rose-nose",
+   "family": "poetry",
+   "source_id": "b3-po-rose-nose"
+  },
+  {
+   "name": "poetry.b3-po-rug-snug",
+   "family": "poetry",
+   "source_id": "b3-po-rug-snug"
+  },
+  {
+   "name": "poetry.b3-po-sand-hand",
+   "family": "poetry",
+   "source_id": "b3-po-sand-hand"
+  },
+  {
+   "name": "poetry.b3-po-snow-go",
+   "family": "poetry",
+   "source_id": "b3-po-snow-go"
+  },
+  {
+   "name": "poetry.b3-po-song-long",
+   "family": "poetry",
+   "source_id": "b3-po-song-long"
+  },
+  {
+   "name": "poetry.b3-po-storm-warm",
+   "family": "poetry",
+   "source_id": "b3-po-storm-warm"
+  },
+  {
+   "name": "poetry.b3-po-street-feet",
+   "family": "poetry",
+   "source_id": "b3-po-street-feet"
+  },
+  {
+   "name": "poetry.b3-po-town-down",
+   "family": "poetry",
+   "source_id": "b3-po-town-down"
+  },
+  {
+   "name": "poetry.b3-po-track-back",
+   "family": "poetry",
+   "source_id": "b3-po-track-back"
+  },
+  {
+   "name": "poetry.b3-po-tune-june",
+   "family": "poetry",
+   "source_id": "b3-po-tune-june"
+  },
+  {
+   "name": "poetry.bf-couplet-beast-feast",
+   "family": "poetry",
+   "source_id": "bf-couplet-beast-feast"
+  },
+  {
+   "name": "poetry.bf-couplet-day-hay",
+   "family": "poetry",
+   "source_id": "bf-couplet-day-hay"
+  },
+  {
+   "name": "poetry.couplet-away-way",
+   "family": "poetry",
+   "source_id": "couplet-away-way"
+  },
+  {
+   "name": "poetry.couplet-cat-mat",
+   "family": "poetry",
+   "source_id": "couplet-cat-mat"
+  },
+  {
+   "name": "poetry.couplet-crack-black",
+   "family": "poetry",
+   "source_id": "couplet-crack-black"
+  },
+  {
+   "name": "poetry.couplet-crown-town",
+   "family": "poetry",
+   "source_id": "couplet-crown-town"
+  },
+  {
+   "name": "poetry.couplet-divine-wine",
+   "family": "poetry",
+   "source_id": "couplet-divine-wine"
+  },
+  {
+   "name": "poetry.couplet-eyes-lies",
+   "family": "poetry",
+   "source_id": "couplet-eyes-lies"
+  },
+  {
+   "name": "poetry.couplet-fear-near",
+   "family": "poetry",
+   "source_id": "couplet-fear-near"
+  },
+  {
+   "name": "poetry.couplet-fight-light",
+   "family": "poetry",
+   "source_id": "couplet-fight-light"
+  },
+  {
+   "name": "poetry.couplet-frame-same",
+   "family": "poetry",
+   "source_id": "couplet-frame-same"
+  },
+  {
+   "name": "poetry.couplet-gown-down",
+   "family": "poetry",
+   "source_id": "couplet-gown-down"
+  },
+  {
+   "name": "poetry.couplet-heart-art",
+   "family": "poetry",
+   "source_id": "couplet-heart-art"
+  },
+  {
+   "name": "poetry.couplet-hold-old",
+   "family": "poetry",
+   "source_id": "couplet-hold-old"
+  },
+  {
+   "name": "poetry.couplet-known-grown",
+   "family": "poetry",
+   "source_id": "couplet-known-grown"
+  },
+  {
+   "name": "poetry.couplet-mistake-make",
+   "family": "poetry",
+   "source_id": "couplet-mistake-make"
+  },
+  {
+   "name": "poetry.couplet-moon-soon",
+   "family": "poetry",
+   "source_id": "couplet-moon-soon"
+  },
+  {
+   "name": "poetry.couplet-rain-pain",
+   "family": "poetry",
+   "source_id": "couplet-rain-pain"
+  },
+  {
+   "name": "poetry.couplet-shook-took",
+   "family": "poetry",
+   "source_id": "couplet-shook-took"
+  },
+  {
+   "name": "poetry.couplet-shore-more",
+   "family": "poetry",
+   "source_id": "couplet-shore-more"
+  },
+  {
+   "name": "poetry.couplet-sleep-deep",
+   "family": "poetry",
+   "source_id": "couplet-sleep-deep"
+  },
+  {
+   "name": "poetry.couplet-sun-done",
+   "family": "poetry",
+   "source_id": "couplet-sun-done"
+  },
+  {
+   "name": "poetry.couplet-time-climb",
+   "family": "poetry",
+   "source_id": "couplet-time-climb"
+  },
+  {
+   "name": "poetry.couplet-war-door",
+   "family": "poetry",
+   "source_id": "couplet-war-door"
+  },
+  {
+   "name": "user_modeling.um-sd-country-02",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-02"
+  },
+  {
+   "name": "user_modeling.um-sd-country-04",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-04"
+  },
+  {
+   "name": "user_modeling.um-sd-country-05",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-05"
+  },
+  {
+   "name": "user_modeling.um-sd-country-06",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-06"
+  },
+  {
+   "name": "user_modeling.um-sd-country-07",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-07"
+  },
+  {
+   "name": "user_modeling.um-sd-country-10",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-10"
+  },
+  {
+   "name": "user_modeling.um-sd-country-12",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-12"
+  },
+  {
+   "name": "user_modeling.um-sd-country-15",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-15"
+  },
+  {
+   "name": "user_modeling.um-sd-country-16",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-16"
+  },
+  {
+   "name": "user_modeling.um-sd-country-17",
+   "family": "user_modeling",
+   "source_id": "um-sd-country-17"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-00",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-00"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-03",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-03"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-04",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-04"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-05",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-05"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-07",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-07"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-12",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-12"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-15",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-15"
+  },
+  {
+   "name": "user_modeling.um-sd-gender-16",
+   "family": "user_modeling",
+   "source_id": "um-sd-gender-16"
+  },
+  {
+   "name": "user_modeling.um-sd-occupation-03",
+   "family": "user_modeling",
+   "source_id": "um-sd-occupation-03"
+  },
+  {
+   "name": "user_modeling.um-sd-occupation-10",
+   "family": "user_modeling",
+   "source_id": "um-sd-occupation-10"
+  },
+  {
+   "name": "user_modeling.um-sd-occupation-11",
+   "family": "user_modeling",
+   "source_id": "um-sd-occupation-11"
+  },
+  {
+   "name": "user_modeling.um-sd-occupation-12",
+   "family": "user_modeling",
+   "source_id": "um-sd-occupation-12"
+  },
+  {
+   "name": "user_modeling.um-sd-occupation-17",
+   "family": "user_modeling",
+   "source_id": "um-sd-occupation-17"
+  },
+  {
+   "name": "user_modeling.um-sd-occupation-18",
+   "family": "user_modeling",
+   "source_id": "um-sd-occupation-18"
+  },
+  {
+   "name": "user_modeling.um-sd-occupation-19",
+   "family": "user_modeling",
+   "source_id": "um-sd-occupation-19"
+  },
+  {
+   "name": "user_modeling.um-sd-religion-12",
+   "family": "user_modeling",
+   "source_id": "um-sd-religion-12"
+  },
+  {
+   "name": "user_modeling.um-ss-agegroup-05",
+   "family": "user_modeling",
+   "source_id": "um-ss-agegroup-05"
+  },
+  {
+   "name": "user_modeling.um-ss-continent-02",
+   "family": "user_modeling",
+   "source_id": "um-ss-continent-02"
+  },
+  {
+   "name": "user_modeling.um-ss-continent-03",
+   "family": "user_modeling",
+   "source_id": "um-ss-continent-03"
+  },
+  {
+   "name": "user_modeling.um-ss-continent-06",
+   "family": "user_modeling",
+   "source_id": "um-ss-continent-06"
+  },
+  {
+   "name": "user_modeling.um-ss-continent-11",
+   "family": "user_modeling",
+   "source_id": "um-ss-continent-11"
+  },
+  {
+   "name": "user_modeling.um-ss-continent-14",
+   "family": "user_modeling",
+   "source_id": "um-ss-continent-14"
+  },
+  {
+   "name": "user_modeling.um-ss-continent-15",
+   "family": "user_modeling",
+   "source_id": "um-ss-continent-15"
+  },
+  {
+   "name": "user_modeling.um-ss-diets-08",
+   "family": "user_modeling",
+   "source_id": "um-ss-diets-08"
+  },
+  {
+   "name": "user_modeling.um-ss-diets-09",
+   "family": "user_modeling",
+   "source_id": "um-ss-diets-09"
+  },
+  {
+   "name": "user_modeling.um-ss-employmentstatus-00",
+   "family": "user_modeling",
+   "source_id": "um-ss-employmentstatus-00"
+  },
+  {
+   "name": "user_modeling.um-ss-employmentstatus-01",
+   "family": "user_modeling",
+   "source_id": "um-ss-employmentstatus-01"
+  },
+  {
+   "name": "user_modeling.um-ss-employmentstatus-11",
+   "family": "user_modeling",
+   "source_id": "um-ss-employmentstatus-11"
+  },
+  {
+   "name": "user_modeling.um-ss-employmentstatus-13",
+   "family": "user_modeling",
+   "source_id": "um-ss-employmentstatus-13"
+  },
+  {
+   "name": "user_modeling.um-ss-maritalstatus-01",
+   "family": "user_modeling",
+   "source_id": "um-ss-maritalstatus-01"
+  },
+  {
+   "name": "user_modeling.um-ss-maritalstatus-07",
+   "family": "user_modeling",
+   "source_id": "um-ss-maritalstatus-07"
+  },
+  {
+   "name": "user_modeling.um-ss-maritalstatus-08",
+   "family": "user_modeling",
+   "source_id": "um-ss-maritalstatus-08"
+  },
+  {
+   "name": "user_modeling.um-ss-maritalstatus-09",
+   "family": "user_modeling",
+   "source_id": "um-ss-maritalstatus-09"
+  },
+  {
+   "name": "user_modeling.um-ss-maritalstatus-12",
+   "family": "user_modeling",
+   "source_id": "um-ss-maritalstatus-12"
+  },
+  {
+   "name": "user_modeling.um-ss-maritalstatus-15",
+   "family": "user_modeling",
+   "source_id": "um-ss-maritalstatus-15"
+  },
+  {
+   "name": "user_modeling.um-ss-petownership-09",
+   "family": "user_modeling",
+   "source_id": "um-ss-petownership-09"
+  },
+  {
+   "name": "user_modeling.um-ss-petownership-13",
+   "family": "user_modeling",
+   "source_id": "um-ss-petownership-13"
+  },
+  {
+   "name": "user_modeling.um-ss-religiousaffiliation-09",
+   "family": "user_modeling",
+   "source_id": "um-ss-religiousaffiliation-09"
+  },
+  {
+   "name": "user_modeling.um-ss-religiousaffiliation-10",
+   "family": "user_modeling",
+   "source_id": "um-ss-religiousaffiliation-10"
+  },
+  {
+   "name": "user_modeling.um-ss-religiousaffiliation-11",
+   "family": "user_modeling",
+   "source_id": "um-ss-religiousaffiliation-11"
   }
  ]
 }

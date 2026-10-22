@@ -1,6 +1,6 @@
-"""celeste_coherence: every bullet of every prose readout at the hallucination family's read sites
-is graded 0-3 for coherence (readable text that conveys a claim; never truth or relevance), 20
-bullets per call; the headline is the share graded 0-1 (incoherent), lower is better."""
+"""celeste_coherence: the bullets of a lens's prose readouts at up to four cells of each item (items
+drawn from eight families, read with their own plans) are graded 0-3 for coherence, 20 per call;
+the headline is the share graded 0-1 (incoherent) among bullets of >= 2 words, lower is better."""
 
 import random
 import re
@@ -29,7 +29,10 @@ from .prompts import CHUNK, PROMPT_VERSION, SCHEMA, SYSTEM, render_user
 NAME = "celeste_coherence"
 BANK = REPO_ROOT / "evals" / NAME / "items.json"
 MAX_BULLETS = 8  # per readout
+MAX_CELLS = 4  # per (item, layer): the lowest positions present in the readouts
+MIN_WORDS = 2  # the headline grades bullets of >= 2 words; shorter ones are reported, not scored
 _MARK = re.compile(r"^\s*(?:[*\-•·]+|\d+[.)])\s*")
+_WORD = re.compile(r"\w+")
 
 
 def bullets_of(sample: str) -> list[str]:
@@ -65,12 +68,19 @@ def run(args: JudgeArgs) -> FamilyResult:
     if rep.kind == "tokens":
         fail(f"{NAME}: coherence is graded on prose readouts; a token lens has no bullets")
     layers = args.layers if args.layers is not None else rep.layers
-    sites = {it["id"]: {int(s["pos"]): s for s in it["sites"]} for it in scope}
-    have = {(c.id, c.layer, c.pos): c for c in cells}
-    expected = [(i, L, p) for i in ids for L in layers for p in sites[i]]
-    missing = [k for k in expected if k not in have]
-    n_extra = sum(1 for k in have if k not in set(expected))
-    require_cells(NAME, missing, len(expected), args)
+    fam_of = {it["id"]: it["family"] for it in scope}
+    by_il: dict[tuple[str, int], list] = defaultdict(list)
+    for c in cells:
+        if c.id in fam_of and c.layer in layers:
+            by_il[(c.id, c.layer)].append(c)
+    have = {}
+    for (i, layer), cs in by_il.items():
+        for c in sorted(cs, key=lambda c: c.pos)[:MAX_CELLS]:
+            have[(i, layer, c.pos)] = c
+    missing = [(i, layer) for i in ids for layer in layers if (i, layer) not in by_il]
+    n_extra = sum(len(cs) - min(len(cs), MAX_CELLS) for cs in by_il.values())
+    expected = sorted(have)
+    require_cells(NAME, missing, len(ids) * len(layers), args)
 
     frags: dict[str, list[tuple[tuple[str, int, int], str]]] = defaultdict(list)
     empty: set[tuple[str, int, int]] = set()
@@ -94,7 +104,12 @@ def run(args: JudgeArgs) -> FamilyResult:
                     key=f"{i}|c{j // CHUNK}",
                     system=SYSTEM,
                     user=render_user([b for _k, b in chunk]),
-                    meta={"item": i, "cells": [list(k) for k, _b in chunk], "n": len(chunk)},
+                    meta={
+                        "item": i,
+                        "cells": [list(k) for k, _b in chunk],
+                        "n": len(chunk),
+                        "nw": [len(_WORD.findall(b)) for _k, b in chunk],
+                    },
                 )
             )
 
@@ -124,7 +139,8 @@ def run(args: JudgeArgs) -> FamilyResult:
             temperature=0.0,
         )
 
-    grades: dict[tuple[str, int, int], list[int]] = defaultdict(list)
+    grades: dict[tuple[str, int, int], list[int]] = defaultdict(list)  # bullets of >= MIN_WORDS
+    short: dict[tuple[str, int, int], list[int]] = defaultdict(list)  # shorter bullets
     why: Counter[str] = Counter()
     unjudged_cells: set[tuple[str, int, int]] = set()
     for c in calls:
@@ -135,6 +151,9 @@ def run(args: JudgeArgs) -> FamilyResult:
             continue
         by_i = {x["i"]: x for x in res["grades"]}
         for n, k in enumerate(ks):
+            if c.meta["nw"][n] < MIN_WORDS:
+                short[k].append(int(by_i[n]["score"]))
+                continue
             grades[k].append(int(by_i[n]["score"]))
             if by_i[n]["score"] <= 1:
                 why[" ".join(str(by_i[n].get("why", "")).lower().split()[:4])] += 1
@@ -159,8 +178,9 @@ def run(args: JudgeArgs) -> FamilyResult:
     by_kind: dict[str, list[int]] = defaultdict(list)
     for k, v in grades.items():
         if k not in unjudged_cells:
-            by_kind[str(sites[k[0]][k[2]].get("kind"))].extend(v)
+            by_kind[fam_of[k[0]]].extend(v)
     value = (sum(s <= 1 for s in all_scores) / n_all) if n_all else None
+    n_short = sum(len(v) for k, v in short.items() if k not in unjudged_cells)
     pinned = args.judge.pinned
     n_unjudged = len(unjudged_cells)
     result = FamilyResult(
@@ -175,15 +195,17 @@ def run(args: JudgeArgs) -> FamilyResult:
         complete=completeness(
             pinned=pinned,
             subset=is_subset(args),
-            n_expected=len(expected),
+            n_expected=len(ids) * len(layers),
             n_missing=len(missing),
             n_unjudged=n_unjudged,
             n_empty=len(empty),
         ),
         pinned_instrument=pinned,
-        config=base_config(args, PROMPT_VERSION, max_bullets=MAX_BULLETS, chunk=CHUNK),
+        config=base_config(
+            args, PROMPT_VERSION, max_bullets=MAX_BULLETS, max_cells=MAX_CELLS, chunk=CHUNK
+        ),
         counts=base_counts(
-            n_expected=len(expected),
+            n_expected=len(ids) * len(layers),
             n_unjudged=n_unjudged,
             n_empty=len(empty),
             skipped_rows=n_extra,
@@ -193,10 +215,13 @@ def run(args: JudgeArgs) -> FamilyResult:
         extras={
             "n_calls": len(calls),
             "n_bullets": n_all,
+            "min_words": MIN_WORDS,
+            # bullets under MIN_WORDS (a lone word, letter or number) are not graded in the headline
+            "short_bullet_share": (n_short / (n_short + n_all)) if (n_short + n_all) else None,
             "mean_score": mean(all_scores),
             "fluent_share": (hist[3] / n_all) if n_all else None,
             "score_hist": {str(s): hist[s] for s in range(4)},
-            "incoherent_rate_by_site_kind": {
+            "incoherent_rate_by_family": {
                 kd: (sum(s <= 1 for s in v) / len(v)) for kd, v in sorted(by_kind.items()) if v
             },
             "top_incoherence_reasons": why.most_common(12),

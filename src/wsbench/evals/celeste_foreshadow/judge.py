@@ -86,7 +86,13 @@ def run(args: JudgeArgs) -> FamilyResult:
     for i in ids:
         every = list(range(len(by_id[i]["thoughts"])))
         for c in by_id[i].get("control_sites") or []:
-            sites[i][int(c["pos"])] = {**c, "targets": every, "pool": [], "control": True}
+            sites[i][int(c["pos"])] = {
+                **c,
+                "targets": every,
+                "said": [],
+                "pool": [],
+                "control": True,
+            }
     have = {(c.id, c.layer, c.pos): c for c in cells}
     expected = [(i, L, p) for i in ids for L in layers for p in sites[i]]
     missing = [k for k in expected if k not in have]
@@ -96,6 +102,10 @@ def run(args: JudgeArgs) -> FamilyResult:
     def targets(i: str, p: int) -> list[str]:
         th = by_id[i]["thoughts"]
         return [th[t]["statement"] for t in sites[i][p]["targets"]]
+
+    def said(i: str, p: int) -> list[str]:
+        th = by_id[i]["thoughts"]
+        return [th[t]["statement"] for t in sites[i][p].get("said") or []]
 
     plain: dict[str, str] = {}
     empty: set[tuple[str, int, int]] = set()
@@ -123,6 +133,7 @@ def run(args: JudgeArgs) -> FamilyResult:
                         targets(i, p),
                         site["pool"],
                         judge_text,
+                        said=said(i, p),
                     ),
                     meta={"item": i, "layer": layer, "pos": p, "sample": j, "site": site["label"]},
                 )
@@ -211,10 +222,11 @@ def run(args: JudgeArgs) -> FamilyResult:
         "n_calls": len(calls),
         "n_rows_not_in_plan": n_extra,
         "cell_hit_rate": rate(bool(v["hits"]) for v in judged_cells),
-        # before-cue control sites: a lens cannot carry a thought about a cue it has not read, so
-        # this is judge leniency + generic spray (lower is better), never part of the pass rule
-        "control_hit_rate": rate(bool(v["hits"]) for v in ctrl_cells),
-        "n_control_cells": len(ctrl_cells),
+        # the last punctuation before the cue sentence, judged against every thought of the item:
+        # never part of the pass rule. Hits there are mostly the model computing ahead from facts
+        # the message gives before the cue (a layover from flight times given earlier), not spray
+        "before_cue_hit_rate": rate(bool(v["hits"]) for v in ctrl_cells),
+        "n_before_cue_cells": len(ctrl_cells),
         "claims_per_cell": (n_cl / len(judged_cells)) if judged_cells else None,
         # the census: what a lens's claims are, over every judged claim
         "claim_share": share,

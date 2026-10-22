@@ -112,6 +112,6 @@ def test_run_pass_rule_ignores_control_hits(tmp_path: Path, monkeypatch):
     res = fj.run(args)
     assert (
         res.value == 0.0
-        and res.extras["control_hit_rate"] == 1.0
+        and res.extras["before_cue_hit_rate"] == 1.0
         and res.extras["cell_hit_rate"] == 0.0
     )

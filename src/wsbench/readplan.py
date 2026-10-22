@@ -5,10 +5,11 @@ turns a positions rule into token indices once a producer has tokenized the rend
 import json
 import re
 from collections.abc import Iterable
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
+from wsbench.banks import label_of
 from wsbench.banks import load_bank as load_bank_file
 from wsbench.registry import REPO_ROOT
 
@@ -406,20 +407,16 @@ def plan(family: str) -> list[ReadSpec]:
             )
             for r in rows
         ]
-    if family == "celeste_coherence":  # the hallucination family's cells, unchanged
-        return [
-            ReadSpec(
-                family,
-                s.id,
-                s.render,
-                s.positions,
-                s.layers,
-                extra=s.extra,
-                note="the hallucination family's read sites (punctuation and newlines inside "
-                "the model's own replies to real chat prompts); every bullet is graded",
-            )
-            for s in plan("hallucination")
-        ]
+    if family == "celeste_coherence":  # each item is another family's item, read with its plan
+        _h, items = _bank(family)
+        src: dict[str, dict[str, ReadSpec]] = {}
+        out = []
+        for it in items:
+            if it["family"] not in src:
+                src[it["family"]] = {s.id: s for s in plan(it["family"])}
+            s = src[it["family"]][it["source_id"]]
+            out.append(replace(s, family=family, id=label_of(it["name"])))
+        return out
     if family == "jailbreak_recognition":
         from wsbench.evals.jailbreak_recognition.judge import grid_positions, prefix_to_last_user
 

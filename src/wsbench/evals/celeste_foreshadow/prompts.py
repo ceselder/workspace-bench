@@ -2,7 +2,7 @@
 
 from wsbench.llm import schema_block
 
-PROMPT_VERSION = "foreshadow-claims-v2-2026-10-22"
+PROMPT_VERSION = "foreshadow-claims-v3-2026-10-22"
 MAX_POOL = 16  # continuations shown to the judge per read site
 
 LABELS = ["thought", "message", "continuation", "other", "contradicted", "junk"]
@@ -51,6 +51,8 @@ You get:
 - THOUGHTS: numbered thoughts that the model itself wrote down later, in its own private
   reasoning, when it answered this message (each one in most of its answers). None of them is
   said in the model's own continuations from the read point.
+- ALREADY SAID: other thoughts the model had about the message that its own continuations from
+  the read point DO state. They never count as THOUGHTS.
 - CONTINUATIONS: what the model itself wrote when it simply continued the text from the read
   point (several independent samples; they may run past the end of the user's message into the
   start of the assistant's reply).
@@ -67,7 +69,10 @@ claim per distinct concept. Label every claim with exactly one of:
   exceeded").
 - "message": it restates or paraphrases something the MESSAGE says (anywhere in it), without
   adding a thought.
-- "continuation": it matches what one of the CONTINUATIONS says, and is not a thought.
+- "continuation": it matches what one of the CONTINUATIONS says or carries an ALREADY SAID
+  thought. If a claim fits an ALREADY SAID thought at least as well as a THOUGHT (for example both
+  mention the same gas, dose or person), it is "continuation", not "thought": a THOUGHT is only
+  credited for the content that sets it apart from the ALREADY SAID ones.
 - "other": a specific claim that is none of the above. It may be true or false; you cannot tell.
 - "contradicted": it contradicts the MESSAGE or a THOUGHT.
 - "junk": no specific content (fragments, formatting, filler, gibberish, a lone function word).
@@ -89,6 +94,7 @@ other label. If the lens output has no claims at all, return an empty list."""
 USER = (
     "MESSAGE:\n<<<\n{message}\n>>>\n\n"
     "THOUGHTS:\n{thoughts}\n\n"
+    "ALREADY SAID:\n{said}\n\n"
     "CONTINUATIONS:\n{pool}\n\n"
     "LENS OUTPUT:\n<<<\n{readout}\n>>>"
 )
@@ -122,8 +128,16 @@ def mark(message: str, char: int) -> str:
     return message[:char] + "⟦READ⟧" + message[char:]
 
 
-def render_user(message: str, char: int, thoughts: list[str], pool: list[str], readout: str) -> str:
+def render_user(
+    message: str,
+    char: int,
+    thoughts: list[str],
+    pool: list[str],
+    readout: str,
+    said: list[str] = (),
+) -> str:
     th = "\n".join(f"{i}. {t}" for i, t in enumerate(thoughts, 1))
+    sd = "\n".join(f"- {t}" for t in said) or "(none)"
     pl = (
         "\n".join(f"[{j}] {' '.join(c.split())}" for j, c in enumerate(pool[:MAX_POOL], 1))
         or "(none)"
@@ -131,6 +145,7 @@ def render_user(message: str, char: int, thoughts: list[str], pool: list[str], r
     return (
         USER.replace("{message}", mark(message, char))
         .replace("{thoughts}", th)
+        .replace("{said}", sd)
         .replace("{pool}", pl)
         .replace("{readout}", readout.strip())
     )

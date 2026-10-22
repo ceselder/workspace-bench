@@ -86,6 +86,12 @@ def main():
                     "token": s["token"],
                     "char": int(s["char"]),
                     "targets": tg,
+                    # cue thoughts the continuations already state here: shown to the judge as said
+                    "said": sorted(
+                        remap[int(k2)]
+                        for k2, v in s["leak"].items()
+                        if int(k2) in remap and v["stated"]
+                    ),
                     "n_leaked": sum(
                         1 for k2, v in s["leak"].items() if int(k2) in remap and v["stated"]
                     ),

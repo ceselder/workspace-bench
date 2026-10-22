@@ -4,9 +4,16 @@
 relevant: whether a reader can read it. RL'd verbalizers drift into repeated phrases, token
 debris and script soup while staying "close" to their reward; this instrument counts that.
 
-Every bullet of a prose readout at the **hallucination family's read sites** (punctuation and
-newlines inside Qwen3.6-27B's own replies to 149 real chat prompts, 1,123 sites; the same cells,
-so any arm with hallucination readouts is graded at no GPU cost) is graded 0-3 by a blind judge:
+The cells are other families' cells: **50 items (seed 0) from each of 8 WorkspaceBench families**
+(association, buggy_code, directed_modulation, hallucination, moral_rationale, multihop, poetry,
+user_modeling; 399 items, buggy_code has 49), each read with its own family's plan; per item the
+(up to) four lowest read positions present in the readouts are graded. Context matters: in the
+validation study every arm was ~0% incoherent at the hallucination family's chat sites, while the
+KV oracle lens was 26% incoherent at directed_modulation and user_modeling cells. An arm that
+already has readouts for those families needs no new generation
+(`scripts/celeste_evals/coherence_assemble.py` copies them under the coherence ids).
+
+Every bullet of the first readout sample of a graded cell is graded 0-3 by a blind judge:
 
 - 0 = not language (gibberish, word pieces, script soup);
 - 1 = broken (scrambled, mostly repetition, mid-word at both ends, a thought-breaking script switch);
@@ -20,7 +27,9 @@ debris (`<think>`, a leading `_`) is ignored. The judge never sees which lens wr
 `ci95` = item-level percentile bootstrap of the ratio of per-item sums (2,000 draws, seed 0). A
 precision instrument like `hallucination`: no chance line, excluded from the macro. Read it
 beside the content families: a lens that says nothing specific can be perfectly coherent.
-Token lenses have no bullets and are refused (exit 2).
+Only bullets of at least 2 words enter the headline (a lone word, letter or number is not a
+claim; their share is `extras.short_bullet_share`). Token lenses have no bullets and are refused
+(exit 2).
 
 ## Why a judge and not base-model perplexity
 
@@ -41,16 +50,18 @@ script drift, generic filler, specific facts):
 
 ## Bank and cells
 
-`items.json`: `{family, model, built, source, render, n_items: 149, n_sites: 1123, items: [{name,
-stratum, sites: [{pos, token, kind}]}]}`; `name` and `pos` are the hallucination family's item
-ids and read positions (its `capture_rows.json` carries the token ids; `wsbench plan
-families=celeste_coherence` reuses that plan). Per cell the first non-blank readout sample is
-split into bullets (one per non-blank line, list markers stripped, at most 8); the bullets of an
-item are graded 20 per call in input order. A call whose grades do not cover every bullet
-with an integer 0-3 is re-queued; a cell whose readout has no bullet is empty (no call).
+`items.json`: `{family, model, built, source, source_families, n_items: 399, items: [{name,
+family, source_id}]}`; `name` = `<family>.<source id>` (the readout id), and `wsbench plan
+families=celeste_coherence` returns each source item's own read spec under that id. Per
+(item, layer) the four lowest positions present in the readouts are graded (`extras.n_rows_not_in_plan`
+counts the rest); per cell the first non-blank readout sample is split into bullets (one per
+non-blank line, list markers stripped, at most 8); an item's bullets are graded 20 per call in
+input order. A call whose grades do not cover every bullet with an integer 0-3 is re-queued; a
+cell whose readout has no bullet is empty (no call).
 
 ```
-wsbench judge family=celeste_coherence readouts=<arm>/hallucination.jsonl out=outputs/<arm>/celeste_coherence layers=42
+python scripts/celeste_evals/coherence_assemble.py --root <arm readouts dir> --out <arm>/celeste_coherence.jsonl
+wsbench judge family=celeste_coherence readouts=<arm>/celeste_coherence.jsonl out=outputs/<arm>/celeste_coherence layers=42
 ```
 
 ## Judge prompts

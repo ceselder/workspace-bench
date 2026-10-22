@@ -90,8 +90,9 @@ for it in bank["items"]:
         funnel["targets_before"] += len(s["targets"])
         funnel["targets_credited_to_pool"] += len(drop)
         tg = [t for k, t in enumerate(s["targets"]) if k not in drop]
+        said = sorted(set(s.get("said", [])) | {t for k, t in enumerate(s["targets"]) if k in drop})
         if tg:
-            sites.append({**s, "targets": tg, "n_judge_leaked": len(drop)})
+            sites.append({**s, "targets": tg, "said": said, "n_judge_leaked": len(drop)})
     if not sites:
         funnel["items_every_target_credited_to_pool"] += 1
         continue
