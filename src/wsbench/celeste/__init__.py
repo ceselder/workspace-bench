@@ -9,7 +9,7 @@ from wsbench.celeste.judge import run_family
 from wsbench.judge_config import JudgeConfig
 from wsbench.registry import REPO_ROOT, EvalSpec
 
-GROUP = "celeste"
+GROUP = "celeste-evals"
 JUDGE_MODEL = "claude-sonnet-5"
 
 

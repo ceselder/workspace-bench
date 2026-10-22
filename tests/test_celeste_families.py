@@ -51,7 +51,7 @@ def test_bank_shape_and_plan(family: str):
 @pytest.mark.parametrize("family", FAMILIES)
 def test_registered_spec_and_readme(family: str):
     spec = _spec(family)
-    assert spec.group == "celeste" and spec.judge.model == "claude-sonnet-5"
+    assert spec.group == "celeste-evals" and spec.judge.model == "claude-sonnet-5"
     assert spec.judge.prompt_version == PROMPT_VERSION
     readme = (REPO / "evals" / family / "README.md").read_text(encoding="utf-8")
     assert SYSTEM in readme and PROMPT_VERSION in readme

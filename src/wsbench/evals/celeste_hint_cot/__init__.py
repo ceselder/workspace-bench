@@ -15,7 +15,7 @@ SPEC = register(
     EvalSpec(
         name="celeste_hint_cot",
         title="Hinted CoT (unverbalized hint following)",
-        group="celeste",
+        group="celeste-evals",
         bank=Path("evals/celeste_hint_cot/items.json"),
         judge=JudgeConfig(model=JUDGE_MODEL, prompt_version=PROMPT_VERSION, reasoning=None),
         metric="auroc",

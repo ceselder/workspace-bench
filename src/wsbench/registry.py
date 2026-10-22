@@ -37,7 +37,7 @@ class EvalSpec:
     name: str  # family key, e.g. "moral_rationale"
     title: str  # README name, e.g. "Moral rationale"
     group: str  # "basic" | "basic_mt" | "safety" | "association" | "bag_of_words" | "precision"
-    #            | "logic" | "computational"
+    #            | "logic" | "computational" | "celeste-evals"
     bank: Path  # the bank file, relative to REPO_ROOT (items.json; jlens_concept_pr: manifest.json)
     judge: JudgeConfig
     metric: str
