@@ -178,7 +178,7 @@ tokenizer. `docs/producing_readouts.md` walks the whole producer side.
 ## What this repo will and will not do for you
 
 Judging is the contract; the readout file format is stated once in README §Quickstart.
-`wsbench produce` (methods logit_lens | jlens | rlens | olens | nla, one prompt at a time on one
+`wsbench produce` (methods logit_lens | jlens | rlens | olens | nla | continuation, one prompt at a time on one
 GPU) can fill it for you; it is not a fan-out harness, and there is no model serving here.
 `wsbench convert-gen-dir` (and the legacy `convert-read-json`) turn the two in-house producer
 layouts into the contract.

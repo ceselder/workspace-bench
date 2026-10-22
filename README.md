@@ -41,7 +41,7 @@ use an `ant auth login` profile).
 uv run wsbench plan out=outputs/plan
 
 # 2. readouts: one JSONL per family (the contract below), from your own lens on those
-#    cells or from the bundled producer (gpu extra; logit_lens | jlens | rlens | olens | nla)
+#    cells or from the bundled producer (gpu extra; logit_lens | jlens | rlens | olens | nla | continuation)
 uv run wsbench produce family=multihop method=jlens out=outputs/readouts/jlens/multihop.jsonl
 
 # 3. check the instrument without spending anything: first judge prompt, no call, no GPU

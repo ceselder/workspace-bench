@@ -119,7 +119,7 @@ and a credit if the items are external. Smoke `limit=3` live before any full run
   `wsbench plan [families=a,b] [out=DIR]` (the producer interface: render, positions rule and
   layers per item, `docs/producing_readouts.md`; `readplan.resolve` turns a rule into indices) |
   `wsbench produce family=F method=M out=F.jsonl` or `text=... method=M positions=-1
-  layers=20,36,60` (methods logit_lens | jlens | rlens | olens | nla; needs the `gpu` extra) |
+  layers=20,36,60` (methods logit_lens | jlens | rlens | olens | nla | continuation; needs the `gpu` extra) |
   `wsbench capable model=M` (re-run a bank's own gate on another model; porting notes and
   the pre-run sanity checks live in `AGENTS.md`) | `wsbench convert-gen-dir
   gen_dir=GEN out=F.jsonl kind=prose|tokens` | `wsbench convert-read-json read=R out=F.jsonl`

@@ -2,6 +2,7 @@
 ranked token list for the vector lenses, free text for the verbalizers. All of them share the
 ``Method`` protocol so the producer treats them alike."""
 
+from contextlib import nullcontext
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Protocol
@@ -352,7 +353,65 @@ class NLA:
         return Readout(samples=texts)
 
 
+# ---------------------------------------------------------------- the sampling baseline
+
+
+@dataclass
+class Continuation:
+    """The sampling baseline: no lens and no vector, the probed model itself continues the
+    render from the read token. One readout = ``bullets`` independent continuations of at most
+    ``max_new_tokens`` tokens, one ``- `` line each (the O-lens readout's shape and budget).
+    Generation runs through the chat template's special tokens (a read site in a user turn may
+    continue into the assistant's own turn). Layer-independent, so it reads at one layer."""
+
+    name: str = "continuation"
+    layers: list[int] | None = field(default_factory=lambda: [42])
+    reads_context: bool = True
+    bullets: int = 4
+    max_new_tokens: int = 24
+    temperature: float = 1.0
+    top_p: float = 0.95
+    top_k: int = 64
+    k: int = 1  # readouts per cell
+    _b: Backend | None = field(default=None, repr=False)
+
+    def bind(self, backend: Backend) -> None:
+        self._b = backend
+
+    def read(self, h: Any, layer: int) -> Readout:
+        raise TypeError("continuation reads the context, not a vector: call read_context")
+
+    def read_context(self, ids: list[int], layer: int) -> Readout:
+        """``ids`` = the render up to and including the read token."""
+        import torch
+
+        b = self._b
+        assert b is not None
+        tok = b.tokenizer
+        plain = b.model.disable_adapter() if hasattr(b.model, "disable_adapter") else nullcontext()
+        with torch.no_grad(), plain:
+            out = b.model.generate(
+                torch.tensor([ids], device=b.device),
+                attention_mask=torch.ones(1, len(ids), device=b.device, dtype=torch.long),
+                do_sample=self.temperature > 0,
+                temperature=max(self.temperature, 1e-5),
+                top_p=self.top_p,
+                top_k=self.top_k,
+                max_new_tokens=self.max_new_tokens,
+                num_return_sequences=self.bullets * self.k,
+                eos_token_id=tok.convert_tokens_to_ids("<|endoftext|>"),
+                pad_token_id=tok.pad_token_id or tok.eos_token_id,
+            )
+        texts = [
+            " ".join(t.split())
+            for t in tok.batch_decode(out[:, len(ids) :], skip_special_tokens=False)
+        ]
+        chunks = [texts[i : i + self.bullets] for i in range(0, len(texts), self.bullets)]
+        return Readout(samples=["\n".join(f"- {t}" for t in c) for c in chunks])
+
+
 METHODS: dict[str, type] = {
+    "continuation": Continuation,
     "logit_lens": LogitLens,
     "jlens": JLens,
     "rlens": RLens,

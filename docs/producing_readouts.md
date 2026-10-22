@@ -92,7 +92,7 @@ and:
 ```python
 from wsbench.produce import Producer
 
-# methods: logit_lens | jlens | rlens | olens | nla
+# methods: logit_lens | jlens | rlens | olens | nla | continuation (the sampling baseline)
 p = Producer.load("Qwen/Qwen3.6-27B", "jlens")
 p.read("The athlete Muhammad Ali plays the sport of", pos=-1, layer=36).readout.tokens
 p.read_prompt("Sechs geteilt durch zwei ist", positions="all", layers=[20, 36, 60])
@@ -118,6 +118,17 @@ and on while generating; `nla` runs Karvonen's reader with the vector added norm
 marker token. Methods are plain classes behind one `read(h, layer)` protocol, so a new lens is a
 few lines. Sampling for the verbalizers is `Sampling(temperature=1.0, top_p=0.95, top_k=64,
 max_new_tokens=256, k=1)`, the settings the in-house arms used.
+
+`continuation` is the **sampling baseline**, not a lens: no vector is read; the probed model
+itself continues the render from the read token (adapter off), and one readout is four
+independent continuations of at most 24 tokens, one `- ` line each, about the O-lens readout's
+budget (`Continuation(bullets=4, max_new_tokens=24)`, temperature 1.0, top-p 0.95, top-k 64).
+It goes through the chat template's special tokens, so a read site late in a user turn may
+continue into the assistant's own turn. It is layer-independent and reads at layer 42 only;
+judge it with `layers=42`. Any family can be judged on it like a lens, and
+`scripts/celeste_evals/cont_gate.py` re-scores a lens on the items this baseline fails: a family
+whose plain continuation already passes most items is measuring what the model is about to
+say, not what it holds unsaid.
 
 Two spellings, on purpose: the read-site `token` is `tokenizer.decode([id])`, exactly what the
 banks store (`"\n"`, `" öffnen"`, `"<|im_end|>"`); the ranked `tokens` of a token lens are the

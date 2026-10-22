@@ -164,6 +164,12 @@ class Producer:
         if not pos:
             return
         idx = [p % len(rendered) for p in pos]  # a plan may report negative offsets
+        if getattr(self.method, "reads_context", False):  # the sampling baseline: no capture
+            for layer in layers:
+                for p, j in zip(pos, idx, strict=True):
+                    readout = self.method.read_context(rendered.ids[: j + 1], layer)
+                    yield Row(item_id, layer, p, rendered.decoded[j], readout)
+            return
         acts = self.backend.capture(rendered.ids, layers, idx)
         for layer in layers:
             h_all = acts[layer]
