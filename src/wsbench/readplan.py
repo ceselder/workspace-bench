@@ -504,6 +504,23 @@ def plan(family: str) -> list[ReadSpec]:
             )
             for it in items
         ]
+    if family == "celeste_secret_choice":
+        _h, items = _bank(family)
+        return [
+            ReadSpec(
+                family,
+                it["id"],
+                "captured",
+                {"kind": "positions", "positions": [int(s["pos"]) for s in it["read_sites"]]},
+                GRID,
+                extra={"input_ids": it["input_ids"], "sites": it["read_sites"]},
+                note="the newline tokens that end lines 1-3 of the model's own filler text, inside "
+                "the captured Qwen3.6-27B render (chat template, thinking off, prompt + the "
+                "rollout prefix), where the model is committed to a pick the text does not give "
+                "away",
+            )
+            for it in items
+        ]
     if family == "jlens_concept_pr":
         m = json.loads((REPO_ROOT / "evals/jlens_concept_pr/manifest.json").read_text())
         return [

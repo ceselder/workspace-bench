@@ -304,6 +304,10 @@ NO_QUESTION: dict[str, str] = {
     "scripts/celeste_evals/foreshadow on a new model",
     "celeste_coherence": "no gate: the cells are the hallucination family's and the instrument "
     "grades the form of any readout, not a behaviour of the model",
+    "celeste_secret_choice": "the gate is Qwen3.6-27B's own commitment (>= 7 of 8 resamples from "
+    "the read site reveal the rollout's pick, re-tested with 8 fresh resamples) plus leak checks "
+    "(the text so far, 16 capped continuations, a claude-sonnet-5 reader of the text): re-run "
+    "scripts/celeste_evals/secret_choice on a new model",
 }
 # What a family's capability check does NOT cover, and what to do about it.
 PARTIAL: dict[str, str] = {

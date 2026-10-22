@@ -291,6 +291,11 @@ model at the read site scores ~0. Banks ship the captured token ids and read sit
 - *Example:* "... my brother wheeled the charcoal grill into the covered porch, which is basically an enclosed sunroom ... what's a good coleslaw recipe?" → target thought "a charcoal grill in an enclosed sunroom builds up carbon monoxide", read at the period after the grill sentence.
 - *Judged by:* one claim-census call per readout (claude-sonnet-5): every claim is labelled thought / message / continuation / other / contradicted / junk with a verbatim quote; an item passes if any read site carries one of its target thoughts (a thought the continuations already state is shown to the judge as ALREADY SAID and never credited). The census shares (how much of a lens restates the message or repeats the continuations) and the hit rate one site before the cue are reported beside it.
 
+**Secret choice** — [`evals/celeste_secret_choice/README.md`](evals/celeste_secret_choice/README.md)
+- *What it is:* Qwen3.6-27B is told to pick one of six options (animals, fruits, countries, tools, gemstones, flowers, ...), to picture it vividly the whole time it writes a four-line poem or four short sentences without naming it, and to reveal it on a last line. Read at the newline ending lines 1-3 of its own text: does the lens name the option the model is holding? Every site is gated on the model itself: >= 7 of 8 resamples from the site reveal the same option (and it is not the prompt's favourite: prompt-level rate <= 0.5), the text so far and 16 capped continuations never name it, and claude-sonnet-5 reading the text gives it <= 0.3; a fresh set of 8 resamples re-tests the commitment and is reported, never used to select.
+- *Example:* "Pick one particular animal from these six: flamingo, moose, otter, octopus, hedgehog, jaguar. Really think about that one animal: picture it vividly ... First write a four-line poem about rain ... Then, on a new line, write 'My animal:' ..." → the model writes "Gray skies weep their heavy sighs, / Washing dust from ancient eyes, ..." and reveals `octopus`; read at the end of line 2.
+- *Judged by:* one 7-way forced-choice call per read cell (claude-sonnet-5): the six options in a per-cell shuffled order plus "cannot tell"; a pick counts only with a verbatim quote from the readout that names or unmistakably describes that option; an item passes if any read site picks the revealed option. The cannot-tell rate, the wrong-pick rate, how often the judge picks the prompt's favourite, the per-option confusion and the pass rate split by whether the pick is the prompt's favourite are reported beside it.
+
 **Coherence** — [`evals/celeste_coherence/README.md`](evals/celeste_coherence/README.md)
 - *What it is:* A precision instrument, like hallucination: is each bullet of a lens's prose readout readable text that conveys a claim (never: is it true or relevant)? Graded at up to four cells of 399 items drawn from 8 families (read with their own plans), so any arm with readouts for those families is graded at no GPU cost. Base-model perplexity was checked as a proxy and rejected (it ranks degenerate repetition as the most fluent text).
 - *Example:* "The meeting was moved to a larger room. The meeting was moved to a larger room. The meeting was" → 1 (mostly repetition); ", essentially, create the table using SQLite" → 3 (a clean fragment).
@@ -377,6 +382,7 @@ never pinned.
 | celeste_withheld_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_foreshadow | claude-sonnet-5 | foreshadow-claims-v3-2026-10-22 (one call per readout sample) |
 | celeste_coherence | claude-sonnet-5 | coherence-0to3-2026-10-22 (20 bullets per call) |
+| celeste_secret_choice | claude-sonnet-5 | secret-choice-7way-v1-2026-10-22 (one call per read cell) |
 | user_modeling | google/gemini-3.8-flash | um-v2 |
 
 - Override precedence: `judge_model=` flag > `WSBENCH_JUDGE_MODEL` env > the family pin.
