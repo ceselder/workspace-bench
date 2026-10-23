@@ -299,6 +299,10 @@ NO_QUESTION: dict[str, str] = {
     "celeste_withheld_answer": "the gate is Qwen3.6-27B's own reply (never names the target, names "
     "it when asked afterwards, never in 16 sampled continuations from each read site): re-run "
     "scripts/celeste_supplement on a new model",
+    "celeste_silent_bridge": "the gate is Qwen3.6-27B's own behaviour (answers the novel two-hop "
+    "question right in one word, recalls both hops, misses it with the clue made generic, never "
+    "names the bridge in 32 sampled answers): re-run scripts/celeste_evals/silent_bridge on a new "
+    "model",
     "celeste_foreshadow": "the targets are Qwen3.6-27B's own thoughts (stated in >= 4 of its 8 "
     "thinking-mode answers, never in 16 sampled continuations from the read site): re-run "
     "scripts/celeste_evals/foreshadow on a new model",

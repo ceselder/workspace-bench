@@ -468,7 +468,12 @@ def plan(family: str) -> list[ReadSpec]:
             )
             for r in rows
         ]
-    if family in ("celeste_encoded_answer", "celeste_lookahead", "celeste_withheld_answer"):
+    if family in (
+        "celeste_encoded_answer",
+        "celeste_lookahead",
+        "celeste_withheld_answer",
+        "celeste_silent_bridge",
+    ):
         _h, items = _bank(family)
         return [
             ReadSpec(
