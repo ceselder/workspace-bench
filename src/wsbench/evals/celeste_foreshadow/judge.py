@@ -3,11 +3,13 @@ when some cell carries one of that site's target thoughts with a verified verbat
 census (what share of a lens's claims restate the message or repeat the continuations) is in
 extras."""
 
+import re
 from collections import defaultdict
 from typing import Any
 
 from wsbench.banks import load_bank
 from wsbench.cache import Cache
+from wsbench.evals.hallucination.judge import decode_token
 from wsbench.family import pass_rate_result, quote_in, rate, require_cells, tri_state
 from wsbench.llm import Spend
 from wsbench.mcjudge import Call, Preflighter, item_scope, run_calls, with_readout_count
@@ -29,15 +31,28 @@ CHANCE_LABEL = (
 )
 
 
+BAG = "\x00bag\x00"  # prefix marking a token bag's plain text (quotes verify word by word)
+
+
 def samples_of(cell: Cell) -> list[tuple[str, str]]:
-    """``(judge_text, plain_text)`` per judged sample: a token bag is one sample (scored bag,
-    verified against the bare tokens); prose keeps its first MAX_SAMPLES non-blank samples."""
+    """``(judge_text, plain_text)`` per judged sample: a token bag is one sample (decoded from
+    byte-level BPE, shown scored, verified word by word against the bare tokens); prose keeps
+    its first MAX_SAMPLES non-blank samples."""
     if cell.tokens is not None:
-        return (
-            [(render_bag(cell.tokens, cell.scores), " | ".join(cell.tokens))] if cell.tokens else []
-        )
+        toks = [decode_token(t) for t in cell.tokens]
+        return [(render_bag(toks, cell.scores), BAG + " | ".join(toks))] if toks else []
     out = [s for s in (cell.samples or ()) if s.strip()][:MAX_SAMPLES]
     return [(s, s) for s in out]
+
+
+def _verified(quote: str, plain: str) -> bool:
+    """Verbatim for prose; for a token bag every word of the quote must be among the tokens (the
+    judge may name a concept the bag spreads over several tokens)."""
+    if not plain.startswith(BAG):
+        return quote_in(quote, plain)
+    bag = plain[len(BAG) :].lower()
+    words = re.findall(r"\w+", quote.lower())
+    return bool(words) and all(w in bag for w in words)
 
 
 def verdict(res: dict[str, Any] | None, plain: str, n_targets: int) -> dict[str, Any]:
@@ -53,11 +68,11 @@ def verdict(res: dict[str, Any] | None, plain: str, n_targets: int) -> dict[str,
         t = c.get("thought") if isinstance(c.get("thought"), int) else 0
         detail = str(c.get("detail") or "")
         words = "".join(ch if ch.isalnum() else " " for ch in detail.lower()).split()
-        if not quote_in(quote, plain):
+        if not _verified(quote, plain):
             label = "unverified"
         elif label == "thought" and (
             not 1 <= t <= n_targets
-            or not quote_in(detail, plain)
+            or not _verified(detail, plain)
             or not words
             or all(w in GENERIC or len(w) < 3 for w in words)
         ):
