@@ -302,6 +302,8 @@ NO_QUESTION: dict[str, str] = {
     "celeste_foreshadow": "the targets are Qwen3.6-27B's own thoughts (stated in >= 4 of its 8 "
     "thinking-mode answers, never in 16 sampled continuations from the read site): re-run "
     "scripts/celeste_evals/foreshadow on a new model",
+    "celeste_false_belief": "the gate is a specific Qwen3.6-27B ERROR (a consistent wrong result "
+    "that survives a forced preamble): re-run scripts/celeste_evals/false_belief on a new model",
     "celeste_coherence": "no gate: the cells are the hallucination family's and the instrument "
     "grades the form of any readout, not a behaviour of the model",
 }
