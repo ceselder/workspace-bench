@@ -250,3 +250,45 @@ TEXT SO FAR:
 
 OPTIONS: {options}
 ```
+
+## Results (2026-10-22, layer 42, judge claude-sonnet-5)
+
+Arms: NLA after RL (`av_rl_adapters/iter_000400`), the single-activation O-lens (`abl_r8_rl2/step_0150`, 8 bullets), the KV-context
+O-lens (`kvr_cont_rl1/step_0300`, prompt masked), the J-lens at layer 42 (top-10 tokens), the sampling baseline (8 of the model's own
+continuations from the read site, 24 tokens, stop at newline, as bullets) and the prompt-only baseline. Item = (prompt, rollout), pass =
+some read site names the pick with a verified quote.
+
+| arm | pass rate (95% CI) | n | pick not favourite | pick = favourite | re-test-confirmed | cell hit | cannot tell | wrong when named | names favourite | uniform floor |
+|---|---|---|---|---|---|---|---|---|---|---|
+| NLA (after RL) | **20.9%** [14.2%, 27.6%] | 134 | 21.6% (n 51) | 20.5% (n 83) | 38.6% (n 57) | 17.4% | 73.9% | 33.3% | 50.0% | 5.2% |
+| olens (1 activation) | **11.3%** [6.8%, 17.3%] | 133 | 15.7% (n 51) | 8.5% (n 82) | 21.4% (n 56) | 9.4% | 82.5% | 46.4% | 35.7% | 3.5% |
+| KV olens | **20.9%** [14.2%, 27.6%] | 134 | 19.6% (n 51) | 21.7% (n 83) | 31.6% (n 57) | 19.3% | 73.9% | 26.2% | 59.5% | 5.1% |
+| J-lens L42 | **6.0%** [2.2%, 10.4%] | 134 | 2.0% (n 51) | 8.4% (n 83) | 12.3% (n 57) | 5.0% | 88.8% | 55.6% | 61.1% | 2.2% |
+| continuation baseline | **49.3%** [41.8%, 58.2%] | 134 | 58.8% (n 51) | 43.4% (n 83) | 63.2% (n 57) | 41.6% | 49.7% | 17.3% | 48.1% | 10.0% |
+| prompt-only baseline | **10.4%** [5.2%, 15.7%] | 134 | 11.8% (n 51) | 9.6% (n 83) | 17.5% (n 57) | 9.3% | 83.9% | 42.3% | 38.5% | 3.2% |
+
+**The sampling baseline wins.** The model's own next line names or unmistakably describes the pick (to the judge's standard) at 42% of
+the read cells and in 49% of items: the gate removed continuations that *name* the pick, not ones that describe it ("iron rails" for a
+tram). No lens reads the held pick better than sampling the model does; NLA and the KV O-lens (21%) sit above the prompt-only floor
+(10%) and the uniform-guess floor (5%), the single-activation O-lens ties prompt-only, the J-lens ties the floor.
+
+**Continuation-silent cells** (post hoc; the sampling baseline's own judge call did not credit the pick there): 94 of
+161 cells, 68 items made only of such cells. A judge-based continuation gate (as celeste_foreshadow's
+step 5) would keep roughly this subset and make the sampling floor 0 by construction:
+
+| arm | cell hit on silent cells | item pass, silent cells only | item pass on all-silent items (n) |
+|---|---|---|---|
+| sc_nla_rl400 | 12.8% | 14.3% | 13.2% (68) |
+| sc_abl_r8_rl2_0150 | 4.3% | 4.8% | 4.4% (68) |
+| sc_kvr_cont_rl1_0300 | 13.8% | 15.5% | 13.2% (68) |
+| sc_jlens_l42 | 2.1% | 2.4% | 2.9% (68) |
+| sc_ctx_unsteered | 0.0% | 0.0% | 0.0% (68) |
+| sc_prompt_only | 7.4% | 8.3% | 7.4% (68) |
+
+**Does the model stick to its pick?** On the 161 kept sites the fresh re-test agrees with the reveal
+5.79 / 8 on average against 2.99 / 8 expected at the picks' prompt-level base rates;
+89.4% of sites re-test above their base rate. Distribution: 8/8 15.5%,
+>= 7/8 39.8%, >= 6/8 62.1%, >= 5/8 78.3%, >= 4/8 88.2%.
+27.6% of fresh continuations from a kept site end by revealing another
+option (the switch rate); the sampling baseline's next line was judged to describe another option at 8.7%
+of kept cells.

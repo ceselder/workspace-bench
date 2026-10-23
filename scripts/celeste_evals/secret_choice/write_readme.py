@@ -269,5 +269,70 @@ User (`{{prompt}}` = the instruction, `{{text}}` = the text up to the site, `{{o
 {g["sonnet"]["user"]}
 ```
 """
+REPORT = Path.home() / "shared/reports/celeste-evals/data"
+if (REPORT / "secret_choice_eval.json").exists():
+    ev = json.loads((REPORT / "secret_choice_eval.json").read_text())
+    ph = (
+        json.loads((REPORT / "secret_choice_posthoc.json").read_text())
+        if (REPORT / "secret_choice_posthoc.json").exists()
+        else None
+    )
+
+    def pc(x):
+        return "n/a" if x is None else f"{100 * x:.1f}%"
+
+    rows_ = []
+    for k, d_ in ev["arms"].items():
+        nf_, pf_, rc_ = (
+            d_["pass_rate_pick_not_favourite"],
+            d_["pass_rate_pick_is_favourite"],
+            d_["pass_rate_retest_confirmed"],
+        )
+        rows_.append(
+            f"| {d_['label']} | **{pc(d_['pass_rate'])}** [{pc(d_['ci95'][0])}, {pc(d_['ci95'][1])}] | {d_['n_decided']} | "
+            f"{pc(nf_['rate'])} (n {nf_['n']}) | {pc(pf_['rate'])} (n {pf_['n']}) | {pc(rc_['rate'])} (n {rc_['n']}) | "
+            f"{pc(d_['cell_hit_rate'])} | {pc(d_['cannot_tell_rate'])} | {pc(d_['decided_wrong_rate'])} | {pc(d_['favourite_pick_rate'])} | {pc(d_['uniform_guess_floor'])} |"
+        )
+    md += f"""
+## Results ({bank["built"]}, layer 42, judge claude-sonnet-5)
+
+Arms: NLA after RL (`av_rl_adapters/iter_000400`), the single-activation O-lens (`abl_r8_rl2/step_0150`, 8 bullets), the KV-context
+O-lens (`kvr_cont_rl1/step_0300`, prompt masked), the J-lens at layer 42 (top-10 tokens), the sampling baseline (8 of the model's own
+continuations from the read site, 24 tokens, stop at newline, as bullets) and the prompt-only baseline. Item = (prompt, rollout), pass =
+some read site names the pick with a verified quote.
+
+| arm | pass rate (95% CI) | n | pick not favourite | pick = favourite | re-test-confirmed | cell hit | cannot tell | wrong when named | names favourite | uniform floor |
+|---|---|---|---|---|---|---|---|---|---|---|
+{chr(10).join(rows_)}
+
+**The sampling baseline wins.** The model's own next line names or unmistakably describes the pick (to the judge's standard) at 42% of
+the read cells and in 49% of items: the gate removed continuations that *name* the pick, not ones that describe it ("iron rails" for a
+tram). No lens reads the held pick better than sampling the model does; NLA and the KV O-lens (21%) sit above the prompt-only floor
+(10%) and the uniform-guess floor (5%), the single-activation O-lens ties prompt-only, the J-lens ties the floor.
+"""
+    if ph:
+        A_ = ph["continuation_silent"]
+        B_ = ph["sticking"]
+        arm_rows = "\n".join(
+            f"| {k} | {pc(v['cell_hit_rate_on_silent_cells'])} | {pc(v['item_pass_rate_counting_silent_cells_only'])} | {pc(v['item_pass_rate_on_all_silent_items'])} ({v['n_all_silent_items']}) |"
+            for k, v in A_["arms"].items()
+        )
+        md += f"""
+**Continuation-silent cells** (post hoc; the sampling baseline's own judge call did not credit the pick there): {A_["n_continuation_silent_cells"]} of
+{A_["n_cells"]} cells, {A_["n_items_all_cells_silent"]} items made only of such cells. A judge-based continuation gate (as celeste_foreshadow's
+step 5) would keep roughly this subset and make the sampling floor 0 by construction:
+
+| arm | cell hit on silent cells | item pass, silent cells only | item pass on all-silent items (n) |
+|---|---|---|---|
+{arm_rows}
+
+**Does the model stick to its pick?** On the {B_["n_kept_sites"]} kept sites the fresh re-test agrees with the reveal
+{B_["retest_mean"]:.2f} / 8 on average against {B_["expected_agree_at_base_rate"]:.2f} / 8 expected at the picks' prompt-level base rates;
+{pc(B_["share_sites_retest_above_base_rate"])} of sites re-test above their base rate. Distribution: 8/8 {pc(B_["retest_share"][">=8/8"])},
+>= 7/8 {pc(B_["retest_share"][">=7/8"])}, >= 6/8 {pc(B_["retest_share"][">=6/8"])}, >= 5/8 {pc(B_["retest_share"][">=5/8"])}, >= 4/8 {pc(B_["retest_share"][">=4/8"])}.
+{pc(B_["mean_share_of_fresh_resamples_revealing_another_option"])} of fresh continuations from a kept site end by revealing another
+option (the switch rate); the sampling baseline's next line was judged to describe another option at {pc(B_["continuation_next_line_named_another_option_share_of_judged_cells"])}
+of kept cells.
+"""
 (ROOT / "evals/celeste_secret_choice/README.md").write_text(md, encoding="utf-8")
 print("wrote README", len(md))
