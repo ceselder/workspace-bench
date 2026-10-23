@@ -5,7 +5,7 @@ ELSE."**: Qwen3.6-27B answers it correctly in one word and never names the bridg
 work out on the way. The clue and the property come from unrelated domains, so the question's words
 and its answer should not co-occur anywhere the model could have memorised them, and the gate checks
 that the answer is out of reach once the clue is made generic. Does a lens name the bridge where
-the reply opens, or at the last prompt token? 111 items, read at the bank's **read sites** inside the
+the reply opens, or at the last prompt token? 204 items, read at the bank's **read sites** inside the
 captured render (`render: captured`, `input_ids` shipped per item; `wsbench plan` lists the
 positions). Built 2026-10-23 (`scripts/celeste_evals/silent_bridge/`).
 
@@ -31,23 +31,23 @@ Read sites: `reply_start` = the <|im_start|> that opens the reply (the deployed 
 `reply_start` the chat template writes `assistant\n<think>\n\n</think>\n\n` before the answer, so
 the continuation is the answer. If instead the continuation from `reply_start` is sampled freely
 (the model may write its own `<think>`, which it never does under its template), it opens a
-thinking block and says the bridge on most items: 32 free continuations of 256 tokens from `reply_start` never name the bridge on 0% of items; from `prompt_end`, where the template has already closed thinking, on 96% (per item: `diagnostics.free_sampling_256_mentions_of_32`).
+thinking block and says the bridge on most items: 32 free continuations of 256 tokens from `reply_start` never name the bridge on 0% of items; from `prompt_end`, where the template has already closed thinking, on 97% (per item: `diagnostics.free_sampling_256_mentions_of_32`).
 
 Funnel (candidates proposed by `claude-sonnet-5`, audited by an independent `claude-sonnet-5`
 call, then the Qwen3.6-27B gate):
 
 | stage | n |
 |---|---|
-| candidates proposed | 3577 |
-| answered right (greedy and >= 16/20 at T=0.7) | 1640 |
-| bridge recalled from its own clue (>= 8/10) | 2636 |
-| last hop recalled with the bridge named (>= 8/10) | 2590 |
-| missed with the clue made generic (greedy miss, <= 4/20) | 2202 |
-| bridge never named in 32 answers at T=1.0 | 3315 |
-| all five of the above | 457 |
-| and clue-answer co-occurrence rated low | 146 |
-| and no answer names the bridge by a derived form | 136 |
-| kept (<= 3 items per bridge, <= 6 per answer) | 111 |
+| candidates proposed | 7060 |
+| answered right (greedy and >= 16/20 at T=0.7) | 3046 |
+| bridge recalled from its own clue (>= 8/10) | 4977 |
+| last hop recalled with the bridge named (>= 8/10) | 4948 |
+| missed with the clue made generic (greedy miss, <= 4/20) | 4555 |
+| bridge never named in 32 answers at T=1.0 | 6464 |
+| all five of the above | 879 |
+| and clue-answer co-occurrence rated low | 288 |
+| and no answer names the bridge by a derived form | 271 |
+| kept (<= 3 items per bridge, <= 6 per answer) | 204 |
 
 ## Scoring
 
@@ -60,8 +60,8 @@ call, then the Qwen3.6-27B gate):
   (any site, any judged layer) is expressed.
 - Per-site rates (`extras.per_site_cell_rate`, `extras.per_site_item_rate`) are reported beside the
   headline. The two sites answer different questions: `reply_start` is where the bridge is held
-  (the J-lens has it in its top 20 there on 68% of items, at
-  `prompt_end` on 13%); `prompt_end` is where the activation has
+  (the J-lens has it in its top 20 there on 67% of items, at
+  `prompt_end` on 10%); `prompt_end` is where the activation has
   moved on to the answer, so a single-activation lens that names the bridge there is rare, and a
   lens that reads the prompt's activations can still do it.
 - An item whose every expected cell is judged negative fails; one with no positive and at least one
@@ -78,12 +78,12 @@ call, then the Qwen3.6-27B gate):
 
 | arm | items passed | via `reply_start` | via `prompt_end` |
 |---|---|---|---|
-| olens | 91% | 86% | 53% |
-| NLA | 91% | 84% | 46% |
-| KV olens | 89% | 82% | 55% |
-| steering vector | 89% | 88% | 61% |
-| J-lens | 63% | 62% | 11% |
-| prompt-only | 90% | 65% | 79% |
+| olens | 92% | 86% | 49% |
+| NLA | 90% | 85% | 41% |
+| KV olens | 90% | 83% | 59% |
+| steering vector | 90% | 88% | 56% |
+| J-lens | 65% | 64% | 7% |
+| prompt-only | 91% | 70% | 75% |
 | plain continuation | 2% | 2% | 0% |
 
 Arms, all reading the block-42 residual of Qwen3.6-27B: olens = single-activation oracle lens (8 samples, <= 160 tokens); KV olens = oracle lens that also reads the prompt's keys and values; NLA = natural-language autoencoder; steering vector = in-context steering-vector lens; J-lens = the Jacobian lens's top 10 tokens; prompt-only = stock Qwen3.6-27B shown the cut-off render as plain text (special tokens escaped) and asked what the model is thinking there; plain continuation = 8 continuations of up to 24 tokens from the read site. Two-hop bridges are inferable from the question, so the prompt-only floor is high (the bench's `multihop` floor is 0.91); it is lower at `reply_start` and higher at `prompt_end`, the reverse of the lenses.

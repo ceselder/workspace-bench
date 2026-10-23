@@ -141,9 +141,10 @@ def main() -> None:
         "enable_thinking=False, user message = the question + '\\n\\nANSWER IN ONE WORD, DO NOT "
         "SAY ANYTHING ELSE.'); `read_sites[*].pos` index it directly",
         "candidate_source": "claude-sonnet-5 proposals over 600 ordered (clue domain, property "
-        "domain) pairs (scripts/celeste_evals/silent_bridge/gen_novel.py), audited by an "
-        "independent claude-sonnet-5 call (audit_novel.py: generic-clue probe + co-occurrence "
-        "rating)",
+        "domain) pairs, two rounds (scripts/celeste_evals/silent_bridge/gen_novel.py; the second "
+        "told to avoid the 40 most-used bridges of the first, and its repeated questions or "
+        "repeated (bridge, answer) pairs dropped), audited by an independent claude-sonnet-5 "
+        "call (audit_novel.py: generic-clue probe + co-occurrence rating)",
         "gate": "Qwen3.6-27B, chat template, thinking off, every question with the all-caps "
         "one-word instruction: (i) correct: greedy hit AND >= 16/20 at T=0.7; (ii) recall: the "
         "bridge from its own clue and the last hop with the bridge named, greedy hit AND >= 8/10 "

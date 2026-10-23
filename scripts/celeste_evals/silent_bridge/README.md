@@ -11,7 +11,10 @@ SAY ANYTHING ELSE."), never naming the bridge entity it had to work out. Built 2
    each), the clue from one domain and the asked property from another, so that the question's
    words and its answer should never co-occur in text. Each item carries the bridge (+ aliases),
    the one-word answer (+ aliases), the bridge's own question, the last hop with the bridge named,
-   and three adversary probes from an independent call. 3,577 candidates.
+   and three adversary probes from an independent call. Two rounds: 3,577 candidates, then 3,561
+   more with the 40 most-used bridges of round 1 banned (`--prefix nov2 --avoid ...`); round-2
+   repeats of a round-1 question or (bridge, answer) pair are dropped before selection, and
+   round-1 items keep priority under the per-bridge cap.
 2. **Audit** (`audit_novel.py`, an independent call per 10 items): a *generic probe* (the question
    with the WHOLE clue replaced by "a certain <type>", property wording kept) and a co-occurrence
    rating (low / medium / high) of the clue's content and the answer in ordinary text.
@@ -43,7 +46,12 @@ env -u ANTHROPIC_API_KEY python3 gen_novel.py --out cands.json --workers 12
 env -u ANTHROPIC_API_KEY python3 audit_novel.py --cands cands.json --out cands_audited.json --workers 16
 python modal/gate.py --cands cands_audited.json --out gate.json                      # Modal, task vllm
 env -u ANTHROPIC_API_KEY python3 leak_forms.py --gate gate.json --out leak_forms.json
-python3 prep.py --gate gate.json --leaks leak_forms.json --outdir bank
+# round 2: the same three steps with --prefix nov2 --avoid "<the 40 most-used round-1 bridges>"
+#   -> cands2.json, gate2.json, leak_forms2.json; then
+python3 prep.py --gate gate.json --leaks leak_forms.json --outdir bank1          # round-1 selection
+python3 merge_rounds.py gate.json gate2.json bank1/selected.json leak_forms.json leak_forms2.json \
+    gate_all.json leak_all.json
+python3 prep.py --gate gate_all.json --leaks leak_all.json --outdir bank
 python modal/jlens_positions.py --pool bank/jlens_pool.json --format chat --last-k 80 \
     --layers 36,40,42,44,48 --out jlens.json                                       # Modal, task hf
 python modal/free_sampling.py --cands bank/free_cands.json --max-tokens 256 --seed 4 \

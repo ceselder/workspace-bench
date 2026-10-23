@@ -629,18 +629,18 @@
   "written": "2026-10-16T20:32:43+00:00"
  },
  "celeste_silent_bridge": {
-  "rate": 0.9009009009009009,
+  "rate": 0.9068627450980392,
   "saturated": false,
   "ci95": [
-   0.8468468468468469,
-   0.954954954954955
+   0.8676470588235294,
+   0.9411764705882353
   ],
   "metric": "pass_rate",
   "higher_is_better": true,
-  "n_items": 111,
-  "n_items_decided": 111,
+  "n_items": 204,
+  "n_items_decided": 204,
   "counts": {
-   "n_expected_cells": 222,
+   "n_expected_cells": 408,
    "n_missing_cells": 0,
    "n_unjudged_cells": 0,
    "n_empty_cells": 0
@@ -651,6 +651,6 @@
    42
   ],
   "complete": false,
-  "written": "2026-10-23T08:48:31+00:00"
+  "written": "2026-10-23T11:47:35+00:00"
  }
 }
