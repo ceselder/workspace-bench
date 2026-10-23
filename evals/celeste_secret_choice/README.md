@@ -261,11 +261,11 @@ some read site names the pick with a verified quote.
 | arm | pass rate (95% CI) | n | pick not favourite | pick = favourite | re-test-confirmed | cell hit | cannot tell | wrong when named | names favourite | uniform floor |
 |---|---|---|---|---|---|---|---|---|---|---|
 | NLA (after RL) | **20.9%** [14.2%, 27.6%] | 134 | 21.6% (n 51) | 20.5% (n 83) | 38.6% (n 57) | 17.4% | 73.9% | 33.3% | 50.0% | 5.2% |
-| olens (1 activation) | **11.3%** [6.8%, 17.3%] | 133 | 15.7% (n 51) | 8.5% (n 82) | 21.4% (n 56) | 9.4% | 82.5% | 46.4% | 35.7% | 3.5% |
-| KV olens | **20.9%** [14.2%, 27.6%] | 134 | 19.6% (n 51) | 21.7% (n 83) | 31.6% (n 57) | 19.3% | 73.9% | 26.2% | 59.5% | 5.1% |
+| O-lens (1 act.) | **11.3%** [6.8%, 17.3%] | 133 | 15.7% (n 51) | 8.5% (n 82) | 21.4% (n 56) | 9.4% | 82.5% | 46.4% | 35.7% | 3.5% |
+| KV O-lens | **20.9%** [14.2%, 27.6%] | 134 | 19.6% (n 51) | 21.7% (n 83) | 31.6% (n 57) | 19.3% | 73.9% | 26.2% | 59.5% | 5.1% |
 | J-lens L42 | **6.0%** [2.2%, 10.4%] | 134 | 2.0% (n 51) | 8.4% (n 83) | 12.3% (n 57) | 5.0% | 88.8% | 55.6% | 61.1% | 2.2% |
-| continuation baseline | **49.3%** [41.8%, 58.2%] | 134 | 58.8% (n 51) | 43.4% (n 83) | 63.2% (n 57) | 41.6% | 49.7% | 17.3% | 48.1% | 10.0% |
-| prompt-only baseline | **10.4%** [5.2%, 15.7%] | 134 | 11.8% (n 51) | 9.6% (n 83) | 17.5% (n 57) | 9.3% | 83.9% | 42.3% | 38.5% | 3.2% |
+| model's own next line | **49.3%** [41.8%, 58.2%] | 134 | 58.8% (n 51) | 43.4% (n 83) | 63.2% (n 57) | 41.6% | 49.7% | 17.3% | 48.1% | 10.0% |
+| prompt- only | **10.4%** [5.2%, 15.7%] | 134 | 11.8% (n 51) | 9.6% (n 83) | 17.5% (n 57) | 9.3% | 83.9% | 42.3% | 38.5% | 3.2% |
 
 **The sampling baseline wins.** The model's own next line names or unmistakably describes the pick (to the judge's standard) at 42% of
 the read cells and in 49% of items: the gate removed continuations that *name* the pick, not ones that describe it ("iron rails" for a
@@ -292,3 +292,16 @@ step 5) would keep roughly this subset and make the sampling floor 0 by construc
 27.6% of fresh continuations from a kept site end by revealing another
 option (the switch rate); the sampling baseline's next line was judged to describe another option at 8.7%
 of kept cells.
+
+**J-lens at exactly layer 42, 6-way forced choice** (the benchmark's wikitext J-lens applied to the residual stream at every vivid read
+site, 11934 sites of 3975 rollouts; top-1 among the six options' first tokens, chance 16.7%; the vocab rank of the
+revealed option's best spelling):
+
+| sites | n | L40 top-1 = pick | L42 top-1 = pick | L44 top-1 = pick | L42 top-1 = favourite | L42 median vocab rank of pick | L42 pick in vocab top-10 |
+|---|---|---|---|---|---|---|---|
+| all vivid sites (before any filter) | 11934 | 24.6% | **24.0%** | 23.8% | 24.3% | 47179 | 1.4% |
+| committed sites | 786 | 48.6% | **49.4%** | 45.7% | 33.6% | 11444 | 8.8% |
+| committed + leak-free sites | 724 | 49.6% | **50.0%** | 45.9% | 34.4% | 12558 | 9.5% |
+| kept (bank) sites | 161 | 30.4% | **26.7%** | 22.4% | 30.4% | 39461 | 5.0% |
+| kept sites, pick is not the favourite | 58 | 27.6% | **19.0%** | 20.7% | 29.3% | 70466 | 3.4% |
+| all sites, pick is not the favourite | 4937 | 18.9% | **19.5%** | 20.6% | 20.3% | 54697 | 1.0% |

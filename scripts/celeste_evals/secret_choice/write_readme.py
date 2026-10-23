@@ -334,5 +334,34 @@ step 5) would keep roughly this subset and make the sampling floor 0 by construc
 option (the switch rate); the sampling baseline's next line was judged to describe another option at {pc(B_["continuation_next_line_named_another_option_share_of_judged_cells"])}
 of kept cells.
 """
+    if (REPORT / "secret_choice_jlens42.json").exists():
+        jl = json.loads((REPORT / "secret_choice_jlens42.json").read_text())
+        names = {
+            "all_sites": "all vivid sites (before any filter)",
+            "committed_7of8_base_le_0.5": "committed sites",
+            "committed_no_text_leak_no_cont_leak": "committed + leak-free sites",
+            "kept_bank_sites": "kept (bank) sites",
+            "kept_pick_not_favourite": "kept sites, pick is not the favourite",
+            "all_pick_not_favourite": "all sites, pick is not the favourite",
+        }
+        jrows = []
+        for k, lab in names.items():
+            st = jl["by_subset"][k]
+            if not st.get("42"):
+                continue
+            jrows.append(
+                f"| {lab} | {st['42']['n']} | {pc(st['40']['top1_is_revealed'])} | **{pc(st['42']['top1_is_revealed'])}** | "
+                f"{pc(st['44']['top1_is_revealed'])} | {pc(st['42']['top1_is_favourite'])} | {st['42']['median_vocab_rank_revealed']:.0f} | "
+                f"{pc(st['42']['share_revealed_in_vocab_top10'])} |"
+            )
+        md += f"""
+**J-lens at exactly layer 42, 6-way forced choice** (the benchmark's wikitext J-lens applied to the residual stream at every vivid read
+site, {jl["n_sites"]} sites of {jl["n_rollouts"]} rollouts; top-1 among the six options' first tokens, chance 16.7%; the vocab rank of the
+revealed option's best spelling):
+
+| sites | n | L40 top-1 = pick | L42 top-1 = pick | L44 top-1 = pick | L42 top-1 = favourite | L42 median vocab rank of pick | L42 pick in vocab top-10 |
+|---|---|---|---|---|---|---|---|
+{chr(10).join(jrows)}
+"""
 (ROOT / "evals/celeste_secret_choice/README.md").write_text(md, encoding="utf-8")
 print("wrote README", len(md))
