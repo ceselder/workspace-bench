@@ -14,7 +14,14 @@ ap.add_argument("--cands", required=True)
 ap.add_argument("--out", required=True)
 ap.add_argument("--model", default="Qwen/Qwen3.6-27B")
 ap.add_argument("--seed", type=int, default=0)
+ap.add_argument(
+    "--bridge-suffix",
+    default=None,
+    help="suffix for the bridge-recall probe (multi-word bridges cannot be answered in one word)",
+)
 a = ap.parse_args()
+if a.bridge_suffix:
+    a.bridge_suffix = a.bridge_suffix.replace("\\n", "\n")  # shell-passed "\n" -> newline
 SUFFIX = "\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE."
 
 
@@ -40,9 +47,9 @@ def main():
     mp = local_model_dir(a.model, resolve_local(a.model))
     tok = AutoTokenizer.from_pretrained(mp)
 
-    def render(q):
+    def render(q, suffix=SUFFIX):
         ids = tok.apply_chat_template(
-            [{"role": "user", "content": q.strip() + SUFFIX}],
+            [{"role": "user", "content": q.strip() + suffix}],
             tokenize=True,
             add_generation_prompt=True,
             enable_thinking=False,
@@ -84,7 +91,14 @@ def main():
         ]
         if c.get("generic_probe"):
             jobs.append((i, "generic_probe", c["generic_probe"], "s"))
-    prompts = [{"prompt_token_ids": render(t)} for _, _, t, _ in jobs]
+    prompts = [
+        {
+            "prompt_token_ids": render(
+                t, a.bridge_suffix if (key == "bridge_question" and a.bridge_suffix) else SUFFIX
+            )
+        }
+        for _, key, t, _ in jobs
+    ]
     greedy_params = SamplingParams(temperature=0.0, max_tokens=12)
     sample_params = {
         "q": SamplingParams(n=20, temperature=0.7, max_tokens=12, seed=a.seed),

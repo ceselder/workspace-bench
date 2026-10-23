@@ -652,5 +652,30 @@
   ],
   "complete": false,
   "written": "2026-10-23T11:47:35+00:00"
+ },
+ "celeste_jlens_intermediates": {
+  "rate": 0.40939597315436244,
+  "saturated": false,
+  "ci95": [
+   0.3288590604026846,
+   0.4899328859060403
+  ],
+  "metric": "pass_rate",
+  "higher_is_better": true,
+  "n_items": 149,
+  "n_items_decided": 149,
+  "counts": {
+   "n_expected_cells": 149,
+   "n_missing_cells": 0,
+   "n_unjudged_cells": 0,
+   "n_empty_cells": 0
+  },
+  "judge_model": "claude-sonnet-5",
+  "instrument": "bank-2026-10-10",
+  "layers_judged": [
+   42
+  ],
+  "complete": false,
+  "written": "2026-10-23T15:12:33+00:00"
  }
 }

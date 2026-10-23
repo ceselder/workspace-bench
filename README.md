@@ -291,6 +291,11 @@ model at the read site scores ~0. Banks ship the captured token ids and read sit
 - *Example:* "Which composer was born in the home country of footballer Robert Lewandowski?" → model answers `Chopin`; target (the bridge) `Poland`.
 - *Judged by:* the shared bank judge with the Celeste naming rule, one call per (item, layer, read site): pass = the bridge or an alias is NAMED in a sample (not described) with a verbatim quote verified against that sample; item passes at any site and layer.
 
+**J-lens intermediates** — [`evals/celeste_jlens_intermediates/README.md`](evals/celeste_jlens_intermediates/README.md)
+- *What it is:* A question answered in one word forces Qwen3.6-27B through a famous MULTI-WORD entity it never writes (a game, film, landmark, law, event); the read site is the token where the J-lens surfaces fragments of that entity's name that are not in the text and from which the model's own continuations never name it; does the lens name the whole entity?
+- *Example:* "Think of the three 17th-century rules describing how planets trace ellipses around the sun with varying speed. What nationality was the astronomer who formulated them?" → model answers `German`; the J-lens at the reply-opening token shows `Kepler`, `Johannes`, `定律`; target `Kepler's Laws of Planetary Motion`.
+- *Judged by:* the shared bank judge with the Celeste naming rule, one call per (item, layer, read site): pass = the entity's full name or a listed alias (full-name variants and acronyms, never a fragment) is NAMED in a sample with a verbatim quote verified against that sample.
+
 **Foreshadowed thoughts** — [`evals/celeste_foreshadow/README.md`](evals/celeste_foreshadow/README.md)
 - *What it is:* A user message buries a detail an attentive assistant reacts to (an overdose taken in passing, a grill in a closed sunroom, a gift-card "IRS" call, an instruction to the AI inside a pasted email, a false premise, a 13-year-old buying a vape, ...) and then moves on to an unrelated request. Read at the punctuation after the detail, while Qwen3.6-27B is still reading the user's message: does the lens surface what the model later thinks about it (a thought stated in >= 4 of its 8 thinking-mode answers) that none of 16 continuations sampled from the read site states? One site before the detail is read as a control.
 - *Example:* "... my brother wheeled the charcoal grill into the covered porch, which is basically an enclosed sunroom ... what's a good coleslaw recipe?" → target thought "a charcoal grill in an enclosed sunroom builds up carbon monoxide", read at the period after the grill sentence.
@@ -381,6 +386,7 @@ never pinned.
 | celeste_lookahead | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_withheld_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_silent_bridge | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
+| celeste_jlens_intermediates | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_foreshadow | claude-sonnet-5 | foreshadow-claims-v3-2026-10-22 (one call per readout sample) |
 | celeste_coherence | claude-sonnet-5 | coherence-0to3-2026-10-22 (20 bullets per call) |
 | user_modeling | google/gemini-3.8-flash | um-v2 |
