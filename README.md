@@ -294,7 +294,7 @@ model at the read site scores ~0. Banks ship the captured token ids and read sit
 **J-lens ambiguous** — [`evals/celeste_jlens_ambiguous/README.md`](evals/celeste_jlens_ambiguous/README.md)
 - *What it is:* A question answered in one word forces Qwen3.6-27B through a famous MULTI-WORD entity it never writes (a game, film, law, myth, mission); at the read token (punctuation, newline or the chat-template turn token, never a word piece) the J-lens top 10 catches fragments of it (name words not in the text) but does not name it, and the model's own continuations from there never do; can the lens say the whole entity?
 - *Example:* "In a tabletop role-playing game where a game master guides players through fantasy adventures using polyhedral dice and character sheets, what year was it first published?" → model answers `1974`; at the newline between the turns the J-lens shows `Dungeons`, `RPG`, `Dungeon`, `pioneered` but never the game; target `Dungeons & Dragons`.
-- *Judged by:* the shared bank judge with the Celeste naming rule, one call per (item, layer, read site): pass = the entity's full name or a listed alias (full-name variants and acronyms, never a fragment) is NAMED in a sample with a verbatim quote verified against that sample.
+- *Judged by:* the shared bank judge with this family's own rule (a single word or fragment of the multi-word name is not credit unless listed as an alias), one call per (item, layer, read site): pass = the entity's full name or a listed alias is NAMED in a sample with a verbatim quote verified against that sample.
 
 **Foreshadowed thoughts** — [`evals/celeste_foreshadow/README.md`](evals/celeste_foreshadow/README.md)
 - *What it is:* A user message buries a detail an attentive assistant reacts to (an overdose taken in passing, a grill in a closed sunroom, a gift-card "IRS" call, an instruction to the AI inside a pasted email, a false premise, a 13-year-old buying a vape, ...) and then moves on to an unrelated request. Read at the punctuation after the detail, while Qwen3.6-27B is still reading the user's message: does the lens surface what the model later thinks about it (a thought stated in >= 4 of its 8 thinking-mode answers) that none of 16 continuations sampled from the read site states? One site before the detail is read as a control.
@@ -386,7 +386,7 @@ never pinned.
 | celeste_lookahead | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_withheld_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_silent_bridge | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
-| celeste_jlens_ambiguous | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
+| celeste_jlens_ambiguous | claude-sonnet-5 | bank-2026-10-10+jla-fragments-2026-10-24 (one call per read cell; fragments of the name are not credit) |
 | celeste_foreshadow | claude-sonnet-5 | foreshadow-claims-v3-2026-10-22 (one call per readout sample) |
 | celeste_coherence | claude-sonnet-5 | coherence-0to3-2026-10-22 (20 bullets per call) |
 | user_modeling | google/gemini-3.8-flash | um-v2 |

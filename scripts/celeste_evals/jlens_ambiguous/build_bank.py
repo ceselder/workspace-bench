@@ -181,7 +181,8 @@ def main() -> None:
         "20 holds a rare, one-token NAME word of the bridge that is not in the text so far (zipf < "
         "4.5, no inflection of a text word), at least one found word is in its top 10, the found "
         "words are judged specific to the bridge rather than the text's topic (claude-sonnet-5), "
-        "and its top-10 readout there is judged by this family's judge NOT to name the bridge; 16 "
+        "and its top-10 readout there is judged NOT to name the bridge by this family's judge "
+        "(fragment rule) in two independent calls; 16 "
         "free continuations of 48 tokens from it never name the bridge; a punctuation/newline site "
         "is preferred over a turn token",
         "review": "an independent claude-opus-5 review keeps an item only if the question singles "

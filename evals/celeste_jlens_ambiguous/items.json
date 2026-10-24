@@ -5,7 +5,7 @@
  "render": "captured: `input_ids` is the exact Qwen3.6-27B token sequence (chat template, enable_thinking=False, user message = the question + '\\n\\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.'); `read_sites[*].pos` index it directly",
  "candidate_source": "claude-sonnet-5 proposals over 18 categories x 10 fact domains, in rounds (item ids mtb-, mtb2-, ...) each banning the most-used bridges of the earlier ones (scripts/celeste_evals/jlens_ambiguous/gen_mt.py): a question whose answer needs a famous MULTI-WORD entity it never names, plus that entity's signature words",
  "gate": "Qwen3.6-27B, chat, thinking off, all-caps one-word instruction: correct (greedy hit and >= 16/20 at T=0.7); the bridge recalled from its clue (asked 'ANSWER WITH THE NAME ONLY') and the last hop with the bridge named (>= 8/10 each); 32 answers at T=1.0 never name the bridge; no answer names it by a derived form (claude-sonnet-5 check). The generic-clue shortcut probe is recorded (gate.generic_probe_reached) but not required: the read site's J-lens evidence is what shows the model holds the bridge",
- "read": "`jlens_site` = a BOUNDARY token (punctuation or newline, else the chat-template turn token <|im_start|> / <|im_end|>; never a word or mid-word piece; `site_class`) where the J-lens (neuronpedia n=1000, layer 42) catches the bridge without naming it: its top 20 holds a rare, one-token NAME word of the bridge that is not in the text so far (zipf < 4.5, no inflection of a text word), at least one found word is in its top 10, the found words are judged specific to the bridge rather than the text's topic (claude-sonnet-5), and its top-10 readout there is judged by this family's judge NOT to name the bridge; 16 free continuations of 48 tokens from it never name the bridge; a punctuation/newline site is preferred over a turn token",
+ "read": "`jlens_site` = a BOUNDARY token (punctuation or newline, else the chat-template turn token <|im_start|> / <|im_end|>; never a word or mid-word piece; `site_class`) where the J-lens (neuronpedia n=1000, layer 42) catches the bridge without naming it: its top 20 holds a rare, one-token NAME word of the bridge that is not in the text so far (zipf < 4.5, no inflection of a text word), at least one found word is in its top 10, the found words are judged specific to the bridge rather than the text's topic (claude-sonnet-5), and its top-10 readout there is judged NOT to name the bridge by this family's judge (fragment rule) in two independent calls; 16 free continuations of 48 tokens from it never name the bridge; a punctuation/newline site is preferred over a turn token",
  "review": "an independent claude-opus-5 review keeps an item only if the question singles out exactly the bridge, never names it, the model's one-word answer is correct, and the bridge is the natural thing to think of (not, e.g., the person behind a law); it also adds missing full-name aliases",
  "funnel": {
   "candidates": 5609,
@@ -14,12 +14,12 @@
   "jlens_site": 247,
   "site_specific": 210,
   "fragment_in_top10": 210,
-  "jlens_does_not_name_it": 128,
-  "no_derived_form_leak": 128,
-  "review_keep": 128,
-  "kept": 112
+  "jlens_does_not_name_it": 175,
+  "no_derived_form_leak": 175,
+  "review_keep": 175,
+  "kept": 153
  },
- "n_items": 112,
+ "n_items": 153,
  "items": [
   {
    "name": "mtb-0018",
@@ -165,6 +165,156 @@
     {
      "label": "jlens_punctuation",
      "pos": 58,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb-0077",
+   "prompt": "In a tale where a girl falls down a rabbit hole into an absurd kingdom ruled by a short-tempered queen, what lawn sport does she play using flamingos and hedgehogs?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In a tale where a girl falls down a rabbit hole into an absurd kingdom ruled by a short-tempered queen, what lawn sport does she play using flamingos and hedgehogs?",
+   "target": "Alice's Adventures in Wonderland",
+   "aliases": [
+    "Alice in Wonderland"
+   ],
+   "name_parts": [
+    "adventures",
+    "alice",
+    "alice's",
+    "wonderland"
+   ],
+   "answer": "Croquet",
+   "variant": "novels and book series",
+   "topic": "novels and book series",
+   "gate": {
+    "greedy_answer": "Croquet",
+    "correct_t07": "20/20",
+    "bridge_question": "Name the multi-word classic tale where a girl falls down a rabbit hole into an absurd kingdom ruled by a short-tempered queen.",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In Alice's Adventures in Wonderland, what lawn sport does the girl play using flamingos and hedgehogs?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In a certain tale, what lawn sport does she play using flamingos and hedgehogs?",
+    "generic_probe_hits_t07": "8/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Croquet",
+     "Croquet",
+     "Croquet",
+     "Croquet"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "alice",
+     "adventures",
+     "wonderland"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "alice": 3,
+     "adventures": 16,
+     "wonderland": 0
+    },
+    "top10_l42": [
+     " Wonderland",
+     " surreal",
+     " fantast",
+     "Alice",
+     "梦幻",
+     " whims",
+     " Alice",
+     "奇幻",
+     " fantasy",
+     " halluc"
+    ],
+    "specific_why": "‘alice’, ‘wonderland’ are title words",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 64,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    264,
+    22557,
+    1332,
+    264,
+    3616,
+    16563,
+    1441,
+    264,
+    37442,
+    13772,
+    1083,
+    449,
+    30538,
+    24284,
+    20632,
+    539,
+    264,
+    2716,
+    12,
+    844,
+    41353,
+    27000,
+    11,
+    1092,
+    34832,
+    10239,
+    1503,
+    1292,
+    1432,
+    1608,
+    81702,
+    428,
+    321,
+    40289,
+    71,
+    25466,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 57,
      "horizon": 48
     }
    ]
@@ -728,6 +878,131 @@
    ]
   },
   {
+   "name": "mtb-0231",
+   "prompt": "Think of the mission that first put humans on the Moon. In what year did it take place?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the mission that first put humans on the Moon. In what year did it take place?",
+   "target": "Apollo 11",
+   "aliases": [
+    "Apollo Eleven"
+   ],
+   "name_parts": [
+    "apollo"
+   ],
+   "answer": "1969",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "1969",
+    "correct_t07": "20/20",
+    "bridge_question": "Which mission first put humans on the Moon?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what year did Apollo 11 take place?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain space mission. In what year did it take place?",
+    "generic_probe_hits_t07": "15/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "low",
+    "answers_sampled_t1": [
+     "1969",
+     "1969",
+     "1969",
+     "1969"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "apollo"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "apollo": 9
+    },
+    "top10_l42": [
+     " astronauts",
+     " astronaut",
+     " NASA",
+     "宇航",
+     "NASA",
+     "月球",
+     "着陆",
+     "神舟",
+     "航天",
+     "Apollo"
+    ],
+    "specific_why": "‘apollo’ names the mission directly",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 46,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    8684,
+    421,
+    1118,
+    2113,
+    12313,
+    383,
+    279,
+    16820,
+    13,
+    733,
+    1092,
+    1007,
+    1467,
+    424,
+    1831,
+    1925,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 39,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb-0235",
    "prompt": "Think of the peace agreement that officially ended World War I and imposed harsh terms on Germany. In what year was it signed?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "Think of the peace agreement that officially ended World War I and imposed harsh terms on Germany. In what year was it signed?",
@@ -854,6 +1129,138 @@
     {
      "label": "jlens_turn_token",
      "pos": 44,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb-0239",
+   "prompt": "A brilliant London detective solves crimes using cold deductive logic and shares an apartment with his loyal physician friend. What instrument does he famously play?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A brilliant London detective solves crimes using cold deductive logic and shares an apartment with his loyal physician friend. What instrument does he famously play?",
+   "target": "Sherlock Holmes",
+   "aliases": [],
+   "name_parts": [
+    "holmes",
+    "sherlock"
+   ],
+   "answer": "Violin",
+   "variant": "fictional characters",
+   "topic": "fictional characters",
+   "gate": {
+    "greedy_answer": "Violin",
+    "correct_t07": "20/20",
+    "bridge_question": "Which pipe-smoking detective lives at 221B and solves mysteries through deduction with his companion Watson?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What instrument does Sherlock Holmes famously play?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain fictional detective solves crimes using cold deductive logic. What instrument does he famously play?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "Violin",
+     "Violin",
+     "Violin",
+     "Violin"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n\n",
+    "name_words": [
+     "sherlock"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "sherlock": 6
+    },
+    "top10_l42": [
+     "한다",
+     "합니다",
+     "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+     "ครับ",
+     "\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+     "입니다",
+     " Sherlock",
+     "른다",
+     " crossword",
+     "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    ],
+    "specific_why": "‘sherlock’ names the detective directly",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 54,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    19149,
+    6924,
+    42691,
+    65199,
+    16170,
+    1608,
+    8981,
+    35591,
+    520,
+    11870,
+    321,
+    12863,
+    449,
+    12772,
+    440,
+    780,
+    27905,
+    26397,
+    4099,
+    13,
+    3437,
+    13736,
+    1503,
+    551,
+    48501,
+    1432,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 53,
      "horizon": 48
     }
    ]
@@ -1709,6 +2116,159 @@
    ]
   },
   {
+   "name": "mtb-0369",
+   "prompt": "In a tabletop role-playing game where players create characters, roll multi-sided dice, and battle monsters under a storytelling referee, what cold element does an arctic-dwelling scaled flying beast breathe as its signature attack?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In a tabletop role-playing game where players create characters, roll multi-sided dice, and battle monsters under a storytelling referee, what cold element does an arctic-dwelling scaled flying beast breathe as its signature attack?",
+   "target": "Dungeons & Dragons",
+   "aliases": [
+    "Dungeons and Dragons"
+   ],
+   "name_parts": [
+    "dragon",
+    "dragons",
+    "dungeon",
+    "dungeons"
+   ],
+   "answer": "Ice",
+   "variant": "board and card games",
+   "topic": "board and card games",
+   "gate": {
+    "greedy_answer": "Ice",
+    "correct_t07": "20/20",
+    "bridge_question": "Which tabletop role-playing game has players create characters, roll multi-sided dice, and battle monsters guided by a storytelling referee?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In Dungeons & Dragons, what cold element does an arctic-dwelling scaled flying beast breathe as its signature attack?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In a certain tabletop role-playing game, what cold element does an arctic-dwelling scaled flying beast breathe as its signature attack?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "cold",
+     "Ice",
+     "Ice",
+     "Ice"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n\n",
+    "name_words": [
+     "dungeons",
+     "dungeon"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "dungeons": 0,
+     "dungeon": 4
+    },
+    "top10_l42": [
+     " Dungeons",
+     "한다",
+     " Minecraft",
+     " Fortnite",
+     " Dungeon",
+     "합니다",
+     " Frozen",
+     " Fallout",
+     " Evil",
+     " Vapor"
+    ],
+    "specific_why": "dungeon(s) part of Dungeons & Dragons name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 69,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    264,
+    85426,
+    3364,
+    69636,
+    1746,
+    1332,
+    4078,
+    1791,
+    5587,
+    11,
+    6299,
+    7072,
+    48085,
+    21434,
+    11,
+    321,
+    7796,
+    24966,
+    1172,
+    264,
+    46234,
+    52381,
+    11,
+    1092,
+    8981,
+    2315,
+    1503,
+    449,
+    771,
+    24742,
+    1676,
+    86,
+    6095,
+    29689,
+    15828,
+    30117,
+    35097,
+    430,
+    1141,
+    11618,
+    3250,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 68,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb-0373",
    "prompt": "A billionaire opens an island attraction where cloned dinosaurs escape containment, with a raptor pack relentlessly hunting the guests. Who directed this film?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "A billionaire opens an island attraction where cloned dinosaurs escape containment, with a raptor pack relentlessly hunting the guests. Who directed this film?",
@@ -1963,6 +2523,149 @@
     {
      "label": "jlens_turn_token",
      "pos": 43,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb-0461",
+   "prompt": "A Spanish football club whose home ground is Camp Nou and whose motto translates as 'more than a club' sings that motto in which language?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A Spanish football club whose home ground is Camp Nou and whose motto translates as 'more than a club' sings that motto in which language?",
+   "target": "FC Barcelona",
+   "aliases": [
+    "Futbol Club Barcelona",
+    "Barcelona FC"
+   ],
+   "name_parts": [
+    "barca",
+    "barcelona",
+    "barça"
+   ],
+   "answer": "Catalan",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "Catalan",
+    "correct_t07": "20/20",
+    "bridge_question": "Which Spanish football club plays at Camp Nou and uses the motto 'more than a club'?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which language is FC Barcelona's motto 'more than a club' written?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain football club sings its motto in which language?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Catalan",
+     "Catalan",
+     "Catalan",
+     "Catalan"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "barcelona",
+     "barça"
+    ],
+    "signature_words": [
+     "messi",
+     "catalonia"
+    ],
+    "ranks_l42": {
+     "barcelona": 0,
+     "barça": 15,
+     "messi": 8,
+     "catalonia": 4
+    },
+    "top10_l42": [
+     " Barcelona",
+     "Barcelona",
+     " Catalan",
+     " Catalunya",
+     " Catalonia",
+     "巴塞罗那",
+     " Cataluña",
+     " برشلونة",
+     " Messi",
+     " barcelona"
+    ],
+    "specific_why": "barcelona/messi uniquely identify FC Barcelona",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 54,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    14712,
+    8693,
+    6135,
+    6483,
+    2046,
+    4751,
+    369,
+    9232,
+    57186,
+    321,
+    6483,
+    60227,
+    45351,
+    430,
+    359,
+    6183,
+    1056,
+    264,
+    6135,
+    6,
+    64973,
+    421,
+    60227,
+    303,
+    864,
+    3992,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 47,
      "horizon": 48
     }
    ]
@@ -2647,6 +3350,146 @@
    ]
   },
   {
+   "name": "mtb-0568",
+   "prompt": "Name the oldest tennis tournament in the world, played each summer on grass courts in southwest London. What fruit is traditionally eaten there with cream, in one word?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Name the oldest tennis tournament in the world, played each summer on grass courts in southwest London. What fruit is traditionally eaten there with cream, in one word?",
+   "target": "Wimbledon Championships",
+   "aliases": [
+    "The Championships",
+    "The Championships, Wimbledon",
+    "Wimbledon Tennis Championships"
+   ],
+   "name_parts": [
+    "championships",
+    "wimbledon"
+   ],
+   "answer": "Strawberries",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "Strawberry",
+    "correct_t07": "20/20",
+    "bridge_question": "Which is the oldest tennis tournament in the world, played on grass courts in southwest London each summer?",
+    "bridge_recall_t07": "9/10",
+    "hop2_question": "What fruit is traditionally eaten with cream at Wimbledon?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Name a certain annual event. What fruit is traditionally eaten there with cream, in one word?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "strawberry",
+     "Strawberry",
+     "Strawberry",
+     "strawberries"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n\n",
+    "name_words": [
+     "wimbledon"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "wimbledon": 6
+    },
+    "top10_l42": [
+     "한다",
+     "른다",
+     "\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+     "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+     "คำว่า",
+     "합니다",
+     " Wimbledon",
+     " acesta",
+     " jawaban",
+     "\n\n\n\n\n\n\n\n\n\n\n\n"
+    ],
+    "specific_why": "wimbledon is the tournament's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 58,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    657,
+    279,
+    22778,
+    30382,
+    15654,
+    303,
+    279,
+    1814,
+    11,
+    6141,
+    1754,
+    7094,
+    383,
+    15879,
+    18259,
+    303,
+    51206,
+    6924,
+    13,
+    3437,
+    13383,
+    369,
+    34075,
+    33416,
+    1017,
+    440,
+    12281,
+    11,
+    303,
+    799,
+    3299,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 57,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb-0671",
    "prompt": "Think of the 3D twisty puzzle invented by a Hungarian architect in 1974, with six faces that must be aligned by color. What material is this puzzle primarily made of?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "Think of the 3D twisty puzzle invented by a Hungarian architect in 1974, with six faces that must be aligned by color. What material is this puzzle primarily made of?",
@@ -2791,6 +3634,557 @@
     {
      "label": "jlens_turn_token",
      "pos": 59,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb-0686",
+   "prompt": "A billionaire orphan who witnessed his parents' murder in an alley becomes a caped vigilante guarding a crime-ridden city. What was his father's first name?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A billionaire orphan who witnessed his parents' murder in an alley becomes a caped vigilante guarding a crime-ridden city. What was his father's first name?",
+   "target": "Bruce Wayne",
+   "aliases": [
+    "The Dark Knight",
+    "The Batman"
+   ],
+   "name_parts": [
+    "batman",
+    "bruce",
+    "wayne"
+   ],
+   "answer": "Thomas",
+   "variant": "fictional characters",
+   "topic": "fictional characters",
+   "gate": {
+    "greedy_answer": "Thomas",
+    "correct_t07": "20/20",
+    "bridge_question": "Which billionaire orphan becomes a caped vigilante after his parents are murdered in an alley?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What was Bruce Wayne's father's first name?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain fictional character. What was his father's first name?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "low",
+    "answers_sampled_t1": [
+     "Thomas",
+     "Thomas",
+     "Thomas",
+     "Thomas"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n\n",
+    "name_words": [
+     "batman"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "batman": 4
+    },
+    "top10_l42": [
+     " prénom",
+     " FirstName",
+     "FirstName",
+     " LastName",
+     " Batman",
+     "firstName",
+     "Father",
+     "father",
+     " Giovanni",
+     "$name"
+    ],
+    "specific_why": "batman uniquely identifies Bruce Wayne",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 59,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    45133,
+    12381,
+    852,
+    30008,
+    780,
+    6357,
+    6,
+    9608,
+    303,
+    449,
+    51172,
+    8772,
+    264,
+    1994,
+    290,
+    36157,
+    4783,
+    76762,
+    264,
+    9486,
+    3667,
+    2761,
+    3177,
+    13,
+    3437,
+    557,
+    780,
+    6764,
+    579,
+    1118,
+    803,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 58,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb-0688",
+   "prompt": "A brilliant detective residing at a famous London address solves crimes through keen deduction alongside his loyal doctor companion. What is his landlady's surname?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A brilliant detective residing at a famous London address solves crimes through keen deduction alongside his loyal doctor companion. What is his landlady's surname?",
+   "target": "Sherlock Holmes",
+   "aliases": [],
+   "name_parts": [
+    "holmes",
+    "sherlock"
+   ],
+   "answer": "Hudson",
+   "variant": "fictional characters",
+   "topic": "fictional characters",
+   "gate": {
+    "greedy_answer": "Hudson",
+    "correct_t07": "20/20",
+    "bridge_question": "Which detective lives at a famous London address and solves crimes with his doctor companion?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What is the surname of Sherlock Holmes's landlady?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain fictional character. What is his landlady's surname?",
+    "generic_probe_hits_t07": "6/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "low",
+    "answers_sampled_t1": [
+     "Hudson",
+     "Hudson",
+     "Hudson",
+     "Hudson"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n\n",
+    "name_words": [
+     "sherlock"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "sherlock": 6
+    },
+    "top10_l42": [
+     " фами",
+     "姓氏",
+     " apellido",
+     " LastName",
+     "surname",
+     " Dickens",
+     " Sherlock",
+     "姓",
+     "Apellido",
+     " Baron"
+    ],
+    "specific_why": "Directly names Sherlock Holmes",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 55,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    19149,
+    42691,
+    64171,
+    506,
+    264,
+    10919,
+    6924,
+    2534,
+    65199,
+    16170,
+    1472,
+    26029,
+    37557,
+    15784,
+    780,
+    27905,
+    10352,
+    21070,
+    13,
+    3437,
+    369,
+    780,
+    4128,
+    75,
+    7363,
+    579,
+    38435,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 54,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb-0689",
+   "prompt": "A young farm boy from a desert planet destroys a massive battle station and later duels his own father with a lightsaber. What was his father's name before turning to the dark side?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A young farm boy from a desert planet destroys a massive battle station and later duels his own father with a lightsaber. What was his father's name before turning to the dark side?",
+   "target": "Luke Skywalker",
+   "aliases": [],
+   "name_parts": [
+    "luke",
+    "skywalker"
+   ],
+   "answer": "Anakin",
+   "variant": "fictional characters",
+   "topic": "fictional characters",
+   "gate": {
+    "greedy_answer": "Anakin",
+    "correct_t07": "20/20",
+    "bridge_question": "Which young hero from a desert planet destroys a battle station and later duels his father?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What was Luke Skywalker's father's name before he turned to the dark side?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain fictional character. What was his father's name before turning to the dark side?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Anakin",
+     "Anakin",
+     "Anakin",
+     "Anakin"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "skywalker"
+    ],
+    "signature_words": [
+     "jedi"
+    ],
+    "ranks_l42": {
+     "skywalker": 0,
+     "jedi": 7
+    },
+    "top10_l42": [
+     " Skywalker",
+     "主角",
+     "father",
+     "父亲",
+     "出身",
+     " protagonist",
+     "小明",
+     " Jedi",
+     " Darth",
+     "爸爸"
+    ],
+    "specific_why": "Names Skywalker, part of title",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 64,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    3777,
+    8520,
+    7914,
+    494,
+    264,
+    22865,
+    11247,
+    57716,
+    264,
+    10632,
+    7796,
+    7803,
+    321,
+    2843,
+    3717,
+    1943,
+    780,
+    1765,
+    6764,
+    440,
+    264,
+    12346,
+    41716,
+    13,
+    3437,
+    557,
+    780,
+    6764,
+    579,
+    803,
+    1518,
+    12680,
+    310,
+    279,
+    6121,
+    3008,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 57,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb-0708",
+   "prompt": "A white marble mausoleum built by a grieving Mughal emperor for his beloved wife is found in which country?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A white marble mausoleum built by a grieving Mughal emperor for his beloved wife is found in which country?",
+   "target": "Taj Mahal",
+   "aliases": [],
+   "name_parts": [
+    "mahal",
+    "taj"
+   ],
+   "answer": "India",
+   "variant": "landmarks and buildings",
+   "topic": "landmarks and buildings",
+   "gate": {
+    "greedy_answer": "India",
+    "correct_t07": "20/20",
+    "bridge_question": "What is the name of the white marble mausoleum built by a Mughal emperor for his wife?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which country is the Taj Mahal located?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain mausoleum is found in which country?",
+    "generic_probe_hits_t07": "1/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "India",
+     "India",
+     "India",
+     "India"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "taj"
+    ],
+    "signature_words": [
+     "shah"
+    ],
+    "ranks_l42": {
+     "taj": 8,
+     "shah": 2
+    },
+    "top10_l42": [
+     " Delhi",
+     " Lahore",
+     " Shah",
+     "印度的",
+     "印度",
+     " Bollywood",
+     "故宫",
+     "India",
+     " Taj",
+     " Hyderabad"
+    ],
+    "specific_why": "Taj is part of monument's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 51,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    4022,
+    39926,
+    7256,
+    350,
+    1219,
+    367,
+    5617,
+    539,
+    264,
+    87620,
+    380,
+    7208,
+    278,
+    54884,
+    364,
+    780,
+    26541,
+    7168,
+    369,
+    1669,
+    303,
+    864,
+    3046,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 44,
      "horizon": 48
     }
    ]
@@ -3896,6 +5290,279 @@
    ]
   },
   {
+   "name": "mtb2-0018",
+   "prompt": "A secretive American hate group formed after the Civil War, notorious for cross burnings and night rallies, traditionally dresses its members in what color robes?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A secretive American hate group formed after the Civil War, notorious for cross burnings and night rallies, traditionally dresses its members in what color robes?",
+   "target": "Ku Klux Klan",
+   "aliases": [
+    "KKK"
+   ],
+   "name_parts": [
+    "klan",
+    "klux"
+   ],
+   "answer": "white",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "White",
+    "correct_t07": "20/20",
+    "bridge_question": "Which secretive American hate group, formed after the Civil War, is known for cross burnings and night rallies?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What color are the robes traditionally worn by the Ku Klux Klan?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain hate group traditionally dresses its members in what color robes?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "White",
+     "White",
+     "White",
+     "White"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "klan"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "klan": 0
+    },
+    "top10_l42": [
+     " Klan",
+     " supremacist",
+     "成员",
+     "Organization",
+     " Mitglieder",
+     " racist",
+     " extremist",
+     "组织",
+     "Membership",
+     "organizations"
+    ],
+    "specific_why": "‘Klan’ directly names the Ku Klux Klan",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 55,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    80134,
+    3567,
+    11865,
+    1809,
+    13717,
+    1238,
+    279,
+    15917,
+    4843,
+    11,
+    41561,
+    364,
+    5144,
+    7974,
+    793,
+    321,
+    3603,
+    54438,
+    11,
+    34075,
+    35544,
+    1141,
+    3492,
+    303,
+    1092,
+    1829,
+    67793,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 48,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb2-0117",
+   "prompt": "A famous Italian campanile is renowned for its unintended tilt rather than standing upright. What light-colored material is it primarily built from?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A famous Italian campanile is renowned for its unintended tilt rather than standing upright. What light-colored material is it primarily built from?",
+   "target": "Leaning Tower of Pisa",
+   "aliases": [
+    "Tower of Pisa",
+    "Torre di Pisa",
+    "Torre pendente di Pisa"
+   ],
+   "name_parts": [
+    "leaning",
+    "pisa",
+    "tower"
+   ],
+   "answer": "marble",
+   "variant": "landmarks and buildings",
+   "topic": "landmarks and buildings",
+   "gate": {
+    "greedy_answer": "Marble",
+    "correct_t07": "18/20",
+    "bridge_question": "What famous Italian campanile is renowned for tilting rather than standing upright?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What material is the Leaning Tower of Pisa primarily built from?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain tower is renowned for its tilt. What light-colored material is it primarily built from?",
+    "generic_probe_hits_t07": "18/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "Marble",
+     "Marble",
+     "Marble",
+     "Marble"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "Pisa"
+    ],
+    "signature_words": [
+     "cathedral"
+    ],
+    "ranks_l42": {
+     "Pisa": 0,
+     "cathedral": 9
+    },
+    "top10_l42": [
+     " Pisa",
+     "Tower",
+     "钟楼",
+     "著名的",
+     "这座",
+     "一座",
+     "是一座",
+     "矗",
+     "tower",
+     " cathedral"
+    ],
+    "specific_why": "‘Pisa’ uniquely names the tower's city",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 52,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    10919,
+    14382,
+    163364,
+    448,
+    369,
+    34756,
+    364,
+    1141,
+    69886,
+    35003,
+    4598,
+    1056,
+    10932,
+    46966,
+    13,
+    3437,
+    3000,
+    55787,
+    3558,
+    369,
+    424,
+    15048,
+    5617,
+    494,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 45,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb2-0197",
    "prompt": "A nymph cursed to only repeat others' words falls for a youth who instead loves his own reflection and wastes away; her name was later given to a smart speaker sold by which company?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "A nymph cursed to only repeat others' words falls for a youth who instead loves his own reflection and wastes away; her name was later given to a smart speaker sold by which company?",
@@ -4870,6 +6537,298 @@
     {
      "label": "jlens_turn_token",
      "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb2-0410",
+   "prompt": "Think of the archaeologist adventurer with a fedora and whip who searches for ancient relics while dodging snakes and traps. In which country does he find the Ark of the Covenant?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the archaeologist adventurer with a fedora and whip who searches for ancient relics while dodging snakes and traps. In which country does he find the Ark of the Covenant?",
+   "target": "Indiana Jones",
+   "aliases": [
+    "Dr. Henry Jones Jr.",
+    "Henry Jones Jr."
+   ],
+   "name_parts": [
+    "indiana",
+    "jones"
+   ],
+   "answer": "Egypt",
+   "variant": "fictional characters",
+   "topic": "fictional characters",
+   "gate": {
+    "greedy_answer": "Egypt",
+    "correct_t07": "20/20",
+    "bridge_question": "Which fedora-wearing archaeologist with a whip searches for ancient relics and dodges snakes and traps?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which country does Indiana Jones find the Ark of the Covenant?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain adventurer. In which country does he find the Ark of the Covenant?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Egypt",
+     "Egypt",
+     "Egypt",
+     "Egypt"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "indiana"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "indiana": 9
+    },
+    "top10_l42": [
+     " Adventures",
+     "探险",
+     " Adventure",
+     "考古",
+     " adventures",
+     " adventure",
+     " Abenteuer",
+     "Adventure",
+     "冒险",
+     "Indiana"
+    ],
+    "specific_why": "Names Indiana directly",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 62,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    36850,
+    15680,
+    95704,
+    440,
+    264,
+    21620,
+    6020,
+    321,
+    48391,
+    852,
+    25628,
+    364,
+    13437,
+    95015,
+    1345,
+    30071,
+    3072,
+    54211,
+    321,
+    43082,
+    13,
+    733,
+    864,
+    3046,
+    1503,
+    551,
+    1423,
+    279,
+    21339,
+    314,
+    279,
+    60820,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 55,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb2-0411",
+   "prompt": "Think of the outlaw who hides in a forest, robs from the rich to give to the poor, and leads a band of merry men. In which country does he carry out his exploits?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the outlaw who hides in a forest, robs from the rich to give to the poor, and leads a band of merry men. In which country does he carry out his exploits?",
+   "target": "Robin Hood",
+   "aliases": [
+    "Robin of Loxley",
+    "Robin of Locksley"
+   ],
+   "name_parts": [
+    "hood",
+    "robin"
+   ],
+   "answer": "England",
+   "variant": "fictional characters",
+   "topic": "fictional characters",
+   "gate": {
+    "greedy_answer": "England",
+    "correct_t07": "20/20",
+    "bridge_question": "Which outlaw hides in a forest, robs from the rich to give to the poor, and leads a band of merry men?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which country does Robin Hood carry out his exploits?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain outlaw. In which country does he carry out his exploits?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "England",
+     "England",
+     "England",
+     "England"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "robin"
+    ],
+    "signature_words": [
+     "nottingham"
+    ],
+    "ranks_l42": {
+     "robin": 1,
+     "nottingham": 2
+    },
+    "top10_l42": [
+     "传说",
+     " Robin",
+     " Nottingham",
+     "Robin",
+     "梁山",
+     "legend",
+     " knights",
+     "传说中的",
+     "传说中",
+     " legend"
+    ],
+    "specific_why": "Names Robin and Nottingham, unique to legend",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 65,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    61847,
+    852,
+    55671,
+    303,
+    264,
+    13245,
+    11,
+    897,
+    1234,
+    494,
+    279,
+    8807,
+    310,
+    2873,
+    310,
+    279,
+    7604,
+    11,
+    321,
+    11177,
+    264,
+    6835,
+    314,
+    89260,
+    2859,
+    13,
+    733,
+    864,
+    3046,
+    1503,
+    551,
+    6564,
+    680,
+    780,
+    60286,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 58,
      "horizon": 48
     }
    ]
@@ -6121,6 +8080,162 @@
    ]
   },
   {
+   "name": "mtb2-0792",
+   "prompt": "A religious denomination founded by Joseph Smith in 1830 and headquartered in Salt Lake City advises members to follow strict health guidelines; what hot beverage made from roasted beans are its members typically told to avoid?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A religious denomination founded by Joseph Smith in 1830 and headquartered in Salt Lake City advises members to follow strict health guidelines; what hot beverage made from roasted beans are its members typically told to avoid?",
+   "target": "The Church of Jesus Christ of Latter-day Saints",
+   "aliases": [
+    "LDS Church",
+    "Mormon Church",
+    "Latter-day Saints",
+    "LDS",
+    "Church of Jesus Christ of Latter-day Saints"
+   ],
+   "name_parts": [
+    "christ",
+    "church",
+    "jesus",
+    "latter-day",
+    "mormon",
+    "saints"
+   ],
+   "answer": "coffee",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "Coffee",
+    "correct_t07": "20/20",
+    "bridge_question": "What religious denomination, founded by Joseph Smith in 1830 and headquartered in Salt Lake City, follows strict health guidelines about beverages?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What hot beverage are members of the Church of Jesus Christ of Latter-day Saints advised to avoid?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain religious denomination advises members to follow strict health guidelines; what hot beverage made from roasted beans are its members typically told to avoid?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "coffee",
+     "Coffee",
+     "Coffee",
+     "Coffee"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_end|>",
+    "name_words": [
+     "mormon"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "mormon": 0
+    },
+    "top10_l42": [
+     " Mormon",
+     "所属",
+     "信徒",
+     " Christianity",
+     "宗教",
+     "指的是",
+     " Protestant",
+     " Scientology",
+     "信仰",
+     "byterian"
+    ],
+    "specific_why": "Lens shows 'Mormon', part of name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 68,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    10072,
+    91657,
+    17508,
+    539,
+    14674,
+    8809,
+    303,
+    220,
+    16,
+    23,
+    18,
+    15,
+    321,
+    77431,
+    303,
+    26173,
+    11342,
+    4170,
+    66640,
+    3492,
+    310,
+    1732,
+    7077,
+    2730,
+    16981,
+    26,
+    1092,
+    3882,
+    40944,
+    1801,
+    494,
+    51764,
+    26034,
+    513,
+    1141,
+    3492,
+    10813,
+    3125,
+    310,
+    5471,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 59,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb2-0806",
    "prompt": "A grand 19th-century American history painting shows a general standing in a small boat as troops ferry across an icy river at night, flag held aloft. What year did this event occur?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "A grand 19th-century American history painting shows a general standing in a small boat as troops ferry across an icy river at night, flag held aloft. What year did this event occur?",
@@ -6398,6 +8513,282 @@
    ]
   },
   {
+   "name": "mtb2-0831",
+   "prompt": "A painting shows a figure with an agonized expression standing on a bridge under a swirling orange sky; what is the nationality of the artist who created it?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A painting shows a figure with an agonized expression standing on a bridge under a swirling orange sky; what is the nationality of the artist who created it?",
+   "target": "The Scream",
+   "aliases": [
+    "Der Schrei der Natur"
+   ],
+   "name_parts": [
+    "scream"
+   ],
+   "answer": "Norwegian",
+   "variant": "paintings and artworks",
+   "topic": "paintings and artworks",
+   "gate": {
+    "greedy_answer": "Norwegian",
+    "correct_t07": "20/20",
+    "bridge_question": "Which famous painting depicts a figure with an agonized expression on a bridge beneath a swirling orange sky?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What is the nationality of the artist who painted The Scream?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain painting; what is the nationality of the artist who created it?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Norwegian",
+     "Norwegian",
+     "Norwegian",
+     "Spanish"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "scream"
+    ],
+    "signature_words": [
+     "angst"
+    ],
+    "ranks_l42": {
+     "scream": 7,
+     "angst": 15
+    },
+    "top10_l42": [
+     " melanch",
+     " anguish",
+     "忧郁",
+     " Anxiety",
+     " anxiety",
+     " surreal",
+     " Nietzsche",
+     " scream",
+     " трево",
+     "xiety"
+    ],
+    "specific_why": "Lens shows 'scream', the title word",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 57,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    18255,
+    4774,
+    264,
+    6851,
+    440,
+    449,
+    54774,
+    1452,
+    7258,
+    10932,
+    383,
+    264,
+    13759,
+    1172,
+    264,
+    89093,
+    18016,
+    12515,
+    26,
+    1092,
+    369,
+    279,
+    56284,
+    314,
+    279,
+    9752,
+    852,
+    3354,
+    424,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 50,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb2-0882",
+   "prompt": "In the game where quirky vegetation battles endless waves of comedic undead trying to reach a suburban house, what flower produces the primary in-game currency?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In the game where quirky vegetation battles endless waves of comedic undead trying to reach a suburban house, what flower produces the primary in-game currency?",
+   "target": "Plants vs Zombies",
+   "aliases": [
+    "Plants vs. Zombies"
+   ],
+   "name_parts": [
+    "plants",
+    "zombies"
+   ],
+   "answer": "Sunflower",
+   "variant": "video games",
+   "topic": "video games",
+   "gate": {
+    "greedy_answer": "Sunflower",
+    "correct_t07": "19/20",
+    "bridge_question": "What video game has quirky vegetation defending a suburban house against waves of comedic undead?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In Plants vs Zombies, what flower produces the primary in-game currency?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In a certain video game, what flower produces the primary in-game currency?",
+    "generic_probe_hits_t07": "18/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Sunflower",
+     "Sunflower",
+     "Sunflower",
+     "Sunflower"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "zombies"
+    ],
+    "signature_words": [
+     "zombie"
+    ],
+    "ranks_l42": {
+     "zombies": 0,
+     "zombie": 2
+    },
+    "top10_l42": [
+     " zombies",
+     "僵尸",
+     " zombie",
+     " Zombies",
+     " Zombie",
+     " Plants",
+     " undead",
+     "game",
+     "植物",
+     "-themed"
+    ],
+    "specific_why": "Lens shows 'Zombies' and 'Plants', title words",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 54,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    279,
+    1746,
+    1332,
+    64864,
+    51930,
+    23779,
+    24860,
+    16382,
+    314,
+    91112,
+    66764,
+    4313,
+    310,
+    5372,
+    264,
+    43710,
+    3626,
+    11,
+    1092,
+    21655,
+    18082,
+    279,
+    5839,
+    303,
+    18807,
+    11085,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 47,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb2-0906",
    "prompt": "A public research university in the San Francisco Bay Area, famous for the 1960s free speech protests, has which animal as its mascot?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "A public research university in the San Francisco Bay Area, famous for the 1960s free speech protests, has which animal as its mascot?",
@@ -6531,6 +8922,148 @@
     {
      "label": "jlens_punctuation",
      "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb2-0953",
+   "prompt": "Nicknamed 'America's Team', this NFL franchise plays under a giant star logo and is owned by Jerry Jones. In which U.S. state do they play their home games?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Nicknamed 'America's Team', this NFL franchise plays under a giant star logo and is owned by Jerry Jones. In which U.S. state do they play their home games?",
+   "target": "Dallas Cowboys",
+   "aliases": [],
+   "name_parts": [
+    "cowboys",
+    "dallas"
+   ],
+   "answer": "Texas",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "Texas",
+    "correct_t07": "20/20",
+    "bridge_question": "Which NFL franchise, nicknamed 'America's Team' and owned by Jerry Jones, plays under a giant star logo?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which U.S. state do the Dallas Cowboys play their home games?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain NFL franchise. In which U.S. state do they play their home games?",
+    "generic_probe_hits_t07": "10/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Texas",
+     "Texas",
+     "Texas",
+     "Texas"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "cowboys",
+     "dallas"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "cowboys": 4,
+     "dallas": 0
+    },
+    "top10_l42": [
+     "Dallas",
+     "Texas",
+     " Dallas",
+     " Texans",
+     " Cowboys",
+     " Texas",
+     "Houston",
+     " NFL",
+     "Tex",
+     "德州"
+    ],
+    "specific_why": "Contains 'Dallas' and 'Cowboys', team's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 62,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    29367,
+    29259,
+    359,
+    30014,
+    579,
+    7659,
+    504,
+    411,
+    12226,
+    18451,
+    10765,
+    1172,
+    264,
+    14120,
+    6561,
+    12070,
+    321,
+    369,
+    12567,
+    539,
+    27769,
+    11596,
+    13,
+    733,
+    864,
+    533,
+    782,
+    13,
+    1528,
+    635,
+    781,
+    1432,
+    836,
+    2046,
+    3739,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 55,
      "horizon": 48
     }
    ]
@@ -7265,6 +9798,130 @@
    ]
   },
   {
+   "name": "mtb3-0065",
+   "prompt": "How many mirrors line the renowned gallery inside the opulent French royal residence outside Paris?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "How many mirrors line the renowned gallery inside the opulent French royal residence outside Paris?",
+   "target": "Palace of Versailles",
+   "aliases": [
+    "Château de Versailles",
+    "Versailles Palace"
+   ],
+   "name_parts": [
+    "palace",
+    "versailles"
+   ],
+   "answer": "357",
+   "variant": "landmarks and buildings",
+   "topic": "landmarks and buildings",
+   "gate": {
+    "greedy_answer": "357",
+    "correct_t07": "20/20",
+    "bridge_question": "Which opulent French royal residence outside Paris features a renowned hall of mirrors?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many mirrors line the Hall of Mirrors inside the Palace of Versailles?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "How many mirrors line a certain renowned gallery?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "357",
+     "357",
+     "357",
+     "357"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "versailles"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "versailles": 2
+    },
+    "top10_l42": [
+     "故宫",
+     "大厅",
+     " Versailles",
+     "著名的",
+     "镀",
+     "宫殿",
+     "巴黎",
+     "展厅",
+     "房间",
+     "华丽的"
+    ],
+    "specific_why": "Versailles directly names the bridge",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 43,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    4199,
+    1599,
+    39147,
+    1500,
+    279,
+    34756,
+    17507,
+    4613,
+    279,
+    1139,
+    27550,
+    8323,
+    28280,
+    21015,
+    4732,
+    11751,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 36,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb3-0168",
    "prompt": "Think of the Cold War operation where Allied aircraft flew around-the-clock to supply a blockaded European city for nearly a year. What was the surname of the US president who ordered it?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "Think of the Cold War operation where Allied aircraft flew around-the-clock to supply a blockaded European city for nearly a year. What was the surname of the US president who ordered it?",
@@ -7550,164 +10207,6 @@
    ]
   },
   {
-   "name": "mtb3-0200",
-   "prompt": "A tabletop role-playing game co-created by Gary Gygax and Dave Arneson, first played in the early 1970s, uses a distinctive polyhedral die for combat resolution. How many sides does that die have?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
-   "question": "A tabletop role-playing game co-created by Gary Gygax and Dave Arneson, first played in the early 1970s, uses a distinctive polyhedral die for combat resolution. How many sides does that die have?",
-   "target": "Dungeons & Dragons",
-   "aliases": [
-    "Dungeons and Dragons"
-   ],
-   "name_parts": [
-    "dragons",
-    "dungeons"
-   ],
-   "answer": "20",
-   "variant": "board and card games",
-   "topic": "board and card games",
-   "gate": {
-    "greedy_answer": "20",
-    "correct_t07": "20/20",
-    "bridge_question": "Which tabletop role-playing game was co-created by Gary Gygax and Dave Arneson in the early 1970s?",
-    "bridge_recall_t07": "10/10",
-    "hop2_question": "How many sides does Dungeons & Dragons' signature die have?",
-    "hop2_recall_t07": "10/10",
-    "generic_probe": "A certain tabletop role-playing game uses a distinctive polyhedral die for combat resolution. How many sides does that die have?",
-    "generic_probe_hits_t07": "20/20",
-    "generic_probe_reached": true,
-    "cooccurrence": "high",
-    "answers_sampled_t1": [
-     "20",
-     "20",
-     "20",
-     "20"
-    ],
-    "answer_bridge_mentions_t1": "0/32"
-   },
-   "jlens_evidence": {
-    "token": "\n",
-    "name_words": [
-     "dungeons"
-    ],
-    "signature_words": [
-     "dice"
-    ],
-    "ranks_l42": {
-     "dungeons": 4,
-     "dice": 0
-    },
-    "top10_l42": [
-     " dice",
-     " hex",
-     "hex",
-     " HEX",
-     " Dungeons",
-     "dice",
-     "六角",
-     " hexadecimal",
-     "Hex",
-     " RPG"
-    ],
-    "specific_why": "Dungeons is part of game's name",
-    "readout_names_target": false
-   },
-   "leak_check": {
-    "k": 16,
-    "path": "free continuation from the site through the chat special tokens, T=1.0",
-    "sites": {
-     "jlens_punctuation": {
-      "max_new_tokens": 48,
-      "n_leaks": 0
-     }
-    }
-   },
-   "n_prompt_tokens": 75,
-   "input_ids": [
-    248045,
-    846,
-    198,
-    32,
-    85426,
-    3364,
-    69636,
-    1746,
-    1027,
-    68550,
-    539,
-    23081,
-    469,
-    47133,
-    686,
-    321,
-    19622,
-    1587,
-    4717,
-    263,
-    11,
-    1118,
-    6141,
-    303,
-    279,
-    3988,
-    220,
-    16,
-    24,
-    22,
-    15,
-    82,
-    11,
-    5533,
-    264,
-    33692,
-    9569,
-    71,
-    34346,
-    2659,
-    364,
-    12247,
-    10616,
-    13,
-    2500,
-    1599,
-    10744,
-    1503,
-    421,
-    2659,
-    599,
-    30,
-    271,
-    11355,
-    38050,
-    1897,
-    23287,
-    35668,
-    11,
-    9043,
-    4045,
-    81708,
-    4001,
-    54768,
-    51148,
-    13,
-    248046,
-    198,
-    248045,
-    74455,
-    198,
-    248068,
-    271,
-    248069,
-    271
-   ],
-   "site_class": "punctuation",
-   "read_sites": [
-    {
-     "label": "jlens_punctuation",
-     "pos": 67,
-     "horizon": 48
-    }
-   ]
-  },
-  {
    "name": "mtb3-0217",
    "prompt": "Thinking of the set of rules describing how planets trace ellipses around the sun and sweep equal areas in equal times, how many such rules are there in total?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "Thinking of the set of rules describing how planets trace ellipses around the sun and sweep equal areas in equal times, how many such rules are there in total?",
@@ -7847,6 +10346,144 @@
     {
      "label": "jlens_turn_token",
      "pos": 52,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb3-0265",
+   "prompt": "A rhythm video game franchise lets players use a plastic controller shaped like a musical instrument to simulate rock songs—how many colored fret buttons does its controller have?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A rhythm video game franchise lets players use a plastic controller shaped like a musical instrument to simulate rock songs—how many colored fret buttons does its controller have?",
+   "target": "Guitar Hero",
+   "aliases": [
+    "Guitar Hero III",
+    "Guitar Hero series"
+   ],
+   "name_parts": [
+    "guitar",
+    "hero"
+   ],
+   "answer": "five",
+   "variant": "companies and products",
+   "topic": "companies and products",
+   "gate": {
+    "greedy_answer": "5",
+    "correct_t07": "20/20",
+    "bridge_question": "Which rhythm video game franchise uses a plastic controller shaped like a musical instrument to simulate rock songs?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many colored fret buttons are on Guitar Hero's controller neck?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain rhythm video game franchise lets players use a plastic controller shaped like a musical instrument to simulate rock songs—how many colored fret buttons does its controller have?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "5",
+     "5",
+     " five",
+     "5"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "guitar"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "guitar": 0
+    },
+    "top10_l42": [
+     " Guitar",
+     "吉他",
+     " guitar",
+     " Wii",
+     "uitar",
+     " guitars",
+     " gitar",
+     " gameplay",
+     " guitarra",
+     " multiplayer"
+    ],
+    "specific_why": "Guitar is part of game's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 57,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    35091,
+    2678,
+    1746,
+    18451,
+    14908,
+    4078,
+    958,
+    264,
+    11840,
+    6259,
+    25432,
+    1040,
+    264,
+    17264,
+    13736,
+    310,
+    36213,
+    6730,
+    11338,
+    2218,
+    4993,
+    1599,
+    26321,
+    51282,
+    12068,
+    1503,
+    1141,
+    6259,
+    599,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 50,
      "horizon": 48
     }
    ]
@@ -8136,6 +10773,148 @@
    ]
   },
   {
+   "name": "mtb3-0459",
+   "prompt": "An NBA franchise that plays home games at the world's most famous arena on Manhattan's west side retired which jersey number for its dominant 1990s center?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "An NBA franchise that plays home games at the world's most famous arena on Manhattan's west side retired which jersey number for its dominant 1990s center?",
+   "target": "New York Knicks",
+   "aliases": [
+    "NY Knicks",
+    "New York Knickerbockers"
+   ],
+   "name_parts": [
+    "knicks",
+    "new",
+    "york"
+   ],
+   "answer": "33",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "33",
+    "correct_t07": "20/20",
+    "bridge_question": "Which NBA franchise plays its home games at the world's most famous arena on Manhattan's west side?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "Which jersey number did the New York Knicks retire for their dominant 1990s center?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "An NBA franchise that plays home games at a certain arena retired which jersey number for its dominant 1990s center?",
+    "generic_probe_hits_t07": "19/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "33",
+     "33",
+     "33",
+     "33"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "knicks"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "knicks": 0
+    },
+    "top10_l42": [
+     " Knicks",
+     " NBA",
+     "纽约",
+     " Basketball",
+     " NYC",
+     " Lakers",
+     " 뉴욕",
+     " Brooklyn",
+     " Bronx",
+     " NYPD"
+    ],
+    "specific_why": "'Knicks' is part of team's name.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 60,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    2014,
+    16879,
+    18451,
+    421,
+    10765,
+    2046,
+    3739,
+    506,
+    279,
+    1814,
+    579,
+    1379,
+    10919,
+    24112,
+    383,
+    27848,
+    579,
+    9422,
+    3008,
+    20922,
+    864,
+    34917,
+    1324,
+    364,
+    1141,
+    23681,
+    220,
+    16,
+    24,
+    24,
+    15,
+    82,
+    3990,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 53,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb3-0487",
    "prompt": "The world's oldest international football tournament, contested by South American nations since 1916, has a name taken directly from a certain language. Which language is that?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "The world's oldest international football tournament, contested by South American nations since 1916, has a name taken directly from a certain language. Which language is that?",
@@ -8280,6 +11059,145 @@
     {
      "label": "jlens_turn_token",
      "pos": 54,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb3-0494",
+   "prompt": "Thinking of the franchise where a teenage pilot operates a towering humanoid war machine amid a conflict between Earth and space colonies, what is the first name of its creator?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Thinking of the franchise where a teenage pilot operates a towering humanoid war machine amid a conflict between Earth and space colonies, what is the first name of its creator?",
+   "target": "Mobile Suit Gundam",
+   "aliases": [
+    "Gundam franchise"
+   ],
+   "name_parts": [
+    "gundam",
+    "mobile",
+    "suit"
+   ],
+   "answer": "Yoshiyuki",
+   "variant": "anime and comics",
+   "topic": "anime and comics",
+   "gate": {
+    "greedy_answer": "Yoshiyuki",
+    "correct_t07": "19/20",
+    "bridge_question": "Which franchise features a teenage pilot operating a towering humanoid war machine during a conflict between Earth and space colonies?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What is the first name of the creator of Mobile Suit Gundam?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Thinking of a certain franchise, what is the first name of its creator?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Yoshikazu",
+     "Yoshiyuki",
+     "Yoshiyuki",
+     "Yoshiyuki"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "gundam"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "gundam": 0
+    },
+    "top10_l42": [
+     " Gundam",
+     " anime",
+     " Capcom",
+     "creator",
+     " manga",
+     " Anime",
+     "Creator",
+     "Anime",
+     " creator",
+     " Hiro"
+    ],
+    "specific_why": "'Gundam' is part of franchise name.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 58,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    90700,
+    314,
+    279,
+    18451,
+    1332,
+    264,
+    32067,
+    17181,
+    25224,
+    264,
+    83702,
+    88933,
+    3980,
+    5484,
+    21914,
+    264,
+    11712,
+    1881,
+    8964,
+    321,
+    3433,
+    46328,
+    11,
+    1092,
+    369,
+    279,
+    1118,
+    803,
+    314,
+    1141,
+    19312,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 50,
      "horizon": 48
     }
    ]
@@ -9267,6 +12185,438 @@
    ]
   },
   {
+   "name": "mtb3-0979",
+   "prompt": "A football club famous for dominating its domestic league for over a decade, counting Beckenbauer and Müller among its legends, and playing at the Allianz Arena, represents which country?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A football club famous for dominating its domestic league for over a decade, counting Beckenbauer and Müller among its legends, and playing at the Allianz Arena, represents which country?",
+   "target": "FC Bayern Munich",
+   "aliases": [
+    "Bayern Munich",
+    "FC Bayern München",
+    "Bayern München",
+    "FC Bayern"
+   ],
+   "name_parts": [
+    "bayern",
+    "munich"
+   ],
+   "answer": "Germany",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "Germany",
+    "correct_t07": "20/20",
+    "bridge_question": "Which football club, famous for domestic dominance, legends like Beckenbauer and Müller, and the Allianz Arena, is being described?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "Which country does FC Bayern Munich represent?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain football club represents which country?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Germany",
+     "Germany",
+     "Germany",
+     "Germany"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "bayern",
+     "munich"
+    ],
+    "signature_words": [
+     "bundesliga"
+    ],
+    "ranks_l42": {
+     "bayern": 0,
+     "munich": 2,
+     "bundesliga": 1
+    },
+    "top10_l42": [
+     " Bayern",
+     " Bundesliga",
+     " Munich",
+     "拜仁",
+     " München",
+     "慕尼黑",
+     "BMW",
+     " Borussia",
+     " Bav",
+     " BMW"
+    ],
+    "specific_why": "Bayern, Munich, Bundesliga name the club",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 61,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    8693,
+    6135,
+    10919,
+    364,
+    64998,
+    1141,
+    12363,
+    10418,
+    364,
+    888,
+    264,
+    12828,
+    11,
+    24217,
+    27778,
+    268,
+    221991,
+    321,
+    95497,
+    4082,
+    1141,
+    46716,
+    11,
+    321,
+    5442,
+    506,
+    279,
+    227035,
+    26179,
+    11,
+    10551,
+    864,
+    3046,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 54,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb3-0996",
+   "prompt": "Thinking of the ancient ruse in which Greek soldiers hid inside a giant structure to infiltrate a besieged city, what material was it made of?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Thinking of the ancient ruse in which Greek soldiers hid inside a giant structure to infiltrate a besieged city, what material was it made of?",
+   "target": "Trojan Horse",
+   "aliases": [
+    "Wooden Horse of Troy"
+   ],
+   "name_parts": [
+    "horse",
+    "trojan"
+   ],
+   "answer": "wood",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "Wood",
+    "correct_t07": "20/20",
+    "bridge_question": "What was the name of the hollow structure Greek soldiers hid inside to infiltrate Troy?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What material was the Trojan Horse made of?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Thinking of a certain ancient ruse, what material was it made of?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Wood",
+     "Wood",
+     "Wood",
+     "Wood"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "trojan"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "trojan": 0
+    },
+    "top10_l42": [
+     " Trojan",
+     "典故",
+     "寓言",
+     "著名的",
+     "传说中的",
+     "的故事",
+     "传说",
+     "伪装",
+     " deception",
+     " hoax"
+    ],
+    "specific_why": "Trojan directly names the Trojan Horse",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 56,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    90700,
+    314,
+    279,
+    13437,
+    427,
+    784,
+    303,
+    864,
+    17326,
+    14426,
+    29787,
+    4613,
+    264,
+    14120,
+    5759,
+    310,
+    40861,
+    344,
+    264,
+    88468,
+    3438,
+    3177,
+    11,
+    1092,
+    3558,
+    557,
+    424,
+    1801,
+    314,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb3-1084",
+   "prompt": "Think of the NBA franchise known for its 'Showtime' era, purple-and-gold colors, and stars like Magic Johnson, Kobe Bryant, and LeBron James. How many championships has it won?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the NBA franchise known for its 'Showtime' era, purple-and-gold colors, and stars like Magic Johnson, Kobe Bryant, and LeBron James. How many championships has it won?",
+   "target": "Los Angeles Lakers",
+   "aliases": [
+    "LA Lakers"
+   ],
+   "name_parts": [
+    "angeles",
+    "lakers",
+    "los"
+   ],
+   "answer": "17",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "17",
+    "correct_t07": "19/20",
+    "bridge_question": "Which NBA franchise is known for its 'Showtime' era, purple-and-gold colors, and stars like Magic Johnson, Kobe Bryant, and LeBron James?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many NBA championships has the Los Angeles Lakers won?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain basketball team. How many championships has it won?",
+    "generic_probe_hits_t07": "18/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "17",
+     "17",
+     "17",
+     "17"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "lakers"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "lakers": 0
+    },
+    "top10_l42": [
+     " Lakers",
+     "洛杉矶",
+     " championships",
+     " postseason",
+     "次数",
+     "五次",
+     "赢",
+     " playoffs",
+     "四次",
+     " Championships"
+    ],
+    "specific_why": "Lakers is the franchise's actual name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 66,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    16879,
+    18451,
+    3750,
+    364,
+    1141,
+    359,
+    7565,
+    1619,
+    6,
+    11057,
+    11,
+    24142,
+    9485,
+    2294,
+    787,
+    7736,
+    11,
+    321,
+    9467,
+    1040,
+    15030,
+    11023,
+    11,
+    66965,
+    38280,
+    11,
+    321,
+    55318,
+    7555,
+    13,
+    2500,
+    1599,
+    56229,
+    682,
+    424,
+    2677,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 58,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb3-1101",
    "prompt": "What beverage reportedly helped pay the laborers who built the last surviving wonder of the ancient world near Cairo?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "What beverage reportedly helped pay the laborers who built the last surviving wonder of the ancient world near Cairo?",
@@ -9541,6 +12891,141 @@
     {
      "label": "jlens_turn_token",
      "pos": 52,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb4-0016",
+   "prompt": "An American secret society formed after the Civil War, known for hooded night rallies and cross burnings, traditionally wore robes of what color?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "An American secret society formed after the Civil War, known for hooded night rallies and cross burnings, traditionally wore robes of what color?",
+   "target": "Ku Klux Klan",
+   "aliases": [
+    "KKK",
+    "The Klan"
+   ],
+   "name_parts": [
+    "klan",
+    "klux"
+   ],
+   "answer": "white",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "White",
+    "correct_t07": "20/20",
+    "bridge_question": "Which American secret society, founded after the Civil War, is known for hooded rallies and burning crosses?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What color are the traditional robes worn by the Ku Klux Klan?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain organization wore robes of what color?",
+    "generic_probe_hits_t07": "2/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "low",
+    "answers_sampled_t1": [
+     "White",
+     "White",
+     "White",
+     "White"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "klan"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "klan": 0
+    },
+    "top10_l42": [
+     " Klan",
+     " supremacist",
+     " Confederate",
+     " racist",
+     " Mitglieder",
+     " racism",
+     " extremist",
+     "acist",
+     " persecution",
+     "白人"
+    ],
+    "specific_why": "'Klan' directly names Ku Klux Klan",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 54,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    2014,
+    3567,
+    6038,
+    7975,
+    13717,
+    1238,
+    279,
+    15917,
+    4843,
+    11,
+    3750,
+    364,
+    26338,
+    290,
+    3603,
+    54438,
+    321,
+    5144,
+    7974,
+    793,
+    11,
+    34075,
+    26676,
+    67793,
+    314,
+    1092,
+    1829,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 47,
      "horizon": 48
     }
    ]
@@ -10101,6 +13586,145 @@
     {
      "label": "jlens_turn_token",
      "pos": 51,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb4-0231",
+   "prompt": "In what year did the wide-body jet airliner nicknamed 'Queen of the Skies', famous for its distinctive upper-deck hump, first take flight?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In what year did the wide-body jet airliner nicknamed 'Queen of the Skies', famous for its distinctive upper-deck hump, first take flight?",
+   "target": "Boeing 747",
+   "aliases": [
+    "747",
+    "Jumbo Jet"
+   ],
+   "name_parts": [
+    "747",
+    "boeing"
+   ],
+   "answer": "1969",
+   "variant": "companies and products",
+   "topic": "companies and products",
+   "gate": {
+    "greedy_answer": "1969",
+    "correct_t07": "20/20",
+    "bridge_question": "Which jet airliner, nicknamed 'Queen of the Skies', is known for its distinctive upper-deck hump?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what year did the Boeing 747 first take flight?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In what year did a certain aircraft first take flight?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "1969",
+     "1969",
+     "1969",
+     "1969"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "boeing"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "boeing": 6
+    },
+    "top10_l42": [
+     "prototype",
+     "原型",
+     "波音",
+     "首次",
+     "一九",
+     "Prototype",
+     " Boeing",
+     "飞机",
+     "DATE",
+     "试验"
+    ],
+    "specific_why": "'Boeing' names Boeing 747",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 58,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    1092,
+    1007,
+    1467,
+    279,
+    6669,
+    9072,
+    16106,
+    79806,
+    10140,
+    86067,
+    359,
+    50258,
+    314,
+    279,
+    4664,
+    536,
+    504,
+    10919,
+    364,
+    1141,
+    33692,
+    8156,
+    6596,
+    372,
+    304,
+    1456,
+    11,
+    1118,
+    1831,
+    10650,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 50,
      "horizon": 48
     }
    ]
@@ -10943,108 +14567,117 @@
    ]
   },
   {
-   "name": "mtb4-0515",
-   "prompt": "How many engines does the wide-body airliner nicknamed the 'Jumbo Jet,' known for its distinctive hump housing an upper-deck lounge, have?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
-   "question": "How many engines does the wide-body airliner nicknamed the 'Jumbo Jet,' known for its distinctive hump housing an upper-deck lounge, have?",
-   "target": "Boeing 747",
+   "name": "mtb4-0459",
+   "prompt": "A dynastic NFL franchise coached by Bill Belichick and quarterbacked by Tom Brady, based in Foxborough, Massachusetts, has won how many Super Bowl titles as of 2024?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A dynastic NFL franchise coached by Bill Belichick and quarterbacked by Tom Brady, based in Foxborough, Massachusetts, has won how many Super Bowl titles as of 2024?",
+   "target": "New England Patriots",
    "aliases": [
-    "747"
+    "NE Patriots"
    ],
    "name_parts": [
-    "747",
-    "boeing"
+    "england",
+    "new",
+    "patriots"
    ],
-   "answer": "four",
-   "variant": "companies and products",
-   "topic": "companies and products",
+   "answer": "6",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
    "gate": {
-    "greedy_answer": "Four",
+    "greedy_answer": "6",
     "correct_t07": "20/20",
-    "bridge_question": "What is the name of the wide-body airliner nicknamed the 'Jumbo Jet,' known for its distinctive hump housing an upper-deck lounge?",
+    "bridge_question": "Which NFL franchise, coached by Bill Belichick and quarterbacked by Tom Brady, was based in Foxborough, Massachusetts?",
     "bridge_recall_t07": "10/10",
-    "hop2_question": "How many engines does the Boeing 747 have?",
+    "hop2_question": "How many Super Bowl titles have the New England Patriots won as of 2024?",
     "hop2_recall_t07": "10/10",
-    "generic_probe": "How many engines does a certain wide-body airliner have?",
-    "generic_probe_hits_t07": "2/20",
-    "generic_probe_reached": false,
+    "generic_probe": "A certain NFL franchise has won how many Super Bowl titles as of 2024?",
+    "generic_probe_hits_t07": "8/20",
+    "generic_probe_reached": true,
     "cooccurrence": "high",
     "answers_sampled_t1": [
-     "Four",
-     "Four",
-     "Four",
-     "Four"
+     "6",
+     "6",
+     "6",
+     "6"
     ],
     "answer_bridge_mentions_t1": "0/32"
    },
    "jlens_evidence": {
-    "token": "<|im_start|>",
+    "token": "\n",
     "name_words": [
-     "boeing"
+     "patriots"
     ],
     "signature_words": [],
     "ranks_l42": {
-     "boeing": 0
+     "patriots": 2
     },
     "top10_l42": [
-     " Boeing",
-     " Airbus",
-     "波音",
-     " Airlines",
-     " airlines",
-     " Lockheed",
-     "航空公司",
-     " airl",
-     "客机",
-     " Exxon"
+     "总共",
+     "次数",
+     " Patriots",
+     " пять",
+     " cinco",
+     " семь",
+     " количество",
+     "四次",
+     " победы",
+     "seven"
     ],
-    "specific_why": "'Boeing' is part of aircraft name",
+    "specific_why": "'Patriots' is part of team name",
     "readout_names_target": false
    },
    "leak_check": {
     "k": 16,
     "path": "free continuation from the site through the chat special tokens, T=1.0",
     "sites": {
-     "jlens_turn_token": {
+     "jlens_punctuation": {
       "max_new_tokens": 48,
       "n_leaks": 0
      }
     }
    },
-   "n_prompt_tokens": 57,
+   "n_prompt_tokens": 65,
    "input_ids": [
     248045,
     846,
     198,
-    4199,
-    1599,
-    20459,
-    1503,
-    279,
-    6669,
-    9072,
-    79806,
-    10140,
-    86067,
-    279,
-    359,
-    41,
-    46989,
-    23597,
-    2800,
-    3750,
-    364,
-    1141,
-    33692,
-    304,
-    1456,
-    11384,
-    449,
-    8156,
-    6596,
-    372,
-    36680,
+    32,
+    30052,
+    4902,
+    12226,
+    18451,
+    67553,
+    539,
+    8333,
+    7580,
+    95194,
+    321,
+    18889,
+    290,
+    539,
+    8105,
+    34199,
     11,
-    599,
+    3018,
+    303,
+    12897,
+    32951,
+    11,
+    20737,
+    11,
+    682,
+    2677,
+    1204,
+    1599,
+    7070,
+    19672,
+    14865,
+    430,
+    314,
+    220,
+    17,
+    15,
+    17,
+    19,
     30,
     271,
     11355,
@@ -11070,11 +14703,11 @@
     248069,
     271
    ],
-   "site_class": "turn_token",
+   "site_class": "punctuation",
    "read_sites": [
     {
-     "label": "jlens_turn_token",
-     "pos": 50,
+     "label": "jlens_punctuation",
+     "pos": 60,
      "horizon": 48
     }
    ]
@@ -12091,6 +15724,144 @@
    ]
   },
   {
+   "name": "mtb4-0677",
+   "prompt": "A Qatar-based news network launched in 1996, known for its coverage of the Arab Spring, takes its name from what language?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A Qatar-based news network launched in 1996, known for its coverage of the Arab Spring, takes its name from what language?",
+   "target": "Al Jazeera",
+   "aliases": [
+    "Al Jazeera Media Network"
+   ],
+   "name_parts": [
+    "al-jazeera",
+    "jazeera"
+   ],
+   "answer": "Arabic",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "Arabic",
+    "correct_t07": "19/20",
+    "bridge_question": "Which Qatar-based news network, launched in 1996, became known for its coverage of the Arab Spring?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What language does Al Jazeera's name originate from?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain news network takes its name from what language?",
+    "generic_probe_hits_t07": "1/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Arabic",
+     "Arabic",
+     "Arabic",
+     "Persian"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "jazeera"
+    ],
+    "signature_words": [
+     "broadcasting"
+    ],
+    "ranks_l42": {
+     "jazeera": 0,
+     "broadcasting": 13
+    },
+    "top10_l42": [
+     " Jazeera",
+     " CNN",
+     "CNN",
+     " Qatar",
+     "媒体",
+     "频道",
+     " Reuters",
+     "Reuters",
+     "电视台",
+     "新闻"
+    ],
+    "specific_why": "'jazeera' is part of Al Jazeera's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 55,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    40536,
+    5792,
+    3543,
+    3790,
+    11291,
+    303,
+    220,
+    16,
+    24,
+    24,
+    21,
+    11,
+    3750,
+    364,
+    1141,
+    9888,
+    314,
+    279,
+    10440,
+    11902,
+    11,
+    4829,
+    1141,
+    803,
+    494,
+    1092,
+    3992,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 48,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb4-0807",
    "prompt": "A Dutch group portrait shows a surgeon dissecting the arm of a corpse before a circle of attentive colleagues. In what year was this painting completed?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "A Dutch group portrait shows a surgeon dissecting the arm of a corpse before a circle of attentive colleagues. In what year was this painting completed?",
@@ -12645,6 +16416,145 @@
    ]
   },
   {
+   "name": "mtb4-0893",
+   "prompt": "Which animal represents the mascot of the Twin Cities land-grant university where surgeons performed the first open-heart surgery in 1952?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Which animal represents the mascot of the Twin Cities land-grant university where surgeons performed the first open-heart surgery in 1952?",
+   "target": "University of Minnesota",
+   "aliases": [
+    "Golden Gophers",
+    "University of Minnesota Twin Cities",
+    "UMN",
+    "Minnesota Golden Gophers"
+   ],
+   "name_parts": [
+    "minnesota"
+   ],
+   "answer": "Gopher",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "Gopher",
+    "correct_t07": "20/20",
+    "bridge_question": "Which Twin Cities land-grant university is known for surgeons performing the first open-heart surgery there in 1952?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "Which animal is the University of Minnesota's mascot?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Which animal represents the mascot of a certain university?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "Gopher",
+     "Gopher",
+     "Gopher",
+     "Gopher"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "minnesota"
+    ],
+    "signature_words": [
+     "minneapolis"
+    ],
+    "ranks_l42": {
+     "minnesota": 0,
+     "minneapolis": 13
+    },
+    "top10_l42": [
+     "Minnesota",
+     "University",
+     " Minnesota",
+     " UNIVERSITY",
+     " มหาวิทยาลัย",
+     " دانشگاه",
+     "大学的",
+     "Michigan",
+     " جامعة",
+     "沈阳"
+    ],
+    "specific_why": "'minnesota' names the university",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 54,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    22365,
+    9572,
+    10551,
+    279,
+    81743,
+    314,
+    279,
+    33790,
+    36039,
+    4128,
+    23557,
+    505,
+    11759,
+    1332,
+    70683,
+    10345,
+    279,
+    1118,
+    1724,
+    40842,
+    14399,
+    303,
+    220,
+    16,
+    24,
+    20,
+    17,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 47,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb4-0918",
    "prompt": "Think of the event where citizens dismantled a Cold War barrier dividing a city in 1989; in which country did this happen?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "Think of the event where citizens dismantled a Cold War barrier dividing a city in 1989; in which country did this happen?",
@@ -12783,6 +16693,147 @@
    ]
   },
   {
+   "name": "mtb4-0934",
+   "prompt": "An Italian football club nicknamed 'The Old Lady,' famous for black-and-white striped jerseys and a record 36 domestic league titles. In which Italian city is this club based?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "An Italian football club nicknamed 'The Old Lady,' famous for black-and-white striped jerseys and a record 36 domestic league titles. In which Italian city is this club based?",
+   "target": "Juventus FC",
+   "aliases": [
+    "Juventus Football Club"
+   ],
+   "name_parts": [
+    "juventus"
+   ],
+   "answer": "Turin",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "Turin",
+    "correct_t07": "20/20",
+    "bridge_question": "Which Italian football club, nicknamed 'The Old Lady,' wears black-and-white stripes and holds a record 36 domestic league titles?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which Italian city is Juventus FC based?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain Italian football club. In which Italian city is this club based?",
+    "generic_probe_hits_t07": "1/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Turin",
+     "Turin",
+     "Turin",
+     "Turin"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "juventus"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "juventus": 0
+    },
+    "top10_l42": [
+     " Juventus",
+     " città",
+     "成都",
+     " города",
+     "城市的",
+     " cidade",
+     "city",
+     "(city",
+     "这座城市",
+     "的城市"
+    ],
+    "specific_why": "Lens explicitly shows 'Juventus'",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 62,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    2014,
+    14382,
+    8693,
+    6135,
+    86067,
+    359,
+    760,
+    10306,
+    19996,
+    2800,
+    10919,
+    364,
+    3565,
+    9485,
+    15392,
+    65311,
+    51270,
+    321,
+    264,
+    3150,
+    220,
+    18,
+    21,
+    12363,
+    10418,
+    14865,
+    13,
+    733,
+    864,
+    14382,
+    3177,
+    369,
+    411,
+    6135,
+    3018,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 54,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb4-0936",
    "prompt": "In the ninja anime sequel where the hero has a fox spirit sealed within him from birth, how many tails does that sealed beast have?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "In the ninja anime sequel where the hero has a fox spirit sealed within him from birth, how many tails does that sealed beast have?",
@@ -12913,6 +16964,143 @@
     {
      "label": "jlens_punctuation",
      "pos": 45,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb4-0945",
+   "prompt": "A Cold War idea claimed that if one nation turned communist, its neighbors would topple in succession. Which country's war most prominently tested this idea?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A Cold War idea claimed that if one nation turned communist, its neighbors would topple in succession. Which country's war most prominently tested this idea?",
+   "target": "Domino Theory",
+   "aliases": [
+    "Domino Effect Theory",
+    "Domino principle"
+   ],
+   "name_parts": [
+    "domino",
+    "theory"
+   ],
+   "answer": "Vietnam",
+   "variant": "scientific theories and laws",
+   "topic": "scientific theories and laws",
+   "gate": {
+    "greedy_answer": "Vietnam",
+    "correct_t07": "20/20",
+    "bridge_question": "What is the name of the Cold War idea that one nation turning communist would cause neighbors to follow in succession?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "Which country's war most prominently tested the Domino Theory?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Which country's war most prominently tested a certain political theory?",
+    "generic_probe_hits_t07": "1/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Vietnam",
+     "Vietnam",
+     "Vietnam",
+     "Vietnam"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "domino"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "domino": 0
+    },
+    "top10_l42": [
+     " domino",
+     "连锁",
+     "效应",
+     "多米",
+     " cascade",
+     " doctrine",
+     "(chain",
+     " NATO",
+     "chain",
+     " Doctrine"
+    ],
+    "specific_why": "Lens shows 'domino' and '多米'",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 56,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    22461,
+    4843,
+    4374,
+    11324,
+    421,
+    413,
+    799,
+    6777,
+    6316,
+    47561,
+    11,
+    1141,
+    18146,
+    1000,
+    42584,
+    273,
+    303,
+    48015,
+    13,
+    15451,
+    3046,
+    579,
+    3980,
+    1379,
+    70507,
+    12152,
+    411,
+    4374,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 49,
      "horizon": 48
     }
    ]
@@ -13195,6 +17383,133 @@
     {
      "label": "jlens_punctuation",
      "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb4-1078",
+   "prompt": "An entertainment conglomerate famous for its mouse mascot and iconic theme parks is headquartered in which city?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "An entertainment conglomerate famous for its mouse mascot and iconic theme parks is headquartered in which city?",
+   "target": "Walt Disney Company",
+   "aliases": [
+    "The Walt Disney Company",
+    "Disney Company"
+   ],
+   "name_parts": [
+    "company",
+    "disney",
+    "walt"
+   ],
+   "answer": "Burbank",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "Burbank",
+    "correct_t07": "20/20",
+    "bridge_question": "Which entertainment conglomerate, famous for a cartoon mouse mascot and theme parks, produced these characters?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which city is the Walt Disney Company headquartered?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain entertainment conglomerate is headquartered in which city?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "Burbank",
+     "Burbank",
+     "Burbank",
+     "Burbank"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "disney"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "disney": 1
+    },
+    "top10_l42": [
+     "洛杉矶",
+     "Disney",
+     " Disneyland",
+     "迪士尼",
+     " Hollywood",
+     "好莱坞",
+     "California",
+     " Disney",
+     " Anaheim",
+     " Pixar"
+    ],
+    "specific_why": "Lens shows 'Disney' and 'Disneyland'",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 45,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    2014,
+    16031,
+    84629,
+    344,
+    10919,
+    364,
+    1141,
+    8380,
+    81743,
+    321,
+    25438,
+    6697,
+    25986,
+    369,
+    77431,
+    303,
+    864,
+    3177,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 37,
      "horizon": 48
     }
    ]
@@ -14024,6 +18339,141 @@
    ]
   },
   {
+   "name": "mtb5-0188",
+   "prompt": "Italy's most successful football club, based in Turin and historically owned by the Agnelli family, wears what color alongside black on its jersey?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Italy's most successful football club, based in Turin and historically owned by the Agnelli family, wears what color alongside black on its jersey?",
+   "target": "Juventus FC",
+   "aliases": [
+    "Juventus Football Club"
+   ],
+   "name_parts": [
+    "juventus"
+   ],
+   "answer": "white",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "White",
+    "correct_t07": "20/20",
+    "bridge_question": "Which Italian football club, based in Turin and long owned by the Agnelli family, is the most successful in Serie A history?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What color appears alongside black on Juventus's jersey?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain football club wears what color alongside black on its jersey?",
+    "generic_probe_hits_t07": "11/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "White",
+     "White",
+     "White",
+     "White"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n\n",
+    "name_words": [
+     "juventus"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "juventus": 3
+    },
+    "top10_l42": [
+     " Farbe",
+     " الألوان",
+     " rosso",
+     " Juventus",
+     "สีแดง",
+     "colors",
+     " اللون",
+     " kleur",
+     " цвета",
+     " màu"
+    ],
+    "specific_why": "‘juventus’ directly names the club",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 56,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    68121,
+    579,
+    1379,
+    6635,
+    8693,
+    6135,
+    11,
+    3018,
+    303,
+    8440,
+    258,
+    321,
+    33649,
+    12567,
+    539,
+    279,
+    4449,
+    77,
+    19883,
+    2902,
+    11,
+    36065,
+    1092,
+    1829,
+    15784,
+    3565,
+    383,
+    1141,
+    34917,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 55,
+     "horizon": 48
+    }
+   ]
+  },
+  {
    "name": "mtb5-0250",
    "prompt": "This was the final mission in a series that sent humans to walk on the Moon; in what year did it launch?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
    "question": "This was the final mission in a series that sent humans to walk on the Moon; in what year did it launch?",
@@ -14152,6 +18602,139 @@
     {
      "label": "jlens_turn_token",
      "pos": 43,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0251",
+   "prompt": "The United States bought a vast tract of land from France, roughly doubling the nation's size; in what year was this deal finalized?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "The United States bought a vast tract of land from France, roughly doubling the nation's size; in what year was this deal finalized?",
+   "target": "Louisiana Purchase",
+   "aliases": [
+    "Purchase of Louisiana"
+   ],
+   "name_parts": [
+    "louisiana",
+    "purchase"
+   ],
+   "answer": "1803",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "1803",
+    "correct_t07": "20/20",
+    "bridge_question": "What 1803 land deal saw the United States buy a vast territory from France, doubling its size?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what year was the Louisiana Purchase finalized?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "The United States made a certain purchase; in what year was this deal finalized?",
+    "generic_probe_hits_t07": "1/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "1803",
+     "1803",
+     "1803",
+     "1803"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "louisiana"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "louisiana": 3
+    },
+    "top10_l42": [
+     "购买",
+     "Purchase",
+     " Purchase",
+     " Louisiana",
+     "purchase",
+     "购",
+     "urchase",
+     " compra",
+     " purchase",
+     "买"
+    ],
+    "specific_why": "Word 'louisiana' is part of the bridge's name.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 53,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    760,
+    3516,
+    4042,
+    10471,
+    264,
+    12401,
+    40450,
+    314,
+    4128,
+    494,
+    9338,
+    11,
+    16757,
+    57020,
+    279,
+    6777,
+    579,
+    1331,
+    26,
+    303,
+    1092,
+    1007,
+    557,
+    411,
+    3372,
+    58351,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 46,
      "horizon": 48
     }
    ]
@@ -14287,6 +18870,157 @@
     {
      "label": "jlens_punctuation",
      "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0298",
+   "prompt": "A rock and roll pioneer whose extravagant 1970s Las Vegas residency featured elaborate one-piece outfits with wide collars and capes that sparkled under stage lights; what material lavishly studded those outfits?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A rock and roll pioneer whose extravagant 1970s Las Vegas residency featured elaborate one-piece outfits with wide collars and capes that sparkled under stage lights; what material lavishly studded those outfits?",
+   "target": "Elvis Presley",
+   "aliases": [
+    "The King",
+    "The King of Rock and Roll"
+   ],
+   "name_parts": [
+    "elvis",
+    "presley"
+   ],
+   "answer": "rhinestones",
+   "variant": "bands and musicians",
+   "topic": "bands and musicians",
+   "gate": {
+    "greedy_answer": "Rhinestones",
+    "correct_t07": "18/20",
+    "bridge_question": "Which rock and roll pioneer's extravagant 1970s Las Vegas residency featured elaborate sparkling one-piece outfits with wide collars and capes?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What material lavishly studded Elvis Presley's iconic Las Vegas jumpsuits?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain rock and roll pioneer whose outfits sparkled under stage lights; what material lavishly studded those outfits?",
+    "generic_probe_hits_t07": "17/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "Rhinestones",
+     "sequins",
+     "Rhinestones",
+     "Rhinestones"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "elvis"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "elvis": 0
+    },
+    "top10_l42": [
+     " Elvis",
+     "摇滚",
+     " Beatles",
+     " Sinatra",
+     " glamorous",
+     " glam",
+     " celebrity",
+     "演唱会",
+     " Johnny",
+     " Grammy"
+    ],
+    "specific_why": "'elvis' directly names the entity.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 70,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    6730,
+    321,
+    6299,
+    51169,
+    6483,
+    91574,
+    220,
+    16,
+    24,
+    22,
+    15,
+    82,
+    15292,
+    17072,
+    51088,
+    14338,
+    34775,
+    799,
+    53991,
+    45698,
+    440,
+    6669,
+    4382,
+    1506,
+    321,
+    1994,
+    287,
+    421,
+    14744,
+    806,
+    1172,
+    6228,
+    12346,
+    26,
+    1092,
+    3558,
+    28522,
+    62629,
+    352,
+    82829,
+    1782,
+    45698,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 63,
      "horizon": 48
     }
    ]
@@ -14566,6 +19300,303 @@
     {
      "label": "jlens_turn_token",
      "pos": 43,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0445",
+   "prompt": "A pioneering giant-robot anime franchise follows young pilots fighting in a war between Earth's federation and a breakaway space colony faction. How many meters tall is the full-scale statue built in Tokyo's Odaiba district honoring its iconic mech?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A pioneering giant-robot anime franchise follows young pilots fighting in a war between Earth's federation and a breakaway space colony faction. How many meters tall is the full-scale statue built in Tokyo's Odaiba district honoring its iconic mech?",
+   "target": "Mobile Suit Gundam",
+   "aliases": [
+    "Kidou Senshi Gundam",
+    "Gundam (franchise)"
+   ],
+   "name_parts": [
+    "gundam",
+    "mobile",
+    "suit"
+   ],
+   "answer": "18",
+   "variant": "anime and comics",
+   "topic": "anime and comics",
+   "gate": {
+    "greedy_answer": "18",
+    "correct_t07": "19/20",
+    "bridge_question": "Which pioneering giant-robot anime franchise inspired a full-scale statue in Tokyo's Odaiba district?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many meters tall is the full-scale Gundam statue built in Tokyo's Odaiba district?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain anime franchise. How many meters tall is the full-scale statue built in Tokyo's Odaiba district honoring its iconic mech?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "18",
+     "18",
+     "9",
+     "18"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "gundam"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "gundam": 0
+    },
+    "top10_l42": [
+     " Gundam",
+     " anime",
+     "机甲",
+     "Anime",
+     " Anime",
+     "anime",
+     "科幻",
+     "动画",
+     " Capcom",
+     " futuristic"
+    ],
+    "specific_why": "'gundam' names the franchise directly.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 74,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    68188,
+    14120,
+    12,
+    17705,
+    22099,
+    18451,
+    10695,
+    3777,
+    34107,
+    10488,
+    303,
+    264,
+    3980,
+    1881,
+    8964,
+    579,
+    76555,
+    321,
+    264,
+    1387,
+    13362,
+    3433,
+    39585,
+    35177,
+    13,
+    2500,
+    1599,
+    19434,
+    15740,
+    369,
+    279,
+    2400,
+    12563,
+    33138,
+    5617,
+    303,
+    25358,
+    579,
+    496,
+    3131,
+    33781,
+    9014,
+    75259,
+    1141,
+    25438,
+    80618,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 67,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0470",
+   "prompt": "Think of the NFL franchise famous for its 'Terrible Towel' tradition and its dominant 1970s dynasty. How many Super Bowl titles has it won?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the NFL franchise famous for its 'Terrible Towel' tradition and its dominant 1970s dynasty. How many Super Bowl titles has it won?",
+   "target": "Pittsburgh Steelers",
+   "aliases": [],
+   "name_parts": [
+    "pittsburgh",
+    "steelers"
+   ],
+   "answer": "6",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "6",
+    "correct_t07": "20/20",
+    "bridge_question": "Which NFL team is known for its 'Terrible Towel' tradition and its 1970s dynasty?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many Super Bowl titles have the Pittsburgh Steelers won?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain NFL franchise. How many Super Bowl titles has it won?",
+    "generic_probe_hits_t07": "17/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "6",
+     "6",
+     "6",
+     "6"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "pittsburgh",
+     "steelers"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "pittsburgh": 1,
+     "steelers": 0
+    },
+    "top10_l42": [
+     " Steelers",
+     " Pittsburgh",
+     "altimore",
+     " Baltimore",
+     "Philadelphia",
+     "徐州",
+     "sburgh",
+     " Louisville",
+     " Indianapolis",
+     " Pennsylvania"
+    ],
+    "specific_why": "'pittsburgh'/'steelers' name the team directly.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 61,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    12226,
+    18451,
+    10919,
+    364,
+    1141,
+    359,
+    20558,
+    11928,
+    39056,
+    300,
+    6,
+    13419,
+    321,
+    1141,
+    23681,
+    220,
+    16,
+    24,
+    22,
+    15,
+    82,
+    64588,
+    13,
+    2500,
+    1599,
+    7070,
+    19672,
+    14865,
+    682,
+    424,
+    2677,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 54,
      "horizon": 48
     }
    ]
@@ -14859,6 +19890,139 @@
     {
      "label": "jlens_turn_token",
      "pos": 59,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0689",
+   "prompt": "In what language does the Doha-based news network that broadcast al-Qaeda statements after 9/11 primarily air its flagship channel?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In what language does the Doha-based news network that broadcast al-Qaeda statements after 9/11 primarily air its flagship channel?",
+   "target": "Al Jazeera",
+   "aliases": [],
+   "name_parts": [
+    "jazeera"
+   ],
+   "answer": "Arabic",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "Arabic",
+    "correct_t07": "20/20",
+    "bridge_question": "Which Doha-based satellite news network became globally famous for airing al-Qaeda statements after 9/11?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what language does Al Jazeera primarily broadcast its flagship channel?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In what language does a certain news network primarily air its flagship channel?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Arabic",
+     "Arabic",
+     "Arabic",
+     "Arabic"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "jazeera"
+    ],
+    "signature_words": [
+     "qatar"
+    ],
+    "ranks_l42": {
+     "jazeera": 0,
+     "qatar": 3
+    },
+    "top10_l42": [
+     " Jazeera",
+     " Islamist",
+     " Reuters",
+     " Qatar",
+     "Reuters",
+     " Yemen",
+     "媒体",
+     " Hezbollah",
+     " WikiLeaks",
+     " Hamas"
+    ],
+    "specific_why": "'jazeera' and 'qatar' identify the network directly.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 53,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    1092,
+    3992,
+    1503,
+    279,
+    414,
+    62885,
+    5792,
+    3543,
+    3790,
+    421,
+    12529,
+    444,
+    54982,
+    11889,
+    1238,
+    220,
+    24,
+    14,
+    16,
+    16,
+    15048,
+    3594,
+    1141,
+    41257,
+    5323,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 46,
      "horizon": 48
     }
    ]
@@ -15415,6 +20579,559 @@
     {
      "label": "jlens_turn_token",
      "pos": 51,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-1076",
+   "prompt": "An NBA franchise that plays home games at the world's most famous arena in Midtown Manhattan, wearing orange-and-blue colors — in what year was this team founded?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "An NBA franchise that plays home games at the world's most famous arena in Midtown Manhattan, wearing orange-and-blue colors — in what year was this team founded?",
+   "target": "New York Knicks",
+   "aliases": [
+    "NY Knicks",
+    "New York Knickerbockers"
+   ],
+   "name_parts": [
+    "knicks",
+    "new",
+    "york"
+   ],
+   "answer": "1946",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "1946",
+    "correct_t07": "20/20",
+    "bridge_question": "Which NBA franchise plays home games at the world's most famous arena in Midtown Manhattan and wears orange-and-blue colors?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what year was the New York Knicks founded?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain NBA franchise. In what year was this team founded?",
+    "generic_probe_hits_t07": "12/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "1946",
+     "1946",
+     "1946",
+     "1946"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "knicks"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "knicks": 1
+    },
+    "top10_l42": [
+     "成立于",
+     " Knicks",
+     "Founded",
+     "纽约",
+     "年份",
+     " NYC",
+     " NBA",
+     " Brooklyn",
+     "ในปี",
+     " tahun"
+    ],
+    "specific_why": "Knicks is the team's actual name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 59,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    2014,
+    16879,
+    18451,
+    421,
+    10765,
+    2046,
+    3739,
+    506,
+    279,
+    1814,
+    579,
+    1379,
+    10919,
+    24112,
+    303,
+    13305,
+    26927,
+    27848,
+    11,
+    11884,
+    18016,
+    9485,
+    30615,
+    7736,
+    1892,
+    303,
+    1092,
+    1007,
+    557,
+    411,
+    2015,
+    17508,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 51,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-1095",
+   "prompt": "Thinking of the lavish French royal residence famous for its Hall of Mirrors and sprawling gardens outside Paris — what sparkling drink is tied to its royal celebrations?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Thinking of the lavish French royal residence famous for its Hall of Mirrors and sprawling gardens outside Paris — what sparkling drink is tied to its royal celebrations?",
+   "target": "Palace of Versailles",
+   "aliases": [
+    "Château de Versailles",
+    "Versailles Palace"
+   ],
+   "name_parts": [
+    "palace",
+    "versailles"
+   ],
+   "answer": "champagne",
+   "variant": "landmarks and buildings",
+   "topic": "landmarks and buildings",
+   "gate": {
+    "greedy_answer": "Champagne",
+    "correct_t07": "20/20",
+    "bridge_question": "Which lavish French royal residence is famous for its Hall of Mirrors and sprawling gardens outside Paris?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What sparkling drink is traditionally tied to royal celebrations at the Palace of Versailles?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Thinking of a certain palace — what sparkling drink is tied to its royal celebrations?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Champagne",
+     "Champagne",
+     "Champagne",
+     "Champagne"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "palace",
+     "versailles"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "palace": 4,
+     "versailles": 0
+    },
+    "top10_l42": [
+     " Versailles",
+     " Château",
+     " château",
+     "宫殿",
+     " palace",
+     " قصر",
+     " Palace",
+     " Palais",
+     "故宫",
+     " palais"
+    ],
+    "specific_why": "Versailles uniquely names the palace",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 56,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    90700,
+    314,
+    279,
+    76422,
+    8323,
+    28280,
+    21015,
+    10919,
+    364,
+    1141,
+    10607,
+    314,
+    13860,
+    30647,
+    321,
+    68488,
+    34264,
+    4732,
+    11751,
+    1892,
+    1092,
+    61366,
+    6808,
+    369,
+    16829,
+    310,
+    1141,
+    28280,
+    45018,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-1112",
+   "prompt": "In which city is the headquarters of the human rights group known for its candle-wrapped-in-barbed-wire logo and campaigns to free prisoners of conscience?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In which city is the headquarters of the human rights group known for its candle-wrapped-in-barbed-wire logo and campaigns to free prisoners of conscience?",
+   "target": "Amnesty International",
+   "aliases": [
+    "AI"
+   ],
+   "name_parts": [
+    "amnesty",
+    "international"
+   ],
+   "answer": "London",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "London",
+    "correct_t07": "20/20",
+    "bridge_question": "Name the human rights group known for its candle-wrapped-in-barbed-wire logo and campaigns to free prisoners of conscience.",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which city is Amnesty International headquartered?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In which city is the headquarters of a certain human rights group?",
+    "generic_probe_hits_t07": "2/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "London",
+     "London",
+     "London",
+     "Singapore"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "amnesty"
+    ],
+    "signature_words": [
+     "activists"
+    ],
+    "ranks_l42": {
+     "amnesty": 0,
+     "activists": 5
+    },
+    "top10_l42": [
+     " Amnesty",
+     " NGOs",
+     "国际",
+     " NGO",
+     "international",
+     " activists",
+     "全球",
+     " Organizations",
+     " weltweit",
+     " WikiLeaks"
+    ],
+    "specific_why": "Amnesty is part of organization's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 57,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    864,
+    3177,
+    369,
+    279,
+    24249,
+    314,
+    279,
+    3611,
+    3087,
+    1809,
+    3750,
+    364,
+    1141,
+    36549,
+    2543,
+    54397,
+    3309,
+    15309,
+    2634,
+    2543,
+    540,
+    12070,
+    321,
+    20060,
+    310,
+    1845,
+    26268,
+    314,
+    40090,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 50,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-1113",
+   "prompt": "In which city is the world's largest museum, education, and research complex, home to the National Zoo and Air and Space Museum?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In which city is the world's largest museum, education, and research complex, home to the National Zoo and Air and Space Museum?",
+   "target": "Smithsonian Institution",
+   "aliases": [
+    "Smithsonian Institute"
+   ],
+   "name_parts": [
+    "institution",
+    "smithsonian"
+   ],
+   "answer": "Washington",
+   "variant": "institutions and organisations",
+   "topic": "institutions and organisations",
+   "gate": {
+    "greedy_answer": "Washington",
+    "correct_t07": "20/20",
+    "bridge_question": "Name the world's largest museum, education, and research complex, home to the National Zoo and Air and Space Museum.",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which city is the Smithsonian Institution headquartered?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In which city is a certain museum, education, and research complex?",
+    "generic_probe_hits_t07": "8/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Washington",
+     "Washington",
+     "Washington",
+     "Washington"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "smithsonian"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "smithsonian": 0
+    },
+    "top10_l42": [
+     " Smithsonian",
+     " museums",
+     " Museums",
+     " Museum",
+     "useum",
+     " museum",
+     "museum",
+     "博物馆",
+     " พิพิธภัณฑ์",
+     "故宫"
+    ],
+    "specific_why": "Smithsonian is the institution's actual name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 53,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    864,
+    3177,
+    369,
+    279,
+    1814,
+    579,
+    7526,
+    23223,
+    11,
+    6520,
+    11,
+    321,
+    3302,
+    6150,
+    11,
+    2046,
+    310,
+    279,
+    4893,
+    39511,
+    321,
+    6350,
+    321,
+    11156,
+    15849,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 46,
      "horizon": 48
     }
    ]

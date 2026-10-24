@@ -7,9 +7,10 @@ from pathlib import Path
 
 from wsbench import readplan, registry
 from wsbench.banks import load_bank
-from wsbench.basic.prompts import PROMPT_VERSION, SYSTEM
+from wsbench.basic.prompts import SYSTEM
 from wsbench.celeste import judge as cj
 from wsbench.cli import main
+from wsbench.evals.celeste_jlens_ambiguous.prompts import FAMILY_RULE_JLA, PROMPT_VERSION
 from wsbench.results import read_results
 
 REPO = Path(__file__).resolve().parents[1]
@@ -33,7 +34,8 @@ def test_bank_shape_and_plan():
     for it in items:
         assert it["prompt"].endswith(SUFFIX) and len(it["target"].split()) >= 2
         for name in [it["target"], *it["aliases"]]:
-            assert name.lower() not in it["question"].lower(), (it["name"], name)
+            pat = rf"(?<![A-Za-z0-9]){re.escape(name)}(?![A-Za-z0-9])"
+            assert not re.search(pat, it["question"], re.I), (it["name"], name)
         for a in it["aliases"]:
             assert len(a.split()) >= 2 or a.isupper() or a.lower() in it["target"].lower()
         ev = it["jlens_evidence"]
@@ -65,7 +67,7 @@ def test_registered_spec_and_readme():
     assert spec.group == "celeste-evals" and spec.judge.model == "claude-sonnet-5"
     assert spec.judge.prompt_version == PROMPT_VERSION
     readme = (REPO / "evals" / FAM / "README.md").read_text(encoding="utf-8")
-    assert SYSTEM in readme and PROMPT_VERSION in readme
+    assert SYSTEM in readme and PROMPT_VERSION in readme and FAMILY_RULE_JLA in readme
 
 
 def test_item_passes_only_when_named(tmp_path, monkeypatch, mk_args):
@@ -104,7 +106,14 @@ def test_item_passes_only_when_named(tmp_path, monkeypatch, mk_args):
 
     monkeypatch.setattr(cj, "run_calls", fake_run_calls)
     args = mk_args(path, items=[a["id"], b["id"]], layers=[42], out=tmp_path / "out")
-    r = cj.run_family(args, name=FAM, bank=BANK, forbidden=False)
+    r = cj.run_family(
+        args,
+        name=FAM,
+        bank=BANK,
+        forbidden=False,
+        family_rule=FAMILY_RULE_JLA,
+        prompt_version=PROMPT_VERSION,
+    )
     by = {row["id"]: row for row in r.rows}
     assert by[a["id"]]["pass"] is True and by[b["id"]]["pass"] is False
     assert r.value == 0.5 and by[a["id"]]["hitting_sites"] == [a["read_sites"][0]["label"]]

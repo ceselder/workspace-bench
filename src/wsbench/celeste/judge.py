@@ -70,7 +70,15 @@ def verdict(res: dict[str, Any] | None, samples: list[str]) -> dict[str, Any]:
     }
 
 
-def run_family(args: JudgeArgs, *, name: str, bank: Path, forbidden: bool) -> FamilyResult:
+def run_family(
+    args: JudgeArgs,
+    *,
+    name: str,
+    bank: Path,
+    forbidden: bool,
+    family_rule: str = FAMILY_RULE_CELESTE,
+    prompt_version: str = PROMPT_VERSION,
+) -> FamilyResult:
     _header, items = load_bank(bank)
     scope = item_scope(items, args)
     ids = [it["id"] for it in scope]
@@ -109,7 +117,7 @@ def run_family(args: JudgeArgs, *, name: str, bank: Path, forbidden: bool) -> Fa
                     targets[k[0]],
                     kind,
                     [have[k]],
-                    family_rule=FAMILY_RULE_CELESTE,
+                    family_rule=family_rule,
                     forbidden=forbidden_line(by_id[k[0]]) if forbidden else "",
                 ),
                 meta={"item": k[0], "layer": k[1], "pos": k[2], "site": label_of[(k[0], k[2])]},
@@ -120,7 +128,7 @@ def run_family(args: JudgeArgs, *, name: str, bank: Path, forbidden: bool) -> Fa
             calls,
             schema=SCHEMA,
             judge=args.judge,
-            prompt_version=PROMPT_VERSION,
+            prompt_version=prompt_version,
             cache=cache,
             spend=spend,
             concurrency=args.concurrency,
@@ -225,7 +233,7 @@ def run_family(args: JudgeArgs, *, name: str, bank: Path, forbidden: bool) -> Fa
     result = pass_rate_result(
         name=name,
         args=args,
-        prompt_version=PROMPT_VERSION,
+        prompt_version=prompt_version,
         rows=rows,
         cells=cells,
         rep=rep,

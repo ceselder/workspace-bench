@@ -11,7 +11,10 @@ REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO / "src"))
 
 from wsbench.basic import prompts as bp  # noqa: E402
-from wsbench.celeste.judge import FAMILY_RULE_CELESTE  # noqa: E402
+from wsbench.evals.celeste_jlens_ambiguous.prompts import (  # noqa: E402
+    FAMILY_RULE_JLA,
+    PROMPT_VERSION,
+)
 
 FAM = "celeste_jlens_ambiguous"
 WHAT = {
@@ -22,7 +25,7 @@ WHAT = {
     "that is not in the text, from which 16 free continuations never name it",
     "site_specific": "and the found words point to the bridge, not the text's topic",
     "fragment_in_top10": "and at least one found word is in the J-lens top 10",
-    "jlens_does_not_name_it": "and the J-lens top-10 readout there is judged NOT to name it",
+    "jlens_does_not_name_it": "and two independent judge calls: its top 10 does NOT name it",
     "no_derived_form_leak": "and no answer names the bridge by a derived form",
     "review_keep": "and an independent claude-opus-5 review keeps the item",
     "kept": "kept (<= 2 items per bridge)",
@@ -136,9 +139,9 @@ Items per category (`variant`):
 
 - **Headline: judged pass rate.** One bank-judge call per read cell (item, layer, site) sees that
   cell's samples and decides whether the target (the entity's full name, or an alias: full-name
-  variants and acronyms only, never a fragment) is NAMED. The Celeste family rule applies (below):
-  descriptions, clues and paraphrases do not count. Every YES carries a verbatim quote verified
-  against one sample of that cell; an unverifiable quote voids the verdict.
+  variants and acronyms only, never a fragment) is NAMED. This family's rule applies (below):
+  fragments, descriptions, clues and paraphrases do not count. Every YES carries a verbatim quote
+  verified against one sample of that cell; an unverifiable quote voids the verdict.
 - No analytic chance floor (free text). Measured floors: the **sampling baseline** (~0 by
   construction: the leak check) and the **prompt-only baseline** (stock Qwen3.6-27B shown the
   render up to the read token as plain text and asked what a model would be thinking there).
@@ -160,9 +163,11 @@ wsbench judge family={FAM} readouts=<arm>.jsonl out=outputs/<arm>/{FAM} layers=4
 
 ## Judge prompts
 
-`prompt_version`: `{bp.PROMPT_VERSION}`. Judge: pinned to `claude-sonnet-5`, temperature 0, one
-call per read cell. The prompts below are sent verbatim (`wsbench.basic.prompts`, shared with the
-single-token basic families). Output schema: `{{"expressed": bool, "target": str, "quote": str}}`.
+`prompt_version`: `{PROMPT_VERSION}` (the shared bank judge, `{bp.PROMPT_VERSION}`, with this
+family's own rule). Judge: pinned to `claude-sonnet-5`, temperature 0, one call per read cell.
+The prompts below are sent verbatim (`wsbench.basic.prompts`, shared with the single-token basic
+families, plus the family rule). Output schema:
+`{{"expressed": bool, "target": str, "quote": str}}`.
 
 System prompt:
 
@@ -180,9 +185,11 @@ the two notes below; `{{family_rule}}` = the family rule (below), preceded by a 
 
 {fence(bp.KIND_NOTE_TOKENS)}
 
-Family rule (`FAMILY_RULE_CELESTE`, sent with every call):
+Family rule (`FAMILY_RULE_JLA`, sent with every call). It replaces the Celeste rule because a
+multi-word target makes fragments a live failure: a lenient judge credited a J-lens token like
+`Dungeons` for "Dungeons & Dragons" on about one item in eight.
 
-{fence(FAMILY_RULE_CELESTE)}
+{fence(FAMILY_RULE_JLA)}
 """
     (REPO / "evals" / FAM / "README.md").write_text(md, encoding="utf-8")
     print(FAM, n, "items; README written")

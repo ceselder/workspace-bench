@@ -5,7 +5,7 @@ Qwen3.6-27B token ids and read sites, and every item was leak-checked against re
 from pathlib import Path
 
 from wsbench.basic.prompts import PROMPT_VERSION
-from wsbench.celeste.judge import run_family
+from wsbench.celeste.judge import FAMILY_RULE_CELESTE, run_family
 from wsbench.judge_config import JudgeConfig
 from wsbench.registry import REPO_ROOT, EvalSpec
 
@@ -14,20 +14,35 @@ JUDGE_MODEL = "claude-sonnet-5"
 
 
 def celeste_family(
-    name: str, title: str, *, calls_per_arm: str, forbidden: bool = False
+    name: str,
+    title: str,
+    *,
+    calls_per_arm: str,
+    forbidden: bool = False,
+    family_rule: str = FAMILY_RULE_CELESTE,
+    prompt_version: str = PROMPT_VERSION,
 ) -> EvalSpec:
     """``forbidden``: the item's written output (the encoded answer) is sent as the bank judge's
-    forbidden-answer line, so a readout that only names it does not pass."""
+    forbidden-answer line, so a readout that only names it does not pass. ``family_rule`` /
+    ``prompt_version``: a family that needs its own rule passes both (a new rule is a new
+    instrument)."""
     bank = Path("evals") / name / "items.json"
     return EvalSpec(
         name=name,
         title=title,
         group=GROUP,
         bank=bank,
-        judge=JudgeConfig(model=JUDGE_MODEL, prompt_version=PROMPT_VERSION),
+        judge=JudgeConfig(model=JUDGE_MODEL, prompt_version=prompt_version),
         metric="pass_rate",
         higher_is_better=True,
-        run=lambda args: run_family(args, name=name, bank=REPO_ROOT / bank, forbidden=forbidden),
+        run=lambda args: run_family(
+            args,
+            name=name,
+            bank=REPO_ROOT / bank,
+            forbidden=forbidden,
+            family_rule=family_rule,
+            prompt_version=prompt_version,
+        ),
         calls_per_arm=calls_per_arm,
         sources="",
     )

@@ -654,28 +654,28 @@
   "written": "2026-10-23T11:47:35+00:00"
  },
  "celeste_jlens_ambiguous": {
-  "rate": 0.4642857142857143,
+  "rate": 0.5816993464052288,
   "saturated": false,
   "ci95": [
-   0.36607142857142855,
-   0.5535714285714286
+   0.5032679738562091,
+   0.6601307189542484
   ],
   "metric": "pass_rate",
   "higher_is_better": true,
-  "n_items": 112,
-  "n_items_decided": 112,
+  "n_items": 153,
+  "n_items_decided": 153,
   "counts": {
-   "n_expected_cells": 112,
+   "n_expected_cells": 153,
    "n_missing_cells": 0,
    "n_unjudged_cells": 0,
    "n_empty_cells": 0
   },
   "judge_model": "claude-sonnet-5",
-  "instrument": "bank-2026-10-10",
+  "instrument": "bank-2026-10-10+jla-fragments-2026-10-24",
   "layers_judged": [
    42
   ],
   "complete": false,
-  "written": "2026-10-24T02:06:21+00:00"
+  "written": "2026-10-24T02:37:16+00:00"
  }
 }
