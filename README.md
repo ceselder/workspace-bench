@@ -291,9 +291,9 @@ model at the read site scores ~0. Banks ship the captured token ids and read sit
 - *Example:* "Which composer was born in the home country of footballer Robert Lewandowski?" → model answers `Chopin`; target (the bridge) `Poland`.
 - *Judged by:* the shared bank judge with the Celeste naming rule, one call per (item, layer, read site): pass = the bridge or an alias is NAMED in a sample (not described) with a verbatim quote verified against that sample; item passes at any site and layer.
 
-**J-lens intermediates** — [`evals/celeste_jlens_intermediates/README.md`](evals/celeste_jlens_intermediates/README.md)
-- *What it is:* A question answered in one word forces Qwen3.6-27B through a famous MULTI-WORD entity it never writes (a game, film, landmark, law, event); the read site is the token where the J-lens surfaces fragments of that entity's name that are not in the text and from which the model's own continuations never name it; does the lens name the whole entity?
-- *Example:* "Think of the three 17th-century rules describing how planets trace ellipses around the sun with varying speed. What nationality was the astronomer who formulated them?" → model answers `German`; the J-lens at the reply-opening token shows `Kepler`, `Johannes`, `定律`; target `Kepler's Laws of Planetary Motion`.
+**J-lens ambiguous** — [`evals/celeste_jlens_ambiguous/README.md`](evals/celeste_jlens_ambiguous/README.md)
+- *What it is:* A question answered in one word forces Qwen3.6-27B through a famous MULTI-WORD entity it never writes (a game, film, law, myth, mission); at the read token (punctuation, newline or the chat-template turn token, never a word piece) the J-lens top 10 catches fragments of it (name words not in the text) but does not name it, and the model's own continuations from there never do; can the lens say the whole entity?
+- *Example:* "In a tabletop role-playing game where a game master guides players through fantasy adventures using polyhedral dice and character sheets, what year was it first published?" → model answers `1974`; at the newline between the turns the J-lens shows `Dungeons`, `RPG`, `Dungeon`, `pioneered` but never the game; target `Dungeons & Dragons`.
 - *Judged by:* the shared bank judge with the Celeste naming rule, one call per (item, layer, read site): pass = the entity's full name or a listed alias (full-name variants and acronyms, never a fragment) is NAMED in a sample with a verbatim quote verified against that sample.
 
 **Foreshadowed thoughts** — [`evals/celeste_foreshadow/README.md`](evals/celeste_foreshadow/README.md)
@@ -386,7 +386,7 @@ never pinned.
 | celeste_lookahead | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_withheld_answer | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_silent_bridge | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
-| celeste_jlens_intermediates | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
+| celeste_jlens_ambiguous | claude-sonnet-5 | bank-2026-10-10 (one call per read cell) |
 | celeste_foreshadow | claude-sonnet-5 | foreshadow-claims-v3-2026-10-22 (one call per readout sample) |
 | celeste_coherence | claude-sonnet-5 | coherence-0to3-2026-10-22 (20 bullets per call) |
 | user_modeling | google/gemini-3.8-flash | um-v2 |

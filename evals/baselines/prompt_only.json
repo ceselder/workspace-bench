@@ -653,19 +653,19 @@
   "complete": false,
   "written": "2026-10-23T11:47:35+00:00"
  },
- "celeste_jlens_intermediates": {
-  "rate": 0.40939597315436244,
+ "celeste_jlens_ambiguous": {
+  "rate": 0.44680851063829785,
   "saturated": false,
   "ci95": [
-   0.3288590604026846,
-   0.4899328859060403
+   0.35106382978723405,
+   0.5531914893617021
   ],
   "metric": "pass_rate",
   "higher_is_better": true,
-  "n_items": 149,
-  "n_items_decided": 149,
+  "n_items": 94,
+  "n_items_decided": 94,
   "counts": {
-   "n_expected_cells": 149,
+   "n_expected_cells": 94,
    "n_missing_cells": 0,
    "n_unjudged_cells": 0,
    "n_empty_cells": 0
@@ -676,6 +676,6 @@
    42
   ],
   "complete": false,
-  "written": "2026-10-23T15:12:33+00:00"
+  "written": "2026-10-24T00:57:27+00:00"
  }
 }

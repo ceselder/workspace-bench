@@ -1,16 +1,16 @@
-# celeste_jlens_intermediates: how the bank was built
+# celeste_jlens_ambiguous: how the bank was built
 
 Questions answered "IN ONE WORD" that force Qwen3.6-27B through a famous multi-word entity it never
-writes, read at a prompt token where the J-lens surfaces fragments of that entity and the model's own
-continuations never name it. Built 2026-10-23 with `claude-sonnet-5` (proposals and audits, via the
+writes, read at a prompt token where the J-lens catches fragments of that entity in its top 10 but its
+readout does not name it, and the model's own continuations never name it. Built 2026-10-23 with `claude-sonnet-5` (proposals and audits, via the
 `ant` OAuth profile) and stock Qwen3.6-27B on Modal. Shared steps reuse `../silent_bridge/`.
 
 ## Pipeline
 
 1. **Candidates** (`gen_mt.py`): 18 categories x 10 fact domains, 8 items per call; each item is a
    question, its multi-word bridge (+ full-name aliases and acronyms), the bridge's name parts and
-   8-12 signature words, the one-word answer, the bridge's own question and the last hop. Two rounds,
-   the second banning the 60 most-used bridges of the first.
+   8-12 signature words, the one-word answer, the bridge's own question and the last hop. Several rounds,
+   later rounds banning the most-used bridges of the earlier ones.
 2. **Audit** (`../silent_bridge/audit_novel.py`): generic-clue probe and co-occurrence rating, both
    recorded per item and not gated on in this family.
 3. **Gate** (`../silent_bridge/modal/gate.py --bridge-suffix '\n\nANSWER WITH THE NAME ONLY, DO
@@ -21,15 +21,24 @@ continuations never name it. Built 2026-10-23 with `claude-sonnet-5` (proposals 
 5. **Sites** (`select_sites.py`): every position whose top 20 holds a rare (zipf < 4.5), one-token
    name word of the bridge that is not in the text so far (stem-aware); a name word scores 2, other
    signature words 1.
-6. **Leak check at every site** (`../silent_bridge/modal/free_sampling.py --n 16 --max-tokens 48`):
-   the best-scoring site whose 16 free continuations never name the bridge is kept. At the single
-   best J-lens site the model names the bridge itself for most items (155 of 186 in round 1): the
-   J-lens is strongest where the model is about to write the name.
-7. **Specificity** (`specific_check.py`, `claude-sonnet-5`): the found words must point to the bridge,
-   not to the text's topic ("frog" for "amphibian" is rejected). **Derived forms**
-   (`../silent_bridge/leak_forms.py`): no answer names the bridge by a demonym or abbreviation.
-8. **Bank** (`merge_rounds.py` for the two rounds, then `build_bank.py`, at most 2 items per bridge)
-   -> `evals/celeste_jlens_intermediates/items.json`; `write_readme.py` regenerates the family README.
+6. **Leak check at every site** (`../silent_bridge/modal/free_sampling.py --n 16 --max-tokens 48`).
+   At the single best J-lens site the model names the bridge itself for most items (the J-lens is
+   strongest where the model is about to write the name), so every qualifying site is checked.
+7. **Boundary site** (`choose_sites.py`): only punctuation, newline or chat-template turn tokens
+   (never a word or mid-word piece), silent, with a found word in the J-lens top 10; a
+   punctuation/newline site is preferred, the item records its `site_class`.
+8. **Specificity** (`specific_check.py`, `claude-sonnet-5`): the found words must point to the
+   bridge, not the text's topic ("frog" for "amphibian" is rejected). **Derived forms**
+   (`../silent_bridge/leak_forms.py`). **Review** (`review_items.py`, `claude-opus-5`): the question
+   singles out the bridge, does not name it, the answer is right, the bridge is the natural thing to
+   think of (not the person behind a law); adds missing full-name aliases.
+9. **Lens arms and the incompleteness check**: every surviving site is read by the bench's arms, the
+   J-lens top-10 readout included, and judged by this family's judge WITH the review's aliases; only
+   sites where the J-lens readout does NOT name the bridge are kept. This drops entities whose
+   everyday name is one token (Skyrim, WoW, 奥运会).
+10. **Bank** (`merge_rounds.py` over the generation rounds, then `build_bank.py --jlens-judged
+    --review`, at most 2 items per bridge) -> `evals/celeste_jlens_ambiguous/items.json`;
+    `write_readme.py` regenerates the family README.
 
 ## Script notes
 
@@ -67,5 +76,5 @@ continuations never name it. Built 2026-10-23 with `claude-sonnet-5` (proposals 
   with that suffix instead of the one-word instruction (a multi-word bridge cannot be answered in
   one word); a shell-passed `\n` is unescaped to a newline. All other probes keep `SUFFIX`.
 - `write_readme.py` keeps two README prose lines over 100 chars in its template (`# noqa: E501` on
-  the closing triple quote) so that the generated `evals/celeste_jlens_intermediates/README.md`
+  the closing triple quote) so that the generated `evals/celeste_jlens_ambiguous/README.md`
   stays byte-identical; re-wrap them and regenerate if you want the template under the limit.

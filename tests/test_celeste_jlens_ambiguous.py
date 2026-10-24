@@ -1,5 +1,5 @@
-"""celeste_jlens_intermediates: the bank's ids and its J-lens read site (fragments of the
-multi-word bridge, not in the text), the plan, the per-cell judge, and the toy dry run."""
+"""celeste_jlens_ambiguous: the bank's ids and its J-lens read site (fragments of the multi-word
+bridge in the J-lens top 10, not in the text, readout not naming it), plan, judge, toy run."""
 
 import json
 import re
@@ -13,7 +13,7 @@ from wsbench.cli import main
 from wsbench.results import read_results
 
 REPO = Path(__file__).resolve().parents[1]
-FAM = "celeste_jlens_intermediates"
+FAM = "celeste_jlens_ambiguous"
 BANK = REPO / "evals" / FAM / "items.json"
 SUFFIX = "\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE."
 
@@ -28,7 +28,7 @@ def _spec():
 
 def test_bank_shape_and_plan():
     header, items = load_bank(BANK)
-    assert header["family"] == FAM and header["n_items"] == len(items) >= 100
+    assert header["family"] == FAM and header["n_items"] == len(items) >= 90
     assert header["funnel"]["kept"] == len(items)
     for it in items:
         assert it["prompt"].endswith(SUFFIX) and len(it["target"].split()) >= 2
@@ -38,6 +38,7 @@ def test_bank_shape_and_plan():
             assert len(a.split()) >= 2 or a.isupper() or a.lower() in it["target"].lower()
         ev = it["jlens_evidence"]
         assert ev["name_words"], it["name"]
+        assert ev["readout_names_target"] is False and min(ev["ranks_l42"].values()) < 10
         prefix = it["question"].lower()
         for w in ev["name_words"]:
             assert not re.search(rf"(?<![a-z0-9]){re.escape(w.lower())}(?![a-z0-9])", prefix), (
@@ -45,8 +46,11 @@ def test_bank_shape_and_plan():
                 w,
             )
         (site,) = it["read_sites"]
-        assert site["label"] == "jlens_site" and 0 <= site["pos"] < len(it["input_ids"])
-        assert it["leak_check"]["sites"]["jlens_site"]["n_leaks"] == 0
+        assert site["label"] == f"jlens_{it['site_class']}" and 0 <= site["pos"] < len(
+            it["input_ids"]
+        )
+        assert it["site_class"] in ("punctuation", "turn_token")
+        assert it["leak_check"]["sites"][site["label"]]["n_leaks"] == 0
         assert cj.targets_of(it)[0] == it["target"]
     specs = readplan.plan(FAM)
     assert len(specs) == len(items)
@@ -103,7 +107,7 @@ def test_item_passes_only_when_named(tmp_path, monkeypatch, mk_args):
     r = cj.run_family(args, name=FAM, bank=BANK, forbidden=False)
     by = {row["id"]: row for row in r.rows}
     assert by[a["id"]]["pass"] is True and by[b["id"]]["pass"] is False
-    assert r.value == 0.5 and r.extras["per_site_item_rate"] == {"jlens_site": 0.5}
+    assert r.value == 0.5 and by[a["id"]]["hitting_sites"] == [a["read_sites"][0]["label"]]
 
 
 def test_dry_run_on_the_toy_file(tmp_path, capsys, monkeypatch):

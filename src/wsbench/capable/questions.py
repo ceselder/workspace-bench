@@ -303,9 +303,9 @@ NO_QUESTION: dict[str, str] = {
     "question right in one word, recalls both hops, misses it with the clue made generic, never "
     "names the bridge in 32 sampled answers): re-run scripts/celeste_evals/silent_bridge on a new "
     "model",
-    "celeste_jlens_intermediates": "the read sites are where the J-lens of Qwen3.6-27B surfaces "
-    "the multi-word bridge (not copied from the text) and its own continuations never name it: "
-    "re-run scripts/celeste_evals/jlens_intermediates on a new model",
+    "celeste_jlens_ambiguous": "the read sites are where the J-lens of Qwen3.6-27B catches "
+    "fragments of the multi-word bridge (not copied from the text) without naming it, and its own "
+    "continuations never name it: re-run scripts/celeste_evals/jlens_ambiguous on a new model",
     "celeste_foreshadow": "the targets are Qwen3.6-27B's own thoughts (stated in >= 4 of its 8 "
     "thinking-mode answers, never in 16 sampled continuations from the read site): re-run "
     "scripts/celeste_evals/foreshadow on a new model",

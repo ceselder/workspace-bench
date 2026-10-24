@@ -473,7 +473,7 @@ def plan(family: str) -> list[ReadSpec]:
         "celeste_lookahead",
         "celeste_withheld_answer",
         "celeste_silent_bridge",
-        "celeste_jlens_intermediates",
+        "celeste_jlens_ambiguous",
     ):
         _h, items = _bank(family)
         return [

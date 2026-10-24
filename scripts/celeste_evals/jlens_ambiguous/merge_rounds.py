@@ -1,18 +1,18 @@
-"""Merge two rounds' gate, sites, leak, derived-form and specificity files into one set of
-build_bank.py inputs; round-2 repeats of a round-1 question are dropped (round-1 ids sort first).
-    python3 merge_rounds.py R1_DIR R2_DIR OUT_DIR"""
+"""Merge the rounds' gate, sites, leak, derived-form and specificity files into one set of
+build_bank.py inputs; a later round's repeat of an earlier question is dropped (ids sort by round).
+    python3 merge_rounds.py DIR OUT_DIR r2 r3   (round 1 = the unsuffixed files in DIR)"""
 
 import json
 import sys
 from pathlib import Path
 
-# (round-1 name, round-2 name, merged name, kind)
+# (round-1 file, file stem of later rounds, merged name, kind); later rounds are <stem>_<rN>.json
 FILES = [
-    ("gate2.json", "gate_r2.json", "gate.json", "items"),
-    ("sites_final.json", "sites_final_r2.json", "sites.json", "list"),
-    ("free_final.json", "free_final_r2.json", "free.json", "items"),
-    ("leak_forms.json", "leak_forms_r2.json", "leaks.json", "dict"),
-    ("specific_final.json", "specific_final_r2.json", "specific.json", "dict"),
+    ("gate2.json", "gate", "gate.json", "items"),
+    ("sites_final.json", "sites_final", "sites.json", "list"),
+    ("free_final.json", "free_final", "free.json", "items"),
+    ("leak_forms.json", "leak_forms", "leaks.json", "dict"),
+    ("specific_final.json", "specific_final", "specific.json", "dict"),
 ]
 
 
@@ -21,28 +21,37 @@ def load(path: Path):
         return json.load(f)
 
 
+def key(x: dict) -> str:
+    return x.get("id", x.get("name"))
+
+
 def main() -> None:
-    r1, r2, out = (Path(p) for p in sys.argv[1:4])
+    src, out, rounds = Path(sys.argv[1]), Path(sys.argv[2]), sys.argv[3:]
     out.mkdir(parents=True, exist_ok=True)
-    seen = {c["question"].strip().lower() for c in load(r1 / "gate2.json")["items"]}
-    dropped = {
-        c["id"] for c in load(r2 / "gate_r2.json")["items"] if c["question"].strip().lower() in seen
-    }
-    for n1, n2, name, kind in FILES:
-        a, b = load(r1 / n1), load(r2 / n2)
-        if kind == "items":
-            merged = {
-                **a,
-                "items": a["items"]
-                + [x for x in b["items"] if x.get("id", x.get("name")) not in dropped],
-            }
-        elif kind == "list":
-            merged = a + [x for x in b if x["id"] not in dropped]
-        else:
-            merged = {**a, **{k: v for k, v in b.items() if k not in dropped}}
+    seen = {c["question"].strip().lower() for c in load(src / "gate2.json")["items"]}
+    dropped: set[str] = set()
+    for r in rounds:
+        for c in load(src / f"gate_{r}.json")["items"]:
+            q = c["question"].strip().lower()
+            if q in seen:
+                dropped.add(c["id"])
+            seen.add(q)
+    for first, stem, name, kind in FILES:
+        merged = load(src / first)
+        for r in rounds:
+            nxt = load(src / f"{stem}_{r}.json")
+            if kind == "items":
+                merged = {
+                    **merged,
+                    "items": merged["items"] + [x for x in nxt["items"] if key(x) not in dropped],
+                }
+            elif kind == "list":
+                merged = merged + [x for x in nxt if x["id"] not in dropped]
+            else:
+                merged = {**merged, **{k: v for k, v in nxt.items() if k not in dropped}}
         with open(out / name, "w") as f:
             json.dump(merged, f, ensure_ascii=False)
-    print(f"merged into {out}; dropped {len(dropped)} round-2 repeats of round-1 questions")
+    print(f"merged round 1 + {', '.join(rounds)} into {out}; dropped {len(dropped)} repeats")
 
 
 if __name__ == "__main__":
