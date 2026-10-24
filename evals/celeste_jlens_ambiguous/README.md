@@ -8,7 +8,7 @@ J-lens top 10 holds fragments of that entity (words of its name that are not in 
 does not name it, the way an image of Bonnie gives the J-lens `night`, `nights`, `anim`,
 `Minecraft` and never "Five Nights at Freddy's". The model's own continuations from the site never
 name it either. Does a lens say the whole entity?
-94 items, read at the bank's **read site** inside the captured render (`render: captured`,
+112 items, read at the bank's **read site** inside the captured render (`render: captured`,
 `input_ids` shipped per item; `wsbench plan` lists the positions). Built 2026-10-23
 (`scripts/celeste_evals/jlens_intermediates/`).
 
@@ -29,8 +29,8 @@ sites are mostly the chat template's tokens and the instruction:
 
 | read token | items |
 |---|---|
-| `'<\|im_start\|>'` | 58 |
-| `'\n'` | 26 |
+| `'<\|im_start\|>'` | 73 |
+| `'\n'` | 29 |
 | `','` | 3 |
 | `'<\|im_end\|>'` | 3 |
 | `'\n\n'` | 3 |
@@ -50,35 +50,35 @@ Funnel (candidates proposed by `claude-sonnet-5`, then the Qwen3.6-27B gate and 
 
 | stage | n |
 |---|---|
-| candidates proposed | 4472 |
-| answered right, both hops recalled, the bridge never named in 32 answers | 1560 |
-| and the bridge's name is two or more tokens | 1533 |
-| and some prompt token's J-lens top 20 holds a rare NAME word of the bridge that is not in the text, from which 16 free continuations never name it | 200 |
-| and the found words point to the bridge, not the text's topic | 169 |
-| and at least one found word is in the J-lens top 10 | 169 |
-| and the J-lens top-10 readout there is judged NOT to name it | 94 |
-| and no answer names the bridge by a derived form | 94 |
-| and an independent claude-opus-5 review keeps the item | 94 |
-| kept (<= 2 items per bridge) | 94 |
+| candidates proposed | 5609 |
+| answered right, both hops recalled, the bridge never named in 32 answers | 1914 |
+| and the bridge's name is two or more tokens | 1881 |
+| and some prompt token's J-lens top 20 holds a rare NAME word of the bridge that is not in the text, from which 16 free continuations never name it | 247 |
+| and the found words point to the bridge, not the text's topic | 210 |
+| and at least one found word is in the J-lens top 10 | 210 |
+| and the J-lens top-10 readout there is judged NOT to name it | 128 |
+| and no answer names the bridge by a derived form | 128 |
+| and an independent claude-opus-5 review keeps the item | 128 |
+| kept (<= 2 items per bridge) | 112 |
 
 Items per category (`variant`):
 
 | category | items |
 |---|---|
-| historical events and missions | 15 |
-| companies and products | 13 |
-| landmarks and buildings | 9 |
+| historical events and missions | 21 |
+| companies and products | 14 |
+| landmarks and buildings | 12 |
+| video games | 9 |
 | institutions and organisations | 9 |
-| video games | 7 |
-| sports teams and tournaments | 6 |
-| paintings and artworks | 6 |
+| paintings and artworks | 8 |
+| sports teams and tournaments | 7 |
 | scientific theories and laws | 6 |
 | board and card games | 5 |
 | mythological stories | 5 |
+| novels and book series | 4 |
 | TV series | 3 |
+| films | 3 |
 | anime and comics | 3 |
-| novels and book series | 2 |
-| films | 2 |
 | fictional characters | 2 |
 | internet phenomena and memes | 1 |
 
@@ -98,17 +98,17 @@ Items per category (`variant`):
 
 ## Reference results (2026-10-24, layer 42, this instrument)
 
-| arm | items passed | 95% CI | at punctuation/newline sites (33) | at turn-token sites (61) |
+| arm | items passed | 95% CI | at punctuation/newline sites (36) | at turn-token sites (76) |
 |---|---|---|---|---|
-| olens | 82% | 74%-89% | 58% | 95% |
-| NLA | 78% | 69%-85% | 64% | 85% |
-| KV olens | 68% | 59%-78% | 39% | 84% |
-| steering vector | 66% | 56%-76% | 33% | 84% |
-| prompt-only | 45% | 35%-55% | 55% | 39% |
+| olens | 82% | 74%-89% | 58% | 93% |
+| NLA | 79% | 71%-86% | 64% | 86% |
+| KV olens | 70% | 62%-78% | 39% | 84% |
+| steering vector | 66% | 58%-74% | 33% | 82% |
+| prompt-only | 46% | 37%-55% | 56% | 42% |
 | J-lens (top 10) | 0% | 0%-0% | 0% | 0% |
-| plain continuation | 2% | 0%-5% | 3% | 2% |
+| plain continuation | 2% | 0%-4% | 3% | 1% |
 
-Arms, all reading the block-42 residual of Qwen3.6-27B: olens = single-activation oracle lens (8 samples, <= 160 tokens); NLA = natural-language autoencoder; KV olens = oracle lens that also reads the prompt's keys and values; steering vector = in-context steering-vector lens; prompt-only = stock Qwen3.6-27B shown the cut-off render as plain text (special tokens escaped) and asked what the model is thinking there; J-lens = its top-10 tokens (0 by construction: the read sites are where it does not name the entity); plain continuation = 8 continuations of up to 24 tokens from the read site. The per-class columns split the items by the read token: a punctuation or newline token, or the chat-template turn token. At punctuation sites the lenses are weaker and the text-only reader is level with them; the lens advantage is at the turn token.
+Arms, all reading the block-42 residual of Qwen3.6-27B: olens = single-activation oracle lens (8 samples, <= 160 tokens); NLA = natural-language autoencoder; KV olens = oracle lens that also reads the prompt's keys and values; steering vector = in-context steering-vector lens; prompt-only = stock Qwen3.6-27B shown the cut-off render as plain text (special tokens escaped) and asked what the model is thinking there; J-lens = its top-10 tokens (0 by construction: the read sites are where it does not name the entity); plain continuation = 8 continuations of up to 24 tokens from the read site. The per-class columns split the items by the read token: a punctuation or newline token, or the chat-template turn token. At punctuation sites the lenses are weaker and the text-only reader is level with them; the lens advantage is at the turn token. Re-judging the same readouts without the cache gives the same verdict on 92-99% of items (pass rates within 1 point; prompt-only within 5).
 
 ## Readouts
 

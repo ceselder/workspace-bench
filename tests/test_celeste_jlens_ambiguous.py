@@ -28,7 +28,7 @@ def _spec():
 
 def test_bank_shape_and_plan():
     header, items = load_bank(BANK)
-    assert header["family"] == FAM and header["n_items"] == len(items) >= 90
+    assert header["family"] == FAM and header["n_items"] == len(items) >= 100
     assert header["funnel"]["kept"] == len(items)
     for it in items:
         assert it["prompt"].endswith(SUFFIX) and len(it["target"].split()) >= 2

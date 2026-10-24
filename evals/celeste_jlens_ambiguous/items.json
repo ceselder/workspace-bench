@@ -8,18 +8,18 @@
  "read": "`jlens_site` = a BOUNDARY token (punctuation or newline, else the chat-template turn token <|im_start|> / <|im_end|>; never a word or mid-word piece; `site_class`) where the J-lens (neuronpedia n=1000, layer 42) catches the bridge without naming it: its top 20 holds a rare, one-token NAME word of the bridge that is not in the text so far (zipf < 4.5, no inflection of a text word), at least one found word is in its top 10, the found words are judged specific to the bridge rather than the text's topic (claude-sonnet-5), and its top-10 readout there is judged by this family's judge NOT to name the bridge; 16 free continuations of 48 tokens from it never name the bridge; a punctuation/newline site is preferred over a turn token",
  "review": "an independent claude-opus-5 review keeps an item only if the question singles out exactly the bridge, never names it, the model's one-word answer is correct, and the bridge is the natural thing to think of (not, e.g., the person behind a law); it also adds missing full-name aliases",
  "funnel": {
-  "candidates": 4472,
-  "gate_pass": 1560,
-  "multi_token_name": 1533,
-  "jlens_site": 200,
-  "site_specific": 169,
-  "fragment_in_top10": 169,
-  "jlens_does_not_name_it": 94,
-  "no_derived_form_leak": 94,
-  "review_keep": 94,
-  "kept": 94
+  "candidates": 5609,
+  "gate_pass": 1914,
+  "multi_token_name": 1881,
+  "jlens_site": 247,
+  "site_specific": 210,
+  "fragment_in_top10": 210,
+  "jlens_does_not_name_it": 128,
+  "no_derived_form_leak": 128,
+  "review_keep": 128,
+  "kept": 112
  },
- "n_items": 94,
+ "n_items": 112,
  "items": [
   {
    "name": "mtb-0018",
@@ -13195,6 +13195,2507 @@
     {
      "label": "jlens_punctuation",
      "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0022",
+   "prompt": "Think of the nuclear-powered exploration vehicle lowered onto Mars by a rocket-powered sky crane in 2012. How many cameras does it carry?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the nuclear-powered exploration vehicle lowered onto Mars by a rocket-powered sky crane in 2012. How many cameras does it carry?",
+   "target": "Curiosity Rover",
+   "aliases": [
+    "Mars Science Laboratory",
+    "MSL"
+   ],
+   "name_parts": [
+    "curiosity",
+    "rover"
+   ],
+   "answer": "17",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "17",
+    "correct_t07": "20/20",
+    "bridge_question": "Which nuclear-powered exploration vehicle was lowered onto Mars by a rocket-powered sky crane in 2012?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many cameras does the Curiosity Rover carry?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain exploration vehicle. How many cameras does it carry?",
+    "generic_probe_hits_t07": "5/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "17",
+     "17",
+     "17",
+     "17"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "rover"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "rover": 0
+    },
+    "top10_l42": [
+     " rover",
+     "火星",
+     "NASA",
+     " NASA",
+     " spacecraft",
+     " SpaceX",
+     " Martian",
+     " robotic",
+     "月球",
+     "机器人的"
+    ],
+    "specific_why": "‘rover’ is part of name Curiosity Rover",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 56,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    10922,
+    39066,
+    25559,
+    7083,
+    37536,
+    8366,
+    20403,
+    539,
+    264,
+    23542,
+    39066,
+    12515,
+    70466,
+    303,
+    220,
+    17,
+    15,
+    16,
+    17,
+    13,
+    2500,
+    1599,
+    17599,
+    1503,
+    424,
+    6564,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0068",
+   "prompt": "Consider the twin skyscrapers in Kuala Lumpur linked by a sky crossing, once the tallest buildings in the world—how many floors does each building have?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Consider the twin skyscrapers in Kuala Lumpur linked by a sky crossing, once the tallest buildings in the world—how many floors does each building have?",
+   "target": "Petronas Towers",
+   "aliases": [
+    "Petronas Twin Towers"
+   ],
+   "name_parts": [
+    "petronas",
+    "towers"
+   ],
+   "answer": "88",
+   "variant": "landmarks and buildings",
+   "topic": "landmarks and buildings",
+   "gate": {
+    "greedy_answer": "88",
+    "correct_t07": "20/20",
+    "bridge_question": "What is the name of the twin skyscrapers in Kuala Lumpur linked by a sky crossing, once the tallest buildings in the world?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many floors does each Petronas Tower have?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Consider a certain pair of skyscrapers, how many floors does each building have?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "88",
+     "88",
+     "88",
+     "88"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "towers"
+    ],
+    "signature_words": [
+     "malaysia"
+    ],
+    "ranks_l42": {
+     "towers": 2,
+     "malaysia": 17
+    },
+    "top10_l42": [
+     " skys",
+     " Kuala",
+     " towers",
+     "tower",
+     "Tower",
+     " Towers",
+     " Tower",
+     " skyline",
+     "两座",
+     "摩天"
+    ],
+    "specific_why": "‘towers’ matches Petronas Towers name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 57,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    35944,
+    279,
+    26510,
+    81410,
+    95307,
+    382,
+    303,
+    83351,
+    83265,
+    10278,
+    539,
+    264,
+    12515,
+    25786,
+    11,
+    2957,
+    279,
+    78802,
+    13308,
+    303,
+    279,
+    1814,
+    2218,
+    4993,
+    1599,
+    25115,
+    1503,
+    1754,
+    4599,
+    599,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 50,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0093",
+   "prompt": "In the satire about a ship's surgeon who visits tiny people, giants, and a land of intelligent horses, how many separate voyages does he undertake?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In the satire about a ship's surgeon who visits tiny people, giants, and a land of intelligent horses, how many separate voyages does he undertake?",
+   "target": "Gulliver's Travels",
+   "aliases": [],
+   "name_parts": [
+    "gulliver",
+    "gulliver's",
+    "travels"
+   ],
+   "answer": "4",
+   "variant": "novels and book series",
+   "topic": "novels and book series",
+   "gate": {
+    "greedy_answer": "Four",
+    "correct_t07": "20/20",
+    "bridge_question": "Which satirical novel follows a ship's surgeon through lands of tiny people, giants, and intelligent horses?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In Gulliver's Travels, how many separate voyages does the protagonist undertake?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In a certain novel, how many separate voyages does he undertake?",
+    "generic_probe_hits_t07": "14/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Four",
+     "Four",
+     "Four",
+     "Four"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "travels"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "travels": 4
+    },
+    "top10_l42": [
+     " voyages",
+     " voyage",
+     "三次",
+     "航行",
+     " travels",
+     " путешеств",
+     " journeys",
+     "四次",
+     "旅行",
+     "四个"
+    ],
+    "specific_why": "‘travels’ matches Gulliver's Travels title",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 56,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    279,
+    78590,
+    883,
+    264,
+    8026,
+    579,
+    43495,
+    852,
+    20406,
+    13280,
+    1208,
+    11,
+    43701,
+    11,
+    321,
+    264,
+    4128,
+    314,
+    23739,
+    25972,
+    11,
+    1204,
+    1599,
+    8387,
+    208653,
+    1503,
+    551,
+    46926,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 48,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0130",
+   "prompt": "During the nearly 900-day WWII blockade of a Soviet city that caused mass starvation, what staple food was rationed to near-nothing for residents?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "During the nearly 900-day WWII blockade of a Soviet city that caused mass starvation, what staple food was rationed to near-nothing for residents?",
+   "target": "Siege of Leningrad",
+   "aliases": [
+    "Leningrad Blockade",
+    "Blockade of Leningrad"
+   ],
+   "name_parts": [
+    "leningrad",
+    "siege"
+   ],
+   "answer": "bread",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "Bread",
+    "correct_t07": "20/20",
+    "bridge_question": "What is the name of the nearly 900-day WWII Nazi blockade of a Soviet city that caused mass civilian starvation?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What staple food was rationed to near-nothing during the Siege of Leningrad?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "During a certain historical siege, what staple food was rationed to near-nothing for residents?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Bread",
+     "Bread",
+     "Bread",
+     "Bread"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "siege"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "siege": 0
+    },
+    "top10_l42": [
+     " siege",
+     " Siege",
+     "封锁",
+     " besie",
+     "Sie",
+     " blockade",
+     "围攻",
+     " оса",
+     "饿",
+     " famine"
+    ],
+    "specific_why": "‘siege’ matches Siege of Leningrad",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 58,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    15542,
+    279,
+    6791,
+    220,
+    24,
+    15,
+    15,
+    10902,
+    58004,
+    73530,
+    314,
+    264,
+    18802,
+    3177,
+    421,
+    8613,
+    2973,
+    74506,
+    11,
+    1092,
+    47315,
+    3487,
+    557,
+    63582,
+    290,
+    310,
+    3043,
+    27443,
+    1540,
+    364,
+    10509,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 51,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0132",
+   "prompt": "After their ship was crushed by pack ice during a 1914 Antarctic journey, what marine mammal's meat helped keep the stranded crew alive?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "After their ship was crushed by pack ice during a 1914 Antarctic journey, what marine mammal's meat helped keep the stranded crew alive?",
+   "target": "Shackleton's Endurance Expedition",
+   "aliases": [
+    "Endurance Expedition",
+    "Imperial Trans-Antarctic Expedition"
+   ],
+   "name_parts": [
+    "endurance",
+    "expedition",
+    "imperial",
+    "shackleton",
+    "trans-antarctic"
+   ],
+   "answer": "seal",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "Seal",
+    "correct_t07": "20/20",
+    "bridge_question": "What is the name of the 1914 Antarctic expedition whose ship was crushed by pack ice, stranding the crew for months?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What marine mammal's meat helped keep Shackleton's Endurance Expedition crew alive?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "During a certain expedition, what marine mammal's meat helped keep the stranded crew alive?",
+    "generic_probe_hits_t07": "16/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "Seal",
+     "Seal",
+     "Seal",
+     "Seal"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "expedition"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "expedition": 3
+    },
+    "top10_l42": [
+     "探险",
+     " Antarctic",
+     "南极",
+     " expedition",
+     "被困",
+     " Expedition",
+     "船",
+     "极地",
+     "船长",
+     "一艘"
+    ],
+    "specific_why": "‘expedition’ matches Endurance Expedition name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 57,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    5836,
+    836,
+    8026,
+    557,
+    31563,
+    539,
+    3641,
+    9561,
+    2261,
+    264,
+    220,
+    16,
+    24,
+    16,
+    19,
+    76994,
+    11285,
+    11,
+    1092,
+    27657,
+    33784,
+    278,
+    579,
+    12668,
+    8640,
+    2426,
+    279,
+    60013,
+    13234,
+    13282,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 50,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0185",
+   "prompt": "An English football club known for the anthem 'You'll Never Walk Alone' and six European Cup titles wears what color home shirts?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "An English football club known for the anthem 'You'll Never Walk Alone' and six European Cup titles wears what color home shirts?",
+   "target": "Liverpool FC",
+   "aliases": [
+    "Liverpool Football Club",
+    "LFC"
+   ],
+   "name_parts": [
+    "liverpool"
+   ],
+   "answer": "red",
+   "variant": "sports teams and tournaments",
+   "topic": "sports teams and tournaments",
+   "gate": {
+    "greedy_answer": "Red",
+    "correct_t07": "20/20",
+    "bridge_question": "Which English football club, famous for singing 'You'll Never Walk Alone,' has won six European Cups?",
+    "bridge_recall_t07": "9/10",
+    "hop2_question": "What color are Liverpool FC's home shirts?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "An English football club wears what color home shirts?",
+    "generic_probe_hits_t07": "19/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Red",
+     "Red",
+     "Red",
+     "Red"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "liverpool"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "liverpool": 2
+    },
+    "top10_l42": [
+     "Manchester",
+     "利物浦",
+     "Liverpool",
+     "球衣",
+     " Liverpool",
+     "-blue",
+     " цвета",
+     "蓝色",
+     "蓝色的",
+     " jerseys"
+    ],
+    "specific_why": "‘liverpool’ directly names the club",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 52,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    2014,
+    6163,
+    8693,
+    6135,
+    3750,
+    364,
+    279,
+    53697,
+    359,
+    2523,
+    3172,
+    14271,
+    12194,
+    66962,
+    6,
+    321,
+    4590,
+    7277,
+    10544,
+    14865,
+    36065,
+    1092,
+    1829,
+    2046,
+    35506,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 44,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0250",
+   "prompt": "This was the final mission in a series that sent humans to walk on the Moon; in what year did it launch?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "This was the final mission in a series that sent humans to walk on the Moon; in what year did it launch?",
+   "target": "Apollo 17",
+   "aliases": [],
+   "name_parts": [
+    "apollo",
+    "seventeen"
+   ],
+   "answer": "1972",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "1972",
+    "correct_t07": "20/20",
+    "bridge_question": "Which NASA mission was the last crewed mission to land humans on the Moon?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what year did Apollo 17 launch?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "This was the final mission in a certain series; in what year did it launch?",
+    "generic_probe_hits_t07": "5/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "1972",
+     "1972",
+     "1972",
+     "1972"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "apollo"
+    ],
+    "signature_words": [
+     "astronauts",
+     "lunar"
+    ],
+    "ranks_l42": {
+     "apollo": 6,
+     "astronauts": 0,
+     "lunar": 19
+    },
+    "top10_l42": [
+     " astronauts",
+     " NASA",
+     "NASA",
+     " astronaut",
+     "宇航",
+     "月球",
+     " Apollo",
+     "Apollo",
+     "神舟",
+     "航天"
+    ],
+    "specific_why": "‘apollo’ directly names the mission",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 50,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    1919,
+    557,
+    279,
+    1534,
+    8684,
+    303,
+    264,
+    3878,
+    421,
+    3106,
+    12313,
+    310,
+    4088,
+    383,
+    279,
+    16820,
+    26,
+    303,
+    1092,
+    1007,
+    1467,
+    424,
+    6830,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 43,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0263",
+   "prompt": "In a pirate adventure novel, a young cabin boy follows a map leading to a buried chest guarded by mutineers. What is the chest filled with?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In a pirate adventure novel, a young cabin boy follows a map leading to a buried chest guarded by mutineers. What is the chest filled with?",
+   "target": "Treasure Island",
+   "aliases": [],
+   "name_parts": [
+    "island",
+    "treasure"
+   ],
+   "answer": "gold",
+   "variant": "novels and book series",
+   "topic": "novels and book series",
+   "gate": {
+    "greedy_answer": "Gold",
+    "correct_t07": "16/20",
+    "bridge_question": "Which novel follows a boy who finds a map leading to a pirate's buried treasure?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What is the treasure chest filled with in Treasure Island?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In a certain novel, what is the chest filled with?",
+    "generic_probe_hits_t07": "13/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Gold",
+     "Gold",
+     "Gold",
+     "Gold"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "\n",
+    "name_words": [
+     "treasure"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "treasure": 0
+    },
+    "top10_l42": [
+     " treasure",
+     " jewels",
+     " treasures",
+     "宝藏",
+     " loot",
+     " gold",
+     " gems",
+     "金币",
+     " diamonds",
+     " coins"
+    ],
+    "specific_why": "'treasure' is part of the title 'Treasure Island'.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_punctuation": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 57,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    264,
+    52154,
+    17407,
+    11183,
+    11,
+    264,
+    3777,
+    12999,
+    7914,
+    10695,
+    264,
+    2336,
+    6187,
+    310,
+    264,
+    26055,
+    14697,
+    61030,
+    539,
+    5041,
+    472,
+    382,
+    13,
+    3437,
+    369,
+    279,
+    14697,
+    9896,
+    440,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "punctuation",
+   "read_sites": [
+    {
+     "label": "jlens_punctuation",
+     "pos": 49,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0302",
+   "prompt": "Thinking of the rhythm video game where players press colored fret buttons on a plastic controller shaped like a musical instrument, how many fret buttons does the standard controller have?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Thinking of the rhythm video game where players press colored fret buttons on a plastic controller shaped like a musical instrument, how many fret buttons does the standard controller have?",
+   "target": "Guitar Hero",
+   "aliases": [],
+   "name_parts": [
+    "guitar",
+    "hero"
+   ],
+   "answer": "Five",
+   "variant": "video games",
+   "topic": "video games",
+   "gate": {
+    "greedy_answer": "5",
+    "correct_t07": "20/20",
+    "bridge_question": "Which rhythm video game has players press colored fret buttons on a guitar-shaped plastic controller?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many colored fret buttons are on the standard Guitar Hero controller?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Thinking of a certain video game, how many fret buttons does the standard controller have?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "medium",
+    "answers_sampled_t1": [
+     "5",
+     "5",
+     " five",
+     "5"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "guitar"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "guitar": 0
+    },
+    "top10_l42": [
+     " Guitar",
+     " guitar",
+     "吉他",
+     " guitars",
+     "uitar",
+     " guitarist",
+     " guitarra",
+     " COLORS",
+     " MIDI",
+     " gitar"
+    ],
+    "specific_why": "'guitar' is part of 'Guitar Hero' title.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 58,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    90700,
+    314,
+    279,
+    35091,
+    2678,
+    1746,
+    1332,
+    4078,
+    3379,
+    26321,
+    51282,
+    12068,
+    383,
+    264,
+    11840,
+    6259,
+    25432,
+    1040,
+    264,
+    17264,
+    13736,
+    11,
+    1204,
+    1599,
+    51282,
+    12068,
+    1503,
+    279,
+    5129,
+    6259,
+    599,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 51,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0398",
+   "prompt": "The original monster-catching games that introduced Pikachu and let players become a Trainer collecting creatures across Kanto launched in what year?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "The original monster-catching games that introduced Pikachu and let players become a Trainer collecting creatures across Kanto launched in what year?",
+   "target": "Pokémon Red and Blue",
+   "aliases": [
+    "Pokemon Red and Blue",
+    "Pokémon Red",
+    "Pokémon Blue",
+    "Pokemon Red",
+    "Pokemon Blue",
+    "Pokémon Red and Green",
+    "Pokemon Red and Green"
+   ],
+   "name_parts": [
+    "blue",
+    "pokemon",
+    "pokémon",
+    "red"
+   ],
+   "answer": "1996",
+   "variant": "video games",
+   "topic": "video games",
+   "gate": {
+    "greedy_answer": "1996",
+    "correct_t07": "20/20",
+    "bridge_question": "Name the original monster-catching games that introduced Pikachu and the Kanto region.",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what year were Pokémon Red and Blue released?",
+    "hop2_recall_t07": "8/10",
+    "generic_probe": "The original monster-catching games launched in what year?",
+    "generic_probe_hits_t07": "19/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "1996",
+     "1996",
+     "1996",
+     "1996"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "pokémon",
+     "pokemon"
+    ],
+    "signature_words": [
+     "Nintendo"
+    ],
+    "ranks_l42": {
+     "pokémon": 0,
+     "pokemon": 3,
+     "Nintendo": 2
+    },
+    "top10_l42": [
+     " Pokémon",
+     "宝可梦",
+     " Nintendo",
+     " pokemon",
+     " Pikachu",
+     "Pokemon",
+     "任天堂",
+     " Pokemon",
+     "Nintendo",
+     "game"
+    ],
+    "specific_why": "'pokémon'/'nintendo' name the franchise directly.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 50,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    760,
+    3889,
+    17125,
+    80449,
+    3739,
+    421,
+    11192,
+    93575,
+    321,
+    1042,
+    4078,
+    3512,
+    264,
+    44518,
+    25068,
+    19361,
+    3808,
+    710,
+    13168,
+    11291,
+    303,
+    1092,
+    1007,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 43,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0522",
+   "prompt": "A particle accelerator buried beneath the Franco-Swiss border, used to confirm the Higgs boson in 2012 and operated by a multinational physics laboratory — how many kilometers long is its underground ring?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A particle accelerator buried beneath the Franco-Swiss border, used to confirm the Higgs boson in 2012 and operated by a multinational physics laboratory — how many kilometers long is its underground ring?",
+   "target": "Large Hadron Collider",
+   "aliases": [
+    "LHC"
+   ],
+   "name_parts": [
+    "collider",
+    "hadron",
+    "large"
+   ],
+   "answer": "27",
+   "variant": "companies and products",
+   "topic": "companies and products",
+   "gate": {
+    "greedy_answer": "27",
+    "correct_t07": "20/20",
+    "bridge_question": "Which particle accelerator, buried beneath the Franco-Swiss border, confirmed the Higgs boson in 2012?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "How many kilometers long is the underground ring of the Large Hadron Collider?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain particle accelerator — how many kilometers long is its underground ring?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "27",
+     "27",
+     "27",
+     "27"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "collider"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "collider": 2
+    },
+    "top10_l42": [
+     " ITER",
+     "日内",
+     " Collider",
+     " collider",
+     " Airbus",
+     "巨大",
+     "GeV",
+     " Genome",
+     "设施",
+     " physicists"
+    ],
+    "specific_why": "'collider' is part of the official name.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 68,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    18223,
+    62183,
+    26055,
+    23221,
+    279,
+    42392,
+    6027,
+    192437,
+    3755,
+    11,
+    1429,
+    310,
+    7440,
+    279,
+    462,
+    59087,
+    41231,
+    263,
+    303,
+    220,
+    17,
+    15,
+    16,
+    17,
+    321,
+    22428,
+    539,
+    264,
+    65634,
+    20665,
+    25744,
+    1892,
+    1204,
+    1599,
+    39229,
+    1248,
+    369,
+    1141,
+    24458,
+    9761,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 61,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0578",
+   "prompt": "A 19th-century suspension crossing linking Manhattan to another borough, designed by John Roebling, is famed for its stone towers and web of cables. What metal are its main cables made of?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A 19th-century suspension crossing linking Manhattan to another borough, designed by John Roebling, is famed for its stone towers and web of cables. What metal are its main cables made of?",
+   "target": "Brooklyn Bridge",
+   "aliases": [],
+   "name_parts": [
+    "bridge",
+    "brooklyn"
+   ],
+   "answer": "steel",
+   "variant": "landmarks and buildings",
+   "topic": "landmarks and buildings",
+   "gate": {
+    "greedy_answer": "Steel",
+    "correct_t07": "16/20",
+    "bridge_question": "What is the name of this 19th-century suspension crossing linking Manhattan to another borough, designed by John Roebling?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What material are the main suspension cables of the Brooklyn Bridge made of?",
+    "hop2_recall_t07": "8/10",
+    "generic_probe": "A certain bridge exists. What metal are its main cables made of?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Steel",
+     "Iron",
+     "Steel",
+     "Steel"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "brooklyn"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "brooklyn": 2
+    },
+    "top10_l42": [
+     "纽约",
+     "著名的",
+     " Brooklyn",
+     "著名",
+     "NY",
+     "桥",
+     "这座",
+     " Manhattan",
+     "桥梁",
+     " NYC"
+    ],
+    "specific_why": "'brooklyn' is part of the bridge's name.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 66,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    220,
+    16,
+    24,
+    337,
+    32252,
+    23538,
+    25786,
+    29697,
+    27848,
+    310,
+    2361,
+    63525,
+    11,
+    5995,
+    539,
+    3629,
+    75763,
+    9407,
+    11,
+    369,
+    58268,
+    364,
+    1141,
+    9506,
+    38409,
+    321,
+    3370,
+    314,
+    34878,
+    13,
+    3437,
+    9041,
+    513,
+    1141,
+    1822,
+    34878,
+    1801,
+    314,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 59,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0739",
+   "prompt": "The tidal island crowned by a medieval abbey, encircled by the sea at high tide, lies in which country?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "The tidal island crowned by a medieval abbey, encircled by the sea at high tide, lies in which country?",
+   "target": "Mont Saint-Michel",
+   "aliases": [
+    "Mount Saint Michael"
+   ],
+   "name_parts": [
+    "michel",
+    "mont",
+    "saint",
+    "saint-michel"
+   ],
+   "answer": "France",
+   "variant": "landmarks and buildings",
+   "topic": "landmarks and buildings",
+   "gate": {
+    "greedy_answer": "France",
+    "correct_t07": "20/20",
+    "bridge_question": "Which tidal island, crowned by a medieval abbey and encircled by the sea at high tide, is a famous pilgrimage site?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In which country is Mont Saint-Michel located?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain tidal island; which country does it lie in?",
+    "generic_probe_hits_t07": "19/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "France",
+     "France",
+     "France",
+     "France"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "saint"
+    ],
+    "signature_words": [
+     "pilgrimage"
+    ],
+    "ranks_l42": {
+     "saint": 6,
+     "pilgrimage": 14
+    },
+    "top10_l42": [
+     " Sainte",
+     " Rennes",
+     "法国",
+     " Château",
+     " cathedral",
+     " Francia",
+     "Saint",
+     " فرنسا",
+     " Nantes",
+     " 프랑스"
+    ],
+    "specific_why": "'saint' is part of 'Mont Saint-Michel' name.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 51,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    760,
+    82507,
+    12552,
+    75952,
+    539,
+    264,
+    39654,
+    28144,
+    1155,
+    11,
+    3107,
+    2358,
+    806,
+    539,
+    279,
+    9117,
+    506,
+    1496,
+    40554,
+    11,
+    14995,
+    303,
+    864,
+    3046,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 44,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0820",
+   "prompt": "Think of the Flemish double depiction of a merchant couple standing in a bedroom, with a convex mirror reflecting the room behind them. What year was it made?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the Flemish double depiction of a merchant couple standing in a bedroom, with a convex mirror reflecting the room behind them. What year was it made?",
+   "target": "The Arnolfini Portrait",
+   "aliases": [
+    "Arnolfini Wedding",
+    "Arnolfini Marriage",
+    "Portrait of Giovanni Arnolfini and his Wife",
+    "The Arnolfini Marriage"
+   ],
+   "name_parts": [
+    "arnolfini",
+    "portrait"
+   ],
+   "answer": "1434",
+   "variant": "paintings and artworks",
+   "topic": "paintings and artworks",
+   "gate": {
+    "greedy_answer": "1434",
+    "correct_t07": "20/20",
+    "bridge_question": "Which artwork shows a Flemish merchant couple standing in a bedroom with a convex mirror reflecting the room behind them?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In what year was The Arnolfini Portrait made?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain painting. What year was it made?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "1434",
+     "1434",
+     "1434",
+     "1434"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "portrait"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "portrait": 3
+    },
+    "top10_l42": [
+     "画家",
+     "著名的",
+     "paint",
+     "Portrait",
+     "构图",
+     "油画",
+     " painter",
+     "著名",
+     "画作",
+     " худож"
+    ],
+    "specific_why": "'portrait' is part of the painting's title.",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 58,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    61863,
+    786,
+    1923,
+    70194,
+    314,
+    264,
+    28282,
+    5448,
+    10932,
+    303,
+    264,
+    13433,
+    11,
+    440,
+    264,
+    63704,
+    17312,
+    40373,
+    279,
+    2956,
+    4661,
+    1070,
+    13,
+    3437,
+    1007,
+    557,
+    424,
+    1801,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 51,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0854",
+   "prompt": "In 1803, a European power sold a vast North American territory to a young nation, doubling its size overnight. What nationality was the selling power?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In 1803, a European power sold a vast North American territory to a young nation, doubling its size overnight. What nationality was the selling power?",
+   "target": "Louisiana Purchase",
+   "aliases": [],
+   "name_parts": [
+    "louisiana",
+    "purchase"
+   ],
+   "answer": "French",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "French",
+    "correct_t07": "20/20",
+    "bridge_question": "What is the name of the 1803 deal in which a European power sold a huge North American territory to a young nation, doubling its size?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What nationality was the power that sold the territory in the Louisiana Purchase?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In a certain historical event, a European power sold territory to a young nation. What nationality was the selling power?",
+    "generic_probe_hits_t07": "20/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "French",
+     "French",
+     "French",
+     "French"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "louisiana"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "louisiana": 5
+    },
+    "top10_l42": [
+     "购买",
+     "Purchase",
+     "purchase",
+     " Purchase",
+     "购",
+     " Louisiana",
+     "urchase",
+     " compra",
+     " purchase",
+     " покуп"
+    ],
+    "specific_why": "Louisiana is part of entity's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 59,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    220,
+    16,
+    23,
+    15,
+    18,
+    11,
+    264,
+    7277,
+    2279,
+    5898,
+    264,
+    12401,
+    4634,
+    3567,
+    17435,
+    310,
+    264,
+    3777,
+    6777,
+    11,
+    57020,
+    1141,
+    1331,
+    23626,
+    13,
+    3437,
+    56284,
+    557,
+    279,
+    10910,
+    2279,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 52,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-0860",
+   "prompt": "In a 1938 pact, European powers let a dictator annex a border region of Czechoslovakia without resistance. What nationality was that dictator?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "In a 1938 pact, European powers let a dictator annex a border region of Czechoslovakia without resistance. What nationality was that dictator?",
+   "target": "Munich Agreement",
+   "aliases": [
+    "Munich Pact",
+    "Munich Betrayal"
+   ],
+   "name_parts": [
+    "agreement",
+    "munich"
+   ],
+   "answer": "German",
+   "variant": "historical events and missions",
+   "topic": "historical events and missions",
+   "gate": {
+    "greedy_answer": "German",
+    "correct_t07": "20/20",
+    "bridge_question": "What is the name of the 1938 pact in which European powers allowed a dictator to annex a border region of Czechoslovakia without resistance?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "What nationality was the dictator who annexed the Sudetenland under the Munich Agreement?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "In a certain agreement, European powers let a dictator annex a region without resistance. What nationality was that dictator?",
+    "generic_probe_hits_t07": "16/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "German",
+     "German",
+     "German",
+     "German"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "munich"
+    ],
+    "signature_words": [
+     "Hitler"
+    ],
+    "ranks_l42": {
+     "munich": 1,
+     "Hitler": 4
+    },
+    "top10_l42": [
+     "慕尼黑",
+     " Munich",
+     " Treaty",
+     " Nazi",
+     " Hitler",
+     " Austria",
+     "ustria",
+     " Czech",
+     "协议",
+     " Prague"
+    ],
+    "specific_why": "Munich and Hitler uniquely identify event",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 58,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    623,
+    264,
+    220,
+    16,
+    24,
+    18,
+    23,
+    57705,
+    11,
+    7277,
+    13043,
+    1042,
+    264,
+    39824,
+    51479,
+    264,
+    3755,
+    5364,
+    314,
+    32050,
+    428,
+    83138,
+    667,
+    1973,
+    13250,
+    13,
+    3437,
+    56284,
+    557,
+    421,
+    39824,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 51,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-1119",
+   "prompt": "A French cubist still life fragments a bowed string instrument alongside a wax-lit holder on a tabletop. In which Italian city were the finest versions of that instrument historically crafted?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "A French cubist still life fragments a bowed string instrument alongside a wax-lit holder on a tabletop. In which Italian city were the finest versions of that instrument historically crafted?",
+   "target": "Violin and Candlestick",
+   "aliases": [
+    "Violin and Candlestick (Braque)"
+   ],
+   "name_parts": [
+    "candlestick",
+    "violin"
+   ],
+   "answer": "Cremona",
+   "variant": "paintings and artworks",
+   "topic": "paintings and artworks",
+   "gate": {
+    "greedy_answer": "Cremona",
+    "correct_t07": "20/20",
+    "bridge_question": "Which Georges Braque cubist still life depicts a fragmented bowed string instrument next to a candle holder?",
+    "bridge_recall_t07": "9/10",
+    "hop2_question": "In which Italian city were the finest instruments of the type shown in Braque's Violin and Candlestick historically crafted?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "A certain painting depicts a bowed string instrument alongside a candlestick. In which Italian city were the finest versions of that instrument historically crafted?",
+    "generic_probe_hits_t07": "19/20",
+    "generic_probe_reached": true,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Cremona",
+     "Cremona",
+     "Cremona",
+     "Cremona"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "violin"
+    ],
+    "signature_words": [],
+    "ranks_l42": {
+     "violin": 0
+    },
+    "top10_l42": [
+     " violin",
+     "小提琴",
+     "乐器",
+     "威尼斯",
+     "演奏",
+     " guitars",
+     "struments",
+     "作曲家",
+     " guitar",
+     "古典"
+    ],
+    "specific_why": "Violin is part of bridge's name",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 61,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    32,
+    8323,
+    18165,
+    375,
+    1990,
+    2199,
+    33358,
+    264,
+    81461,
+    886,
+    13736,
+    15784,
+    264,
+    34830,
+    2759,
+    275,
+    11500,
+    383,
+    264,
+    85426,
+    13,
+    733,
+    864,
+    14382,
+    3177,
+    998,
+    279,
+    26809,
+    10478,
+    314,
+    421,
+    13736,
+    33649,
+    32348,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 54,
+     "horizon": 48
+    }
+   ]
+  },
+  {
+   "name": "mtb5-1123",
+   "prompt": "Think of the biographical film following the final ruler of an ancient dynasty, raised inside a grand palace complex before becoming an ordinary citizen. Which city houses that palace?\n\nANSWER IN ONE WORD, DO NOT SAY ANYTHING ELSE.",
+   "question": "Think of the biographical film following the final ruler of an ancient dynasty, raised inside a grand palace complex before becoming an ordinary citizen. Which city houses that palace?",
+   "target": "The Last Emperor",
+   "aliases": [],
+   "name_parts": [
+    "emperor",
+    "last"
+   ],
+   "answer": "Beijing",
+   "variant": "films",
+   "topic": "films",
+   "gate": {
+    "greedy_answer": "Beijing",
+    "correct_t07": "18/20",
+    "bridge_question": "What is the name of the biographical film following the final ruler of an ancient dynasty raised inside a grand palace complex?",
+    "bridge_recall_t07": "10/10",
+    "hop2_question": "In The Last Emperor, which city houses the palace where he was raised?",
+    "hop2_recall_t07": "10/10",
+    "generic_probe": "Think of a certain movie. Which city houses that palace?",
+    "generic_probe_hits_t07": "0/20",
+    "generic_probe_reached": false,
+    "cooccurrence": "high",
+    "answers_sampled_t1": [
+     "Beijing",
+     "Peking",
+     "Beijing",
+     "Paris"
+    ],
+    "answer_bridge_mentions_t1": "0/32"
+   },
+   "jlens_evidence": {
+    "token": "<|im_start|>",
+    "name_words": [
+     "emperor"
+    ],
+    "signature_words": [
+     "monarch"
+    ],
+    "ranks_l42": {
+     "emperor": 2,
+     "monarch": 1
+    },
+    "top10_l42": [
+     " monarchy",
+     " monarch",
+     " emperor",
+     " Emperor",
+     " abolished",
+     "清末",
+     "辛亥革命",
+     "天皇",
+     "清朝",
+     " imperial"
+    ],
+    "specific_why": "Emperor is part of film's title",
+    "readout_names_target": false
+   },
+   "leak_check": {
+    "k": 16,
+    "path": "free continuation from the site through the chat special tokens, T=1.0",
+    "sites": {
+     "jlens_turn_token": {
+      "max_new_tokens": 48,
+      "n_leaks": 0
+     }
+    }
+   },
+   "n_prompt_tokens": 59,
+   "input_ids": [
+    248045,
+    846,
+    198,
+    37405,
+    314,
+    279,
+    5843,
+    30157,
+    4383,
+    2614,
+    279,
+    1534,
+    46379,
+    314,
+    449,
+    13437,
+    64588,
+    11,
+    8953,
+    4613,
+    264,
+    6453,
+    41908,
+    6150,
+    1518,
+    10141,
+    449,
+    18541,
+    21188,
+    13,
+    15451,
+    3177,
+    14533,
+    421,
+    41908,
+    30,
+    271,
+    11355,
+    38050,
+    1897,
+    23287,
+    35668,
+    11,
+    9043,
+    4045,
+    81708,
+    4001,
+    54768,
+    51148,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+   ],
+   "site_class": "turn_token",
+   "read_sites": [
+    {
+     "label": "jlens_turn_token",
+     "pos": 52,
      "horizon": 48
     }
    ]
